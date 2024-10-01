@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ - Website Bán Hàng</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="Logo/icon.png" />
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        .logo {
+            max-width: 190px;
+        }
+
+        .btn-auth {
+            background-color: #3A6D8C;
+            color: #EAD8B1;
+        }
+
+        .btn-auth:hover {
+            background-color: #6A9AB0;
+        }
+
+        .navbar,
+        footer {
+            background-color: #001F3F;
+        }
+
+        .navbar-nav .nav-link,
+        footer {
+            color: #EAD8B1 !important;
+        }
+
+        .slogan {
+            background-color: #3A6D8C;
+            color: #EAD8B1;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            font-family: Palatino Linotype;
+        }
+
+        .section-title {
+            color: #001F3F;
+        }
+
+        .product-image {
+            width: 100%;
+            max-width: 150px;
+            height: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            margin: 0 auto;
+        }
+
+        .price-original {
+            text-decoration: line-through;
+            color: #6A9AB0;
+        }
+
+        .price-discount {
+            color: #E74C3C;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="#">
+                <img src="Logo/Logo.png" alt="Logo" class="logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Trang chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sản Phẩm</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Liên Hệ</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <button class="btn btn-outline-light" type="submit">
+                        <i class="bi-cart-fill me-1"></i>
+                        Giỏ hàng
+                    </button>
+                </form>
+                <button class="btn btn-auth ms-2">Đăng nhập</button>
+                <button class="btn btn-auth ms-2">Đăng ký</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header-->
+    <header>
+        <div class="slogan">
+            <h1 class="display-4 fw-bolder">TATLN</h1>
+            <p>Mua sắm thông minh, ưu đãi hấp dẫn, giao hàng nhanh chóng -
+                tất cả chỉ trong một chạm</p>
+        </div>
+    </header>
+    <!-- Sản phẩm khuyến mãi -->
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <h3 class="section-title">Sản Phẩm Đang Khuyến Mãi</h3>
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
+                id="product-list">
+
+            </div>
+        </div>
+        <!-- Sản phẩm sắp khuyến mãi -->
+        <div class="container px-4 px-lg-5 mt-5">
+            <h3 class="section-title">Sản Phẩm Sắp Khuyến Mãi</h3>
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
+                id="upcoming-sales-products">
+
+            </div>
+        </div>
+        <!-- Sản phẩm đánh giá cao -->
+        <div class="container px-4 px-lg-5 mt-5">
+            <h3 class="section-title">Sản Phẩm Đánh Giá Cao</h3>
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
+                id="top-rated-products">
+            </div>
+        </div>
+        <!-- Chương trình khuyến mãi -->
+        <!-- <div class="container">
+                <h3 class="section-title"><i class="fas fa-gift"></i> Chương Trình Khuyến Mãi</h3>
+                <div class="row" id="sale-list">
+                </div>
+            </div> -->
+    </section>
+
+    <!-- Footer -->
+
+        <footer>
+            <div class="container my-5">
+          <!-- Grid container -->
+          <div class="container p-4 pb-0">
+            <!-- Section: Links -->
+            <section class="">
+              <!--Grid row-->
+              <div class="row">
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                  <h6 class="text-uppercase mb-4 font-weight-bold">
+                    Tatlan E-Commerce
+                  </h6>
+                  <p>
+                    Khám phá thế giới mua sắm trực tuyến đa dạng, tiện lợi và đáng tin cậy, nơi mọi sản phẩm chất lượng đều được mang đến tận tay bạn với giá ưu đãi mỗi ngày. Mua sắm thông minh, tiết kiệm thời gian và nhận ngay niềm vui!
+                  </p>
+                </div>
+                <!-- Grid column -->
+      
+                <hr class="w-100 clearfix d-md-none" />
+      
+                <!-- Grid column -->
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                  <h6 class="text-uppercase mb-4 font-weight-bold">Thành viên</h6>
+                  <p>
+                    Nguyễn Phan Thanh Tường
+                  </p>
+                  <p>
+                    Đoàn Khả Ái
+                  </p>
+                  <p>
+                    Nguyễn Trần Tiểu Lam
+                  </p>
+                  <p>
+                    Huỳnh Thị Yến Như
+                  </p>
+                  <p>
+                    Võ Thị Cẩm Thùy
+                  </p>
+                </div>
+                <!-- Grid column -->
+      
+                <hr class="w-100 clearfix d-md-none" />
+      
+                <!-- Grid column -->
+                <hr class="w-100 clearfix d-md-none" />
+      
+                <!-- Grid column -->
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+                  <h6 class="text-uppercase mb-4 font-weight-bold">Liên hệ</h6>
+                  <p><i class="fas fa-home mr-3"></i> Cần Thơ, Việt Nam</p>
+                  <p><i class="fas fa-envelope mr-3"></i> tatln@gmail.com</p>
+                  <p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
+                  <p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+                </div>
+                <!-- Grid column -->
+      
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                  <h6 class="text-uppercase mb-4 font-weight-bold">Kết nối với chúng tôi</h6>
+      
+                  <!-- Facebook -->
+                  <a
+                     class="btn btn-primary btn-floating m-1"
+                     style="background-color: #3b5998"
+                     href="#!"
+                     role="button"
+                     ><i class="fab fa-facebook-f"></i
+                    ></a>
+      
+                  <!-- Twitter -->
+                  <a
+                     class="btn btn-primary btn-floating m-1"
+                     style="background-color: #55acee"
+                     href="#!"
+                     role="button"
+                     ><i class="fab fa-twitter"></i
+                    ></a>
+      
+                  <!-- Google -->
+                  <a
+                     class="btn btn-primary btn-floating m-1"
+                     style="background-color: #dd4b39"
+                     href="#!"
+                     role="button"
+                     ><i class="fab fa-google"></i
+                    ></a>
+      
+                  <!-- Instagram -->
+                  <a
+                     class="btn btn-primary btn-floating m-1"
+                     style="background-color: #ac2bac"
+                     href="#!"
+                     role="button"
+                     ><i class="fab fa-instagram"></i
+                    ></a>
+      
+                  <!-- Linkedin -->
+                  <a
+                     class="btn btn-primary btn-floating m-1"
+                     style="background-color: #0082ca"
+                     href="#!"
+                     role="button"
+                     ><i class="fab fa-linkedin-in"></i
+                    ></a>
+                  <!-- Github -->
+                  <a
+                     class="btn btn-primary btn-floating m-1"
+                     style="background-color: #333333"
+                     href="#!"
+                     role="button"
+                     ><i class="fab fa-github"></i
+                    ></a>
+                </div>
+              </div>
+              <!--Grid row-->
+            </section>
+            <!-- Section: Links -->
+          </div>
+          <!-- Grid container -->
+      
+          <!-- Copyright -->
+        </div>
+          <div
+               class="text-center p-3"
+               style="background-color: rgba(0, 0, 0, 0.2)"
+               >
+            © 2024 Tatln. Tất cả các quyền được bảo lưu.
+          </div>
+          <!-- Copyright -->
+
+        </footer>
+        <!-- Footer -->
+
+
+    <!-- Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const productList = document.getElementById("product-list");
+            // const saleList = document.getElementById("sale-list");
+            const topRatedProductList = document.getElementById("top-rated-products");
+            const upcomingSalesProductList = document.getElementById("upcoming-sales-products");
+
+            // Gọi API để lấy danh sách sản phẩm khuyến mãi
+            fetch("https://localhost:7060/api/Sales/current/products")
+                .then(response => response.json())
+                .then(data => {
+                    const products = data.data;  // Lấy danh sách sản phẩm từ API
+                    if (products && products.length > 0) {
+                        products.forEach(saleEvent => {
+                            saleEvent.products.forEach(product => {
+                                // Đường dẫn hình ảnh trong thư mục Images phía frontend
+                                let imagePath = 'Images/';
+                                if (product.images && product.images.length > 0) {
+                                    imagePath += product.images[0].path; // Hình ảnh đầu tiên của sản phẩm
+                                } else {
+                                    imagePath += 'default-image.jpg'; // Hình ảnh mặc định nếu không có ảnh
+                                }
+
+                                // Giá gốc và giá khuyến mãi
+                                const originalPrice = product.price.toFixed(2);
+                                const discountPrice = (product.price * (1 - product.discountPercent)).toFixed(2);
+
+                                // Tạo HTML cho từng sản phẩm
+                                const productHTML = `
+                                    <div class="col mb-5">
+                                        <div class="card h-100">
+                                                <img src="${imagePath}" 
+                                                    alt="${product.name}" 
+                                                    class="card-img-top product-image">
+                                                    <div class="card-body p-2">
+                                                        <div class="text-center">
+                                                            <h5 class="fw-bolder">${product.name}</h5>
+                                                            
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div class="text-center">
+                                                            <p class="product-price">
+                                                                <span class="price-original">$${originalPrice}</span>
+                                                                <br>
+                                                                <span class="price-discount ms-2">$${discountPrice}</span>
+                                                            </p>  
+                                                        </div>
+                                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Xem chi tiết</a></div>
+                                                    </div>
+                                        </div>
+                                    </div>`;
+
+                                // Thêm sản phẩm vào danh sách
+                                productList.innerHTML += productHTML;
+                            });
+                        });
+                    } else {
+                        productList.innerHTML = "<p>Không có sản phẩm nào đang khuyến mãi.</p>";
+                    }
+                })
+                .catch(error => {
+                    console.error("Có lỗi xảy ra:", error);
+                    productList.innerHTML = "<p>Không thể tải dữ liệu sản phẩm.</p>";
+                });
+
+            // Gọi API để lấy danh sách khuyến mãi
+            // fetch("https://localhost:7060/api/Sales/current")
+            //     .then(response => response.json())
+            //     .then(data => {
+            //         const sales = data.data; 
+            //         if (sales && sales.length > 0) {
+            //             sales.forEach(sale => {
+            //                 const saleHTML = `
+            //                     <div class="col-md-4 mb-4">
+            //                         <div class="product-card">
+            //                             <a href="#" class="text-decoration-none">
+            //                                 <h4 class="product-title">${sale.name}</h4>
+            //                                 <p>${sale.description}</p>
+            //                                 <p>Giảm giá: ${sale.discount * 100}%</p>
+            //                                 <p>Thời gian: từ ${new Date(sale.startDate).toLocaleDateString()} đến ${new Date(sale.endDate).toLocaleDateString()}</p>
+            //                             </a>
+            //                         </div>
+            //                     </div>`;
+            //                 saleList.innerHTML += saleHTML;
+            //             });
+            //         } else {
+            //             saleList.innerHTML = "<p>Không có chương trình khuyến mãi nào hiện tại.</p>";
+            //         }
+            //     })
+            //     .catch(error => {
+            //         console.error("Có lỗi xảy ra:", error);
+            //         saleList.innerHTML = "<p>Không thể tải dữ liệu khuyến mãi.</p>";
+            //     });
+
+            // Gọi API để lấy sản phẩm có đánh giá cao
+
+            fetch("https://localhost:7060/api/Products?SortBy=rating&SortType=desc")
+                .then(response => response.json())
+                .then(data => {
+
+                    const products = data.data;
+                    if (products && products.length > 0) {
+                        products.forEach(product => {
+                            let imagePath = 'Images/';
+                            if (product.images && product.images.length > 0) {
+                                imagePath += product.images[0].path;
+                            } else {
+                                imagePath += 'default-image.jpg';
+                            }
+
+                            // Tính điểm trung bình rating của sản phẩm
+                            let avgRating = product.rating > 0 ? product.rating.toFixed(1) : "Chưa có đánh giá";
+
+                            // Tạo HTML cho từng sản phẩm
+                            const productHTML = `
+                                <div class="col mb-5">
+                                    <div class="card h-100">
+                                        <img src="${imagePath}" alt="${product.name}" class="product-image card-img-top">
+                                        <div class="card-body p-2">
+                                            <div class="text-center">
+                                                <h5 class="product-title mt-3">${product.name}</h5>
+                                            </div>
+                                        </div>
+                                        <div class="text-center">
+                                            <p class="product-price">$${product.price}</p>
+                                            <p class="product-rating">Đánh giá: ${avgRating}⭐</p> <!-- Hiển thị rating -->
+                                        </div>
+                                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Xem chi tiết</a></div>
+                                        </div>
+                                                                
+                                    
+                                    </div>
+                                </div>`;
+
+                            // Thêm sản phẩm vào danh sách
+                            topRatedProductList.innerHTML += productHTML;
+                        });
+                    } else {
+                        topRatedProductList.innerHTML = "<p>Không có sản phẩm nào có đánh giá cao.</p>";
+                    }
+                })
+                .catch(error => {
+                    console.error("Có lỗi xảy ra:", error);
+                    topRatedProductList.innerHTML = "<p>Không thể tải dữ liệu sản phẩm đánh giá cao.</p>";
+                });
+            // Gọi API để lấy danh sách sản phẩm sắp khuyến mãi
+            fetch("https://localhost:7060/api/Sales/upcoming/products")
+                .then(response => response.json())
+                .then(data => {
+                    const salesEvents = data.data; // Dữ liệu khuyến mãi
+                    if (salesEvents && salesEvents.length > 0) {
+                        salesEvents.forEach(saleEvent => {
+                            saleEvent.products.forEach(product => {
+                                // Đường dẫn hình ảnh sản phẩm
+                                let imagePath = 'Images/';
+                                if (product.images && product.images.length > 0) {
+                                    imagePath += product.images[0].path;
+                                } else {
+                                    imagePath += 'default-image.jpg'; // Hình ảnh mặc định nếu không có ảnh
+                                }
+
+                                // Giá gốc và giá khuyến mãi
+                                const originalPrice = product.price.toFixed(2);
+                                const discountPrice = (product.price * (1 - saleEvent.discount)).toFixed(2);
+
+                                // Tạo HTML cho từng sản phẩm
+                                const productHTML = `
+                                    <div class="col mb-5">
+                                        <div class="card h-100">
+                                            <img src="${imagePath}" alt="${product.name}" class="product-image card-img-top">
+                                            <div class="card-body p-2">
+                                                <div class="text-center">
+                                                    <h5 class="product-title mt-3">${product.name}</h5>
+                                                    <p class="product-price">
+                                                        <span class="price-original">$${originalPrice}</span>
+                                                        <br>
+                                                        <span class="price-discount ms-2">$${discountPrice}</span>
+                                                    </p>
+                                                    <p class="sale-start-date">Bắt đầu khuyến mãi: ${new Date(saleEvent.startDate).toLocaleDateString()}</p>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Xem chi tiết</a></div>
+                                            </div>
+                                        </div>
+                                    </div>`;
+
+                                // Thêm sản phẩm vào danh sách
+                                upcomingSalesProductList.innerHTML += productHTML;
+                            });
+                        });
+                    } else {
+                        upcomingSalesProductList.innerHTML = "<p>Không có sản phẩm sắp khuyến mãi.</p>";
+                    }
+                })
+                .catch(error => {
+                    console.error("Có lỗi xảy ra:", error);
+                    upcomingSalesProductList.innerHTML = "<p>Không thể tải dữ liệu sản phẩm sắp khuyến mãi.</p>";
+                });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
