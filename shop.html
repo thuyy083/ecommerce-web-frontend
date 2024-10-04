@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+       <meta name="viewport" content="width=device-width, initial-scale=1">
+       <title>Sản Phẩm</title>
+       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+       <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+       <link rel="stylesheet" href="css/style_shop.css">
+       <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+       <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    </head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="#">
+                <img src="Logo/Logo.png" alt="Logo" class="logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Trang chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="shop.html">Sản Phẩm</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Liên Hệ</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <button class="btn btn-outline-light" type="submit">
+                        <i class="bi-cart-fill me-1"></i>
+                        Giỏ hàng
+                    </button>
+                </form>
+                <button class="btn btn-auth ms-2">Đăng nhập</button>
+                <button class="btn btn-auth ms-2">Đăng ký</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header-->
+    <header>
+        <div class="slogan">
+            <h1 class="display-4 fw-bolder">TATLN</h1>
+            <p>Mua sắm thông minh, ưu đãi hấp dẫn, giao hàng nhanh chóng -
+                tất cả chỉ trong một chạm</p>
+        </div>
+    </header>  
+    <!-- chèn -->
+    <div class="shop-box-inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-9 col-lg-9 col-sm-12 col-xs-12 shop-content-right">
+                    <div class="right-product-box">
+                        <div class="product-item-filter row">
+                            <div class="col-12 col-sm-8 text-center text-sm-left">
+                                <div class="toolbar-sorter-right d-flex justify-content-start align-items-center">
+                                    <div class="sort-icons" >
+                                       
+                                        <ul class="nav nav-tabs ml-auto">
+                                            <li>
+                                                <a  id="sortAsc" class="icon" data-toggle="tab"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                                                    <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                                                  </svg> </a>
+                                            </li>
+                                            <li>
+                                                <a id="sortDesc" class="icon"  href="#list-view" data-toggle="tab"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                                    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                                                  </svg></i> </a>
+                                            </li>
+                                        </ul>
+                                        
+                                    </div>
+                                   
+                                    <select id="sortBy" class=" show-tick form-control" >
+                                        
+                                        <option value="id">Sắp xếp theo ID sản phẩm</option>
+                                        <option value="price">Sắp xếp sản phẩm theo giá</option>
+                                        <option value="rating">Sắp xếp sản phẩm theo đánh giá</option>
+                                        <option value="like">Sắp xếp sản phẩm theo yêu thích</option>
+                                        <option value="sold">Sắp xếp sản phẩm theo lượng sản phẩm bán ra</option>
+                                    </select>
+                                </div>
+                                
+                            </div>
+                            <div class="col-12 col-sm-4 text-center text-sm-right">
+                                <ul class="nav nav-tabs ml-auto">
+                                    <li>
+                                        <a class="nav-link active" href="#grid-view" data-toggle="tab"> <i class="fa fa-th"></i> </a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" href="#list-view" data-toggle="tab"> <i class="fa fa-list-ul"></i> </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="product-categorie-box">
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
+                                    <!-- <div class="row"> -->
+                                        <div id="productgrid"></div>
+                                        
+                                    <!-- </div> -->
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="list-view">
+                                    <div class="list-view-box">
+                                        <div id="productlist"></div>
+                                        
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-item-filter row">
+                              <!-- Phân trang -->
+                                    <div class="pagination">
+                                        <ul class="d-flex list-unstyled" style="margin-left: 300px;">
+                                                <li class="page-item">
+                                                    <a class="page-link" id="prevPage">
+                                                        <<
+                                                    </a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a class="page-link" id="currentPage" >
+                                                        
+                                                    </a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a class="page-link" id="nextPage">
+                                                        >> 
+                                                    </a>
+                                                </li> 
+                                        </ul>
+                                    </div>
+                        </div>
+                            
+                            
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
+                    <div class="product-categori">
+                        <div class="search-product">
+                            <form action="#">
+                                <input class="form-control" id="search" placeholder="Tìm kiếm sản phẩm" type="text">
+                                <button type="submit" id="filterSearch"> <i class="fa fa-search"></i> </button>
+                            </form>
+                        </div>
+                        <div class="filter-sidebar-left">
+                            <div class="title-left">
+                                <h3>Danh Sách Loại Sản Phẩm</h3>
+                            </div>
+                            <div class="list-group list-group-collapse list-group-sm list-group-tree" id="productType" data-children=".sub-men">
+                                <a class="list-group-item list-group-item-action" data-id="">Tất cả sản phẩm</a>
+                            </div>
+                        </div>
+                        <div class="filter-price-left">
+                            <div class="title-left">
+                                <h3>Tìm kiếm theo mức giá</h3>
+                            </div>
+                            <div class="price-box-slider">
+                                <div id="slider-range"></div>
+                                <p>
+                                    <input type="text" id="amount" readonly style="border:0; font-weight:bold;">
+                                    <button class="btn hvr-hover" type="button" id="filterBtn">Chọn</button>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     <!-- Footer -->
+    
+     <footer>
+        <div class="container my-5">
+      <!-- Grid container -->
+      <div class="container p-4 pb-0">
+        <!-- Section: Links -->
+        <section class="">
+          <!--Grid row-->
+          <div class="row">
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+              <h6 class="text-uppercase mb-4 font-weight-bold">
+                Tatlan E-Commerce
+              </h6>
+              <p>
+                Khám phá thế giới mua sắm trực tuyến đa dạng, tiện lợi và đáng tin cậy, nơi mọi sản phẩm chất lượng đều được mang đến tận tay bạn với giá ưu đãi mỗi ngày. Mua sắm thông minh, tiết kiệm thời gian và nhận ngay niềm vui!
+              </p>
+            </div>
+            <!-- Grid column -->
+  
+            <hr class="w-100 clearfix d-md-none" />
+  
+            <!-- Grid column -->
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+              <h6 class="text-uppercase mb-4 font-weight-bold">Thành viên</h6>
+              <p>
+                Nguyễn Phan Thanh Tường
+              </p>
+              <p>
+                Đoàn Khả Ái
+              </p>
+              <p>
+                Nguyễn Trần Tiểu Lam
+              </p>
+              <p>
+                Huỳnh Thị Yến Như
+              </p>
+              <p>
+                Võ Thị Cẩm Thùy
+              </p>
+            </div>
+            <!-- Grid column -->
+  
+            <hr class="w-100 clearfix d-md-none" />
+  
+            <!-- Grid column -->
+            <hr class="w-100 clearfix d-md-none" />
+  
+            <!-- Grid column -->
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+              <h6 class="text-uppercase mb-4 font-weight-bold">Liên hệ</h6>
+              <p><i class="fas fa-home mr-3"></i> Cần Thơ, Việt Nam</p>
+              <p><i class="fas fa-envelope mr-3"></i> tatln@gmail.com</p>
+              <p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
+              <p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+            </div>
+            <!-- Grid column -->
+  
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+              <h6 class="text-uppercase mb-4 font-weight-bold">Kết nối với chúng tôi</h6>
+  
+              <!-- Facebook -->
+              <a
+                 class="btn btn-primary btn-floating m-1"
+                 style="background-color: #3b5998"
+                 href="#!"
+                 role="button"
+                 ><i class="fab fa-facebook-f"></i
+                ></a>
+  
+              <!-- Twitter -->
+              <a
+                 class="btn btn-primary btn-floating m-1"
+                 style="background-color: #55acee"
+                 href="#!"
+                 role="button"
+                 ><i class="fab fa-twitter"></i
+                ></a>
+  
+              <!-- Google -->
+              <a
+                 class="btn btn-primary btn-floating m-1"
+                 style="background-color: #dd4b39"
+                 href="#!"
+                 role="button"
+                 ><i class="fab fa-google"></i
+                ></a>
+  
+              <!-- Instagram -->
+              <a
+                 class="btn btn-primary btn-floating m-1"
+                 style="background-color: #ac2bac"
+                 href="#!"
+                 role="button"
+                 ><i class="fab fa-instagram"></i
+                ></a>
+  
+              <!-- Linkedin -->
+              <a
+                 class="btn btn-primary btn-floating m-1"
+                 style="background-color: #0082ca"
+                 href="#!"
+                 role="button"
+                 ><i class="fab fa-linkedin-in"></i
+                ></a>
+              <!-- Github -->
+              <a
+                 class="btn btn-primary btn-floating m-1"
+                 style="background-color: #333333"
+                 href="#!"
+                 role="button"
+                 ><i class="fab fa-github"></i
+                ></a>
+            </div>
+          </div>
+          <!--Grid row-->
+        </section>
+        <!-- Section: Links -->
+      </div>
+      <!-- Grid container -->
+  
+      <!-- Copyright -->
+    </div>
+      <div
+           class="text-center p-3"
+           style="background-color: rgba(0, 0, 0, 0.2)"
+           >
+        © 2024 Tatln. Tất cả các quyền được bảo lưu.
+      </div>
+      <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
+    
+   
+   
+    <script>
+        let currentPage = 1;
+        let typeId = null;
+        let sortType = 'asc'; 
+        let sortBy = ''; 
+        let minPrice, maxPrice;
+    
+        // Hàm tải danh sách loại sản phẩm
+        function loadProductTypes() {
+            $.ajax({
+                url: 'https://localhost:7060/api/ProductTypes', // URL lấy danh sách loại sản phẩm
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    const productType = $('#productType');
+                    data.data.forEach(function (type) {
+                        productType.append(`<a class="list-group-item list-group-item-action" data-id="${type.id}">${type.name}</a>`);
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error("Đã xảy ra lỗi khi lấy danh sách loại sản phẩm: " + error);
+                }
+            });
+        }
+    
+        // Hàm tải danh sách sản phẩm
+        function loadProducts() {
+            const search = $('#search').val().trim();
+            const pageSize = $('#pageSize').val() || 10;
+    
+            let url = `https://localhost:7060/api/Products?page=${currentPage}&pageSize=${pageSize}`;
+            
+            if (search) {
+                url += `&search=${encodeURIComponent(search)}`;
+            }
+    
+            if (minPrice || maxPrice) {
+                url += `&fByPrice=${minPrice || 0}_${maxPrice || ''}`;
+            }
+    
+            if (typeId) {
+                url += `&fByType=${typeId}`;
+            }
+
+            if (sortBy) {
+                url += `&sortBy=${sortBy}`;
+            }
+
+            if (sortType) {
+                url += `&sortType=${sortType}`;
+            }
+    
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    let productGridHtml = '';
+                    let productListHtml = '';
+    
+                    data.data.forEach(function (product) {
+                        let imagePath = 'Images/';
+                        imagePath += product.images && product.images.length > 0 ? product.images[0].path : 'default-image.jpg';
+                        let avgRating = product.rating > 0 ? product.rating.toFixed(1) : "Chưa có đánh giá";
+    
+                        // Thêm sản phẩm vào dạng lưới
+                        productGridHtml += `
+                            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                                <div class="products-single fix">
+                                    <div class="box-img-hover">
+                                        <div class="type-lb">
+                                            <p class="new">${avgRating}⭐</p>
+                                        </div>
+                                        <img src="${imagePath}" class="img-fluid" alt="${product.name}">
+                                        <div class="mask-icon">
+                                            <a class="cart" href="#">Thêm vào giỏ</a>
+                                        </div>
+                                    </div>
+                                    <div class="why-text">
+                                        <h4>${product.name}</h4>
+                                        <h5>$${product.price}</h5>
+                                    </div>
+                                </div>
+                            </div>`;
+    
+                        // Thêm sản phẩm vào dạng danh sách
+                        productListHtml += `
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+                                    <div class="products-single fix">
+                                        <div class="box-img-hover">
+                                            <div class="type-lb">
+                                                <p class="new">${avgRating}⭐</p>
+                                            </div>
+                                            <img src="${imagePath}" class="img-fluid" alt="${product.name}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-lg-8 col-xl-8">
+                                    <div class="why-text full-width">
+                                        <h4>${product.name}</h4>
+                                        <h5>$${product.price}</h5>
+                                        <p>Mô tả: ${product.description}</p>
+                                        <p>Số lượng: ${product.quantity}</p>
+                                        <a class="btn hvr-hover" href="#">Thêm vào giỏ</a>
+                                    </div>
+                                </div>
+                            </div>`;
+                    });
+    
+                    $('#productgrid').html(productGridHtml); 
+                    $('#productlist').html(productListHtml); 
+                    $('#currentPage').text(currentPage); 
+                },
+                error: function (xhr, status, error) {
+                    console.error("Đã xảy ra lỗi: " + error);
+                }
+            });
+        }
+    
+        $(document).ready(function () {
+            loadProductTypes(); 
+            loadProducts(); 
+            
+            // Sự kiện khi nhấn nút tìm kiếm
+            $('#filterSearch').click(function () {
+                currentPage = 1; // Reset về trang 1 khi tìm kiếm
+                loadProducts();
+            });
+    
+            // Sự kiện chuyển trang trước
+            $('#prevPage').click(function () {
+                if (currentPage > 1) {
+                    currentPage--;
+                    loadProducts();
+                }
+            });
+    
+            // Sự kiện chuyển trang tiếp theo
+            $('#nextPage').click(function () {
+                currentPage++;
+                loadProducts();
+            });
+    
+            // Sự kiện thay đổi giá trị min/max giá trị của slider
+            $("#slider-range").slider({
+                range: true,
+                min: 0,
+                max: 10000, 
+                values: [3000, 8000], 
+                slide: function(event, ui) {
+                    $("#amount").val("Giá: " + ui.values[0] + " - " + ui.values[1]);
+                }
+            });
+            $("#amount").val("Giá: " + $("#slider-range").slider("values", 0) + " - " + $("#slider-range").slider("values", 1));
+    
+            // Lọc sản phẩm theo giá
+            $("#filterBtn").on("click", function() {
+                minPrice = $("#slider-range").slider("values", 0);
+                maxPrice = $("#slider-range").slider("values", 1);
+                currentPage = 1;
+                loadProducts();
+            });
+    
+            // Sự kiện sắp xếp tăng dần
+            $('#sortAsc').click(function () {
+                sortType = 'asc';
+                currentPage = 1;
+                loadProducts();
+            });
+    
+            // Sự kiện sắp xếp giảm dần
+            $('#sortDesc').click(function () {
+                sortType = 'desc';
+                currentPage = 1;
+                loadProducts();
+            });
+    
+            // Lọc theo loại sản phẩm
+            $('#productType').on('click', '.list-group-item', function (event) {
+                event.preventDefault();
+                typeId = $(this).data('id'); 
+                currentPage = 1; 
+                loadProducts();
+                $('.list-group-item').removeClass('active'); 
+                $(this).addClass('active'); 
+            });
+
+            $('#sortBy').change(function () {
+                sortBy = $(this).val(); // Lấy giá trị từ dropdown
+                currentPage = 1; // Reset về trang 1 khi thay đổi sắp xếp
+                loadProducts(); // Gọi hàm tải sản phẩm với kiểu sắp xếp mới
+            });
+        });
+    </script>
+    
+    
+
+    <!-- ALL JS FILES -->
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.superslides/2.0.1/jquery.superslides.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta3/js/bootstrap-select.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inview/1.2.2/jquery.inview.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inview/1.2.2/jquery.inview.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Isotope/3.0.6/isotope.pkgd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/validator.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script> 
+</body>
+</html>
