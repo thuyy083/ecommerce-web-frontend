@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng nhập</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
+
+    <!-- Font Awesome 5 CDN -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    />
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- JWT Decode -->
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="icon" href="icon.png" type="image/x-icon" />
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #eee;
+        height: 100vh;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(
+            to top,
+            #fff 10%,
+            rgba(58, 109, 140, 0.4) 90%
+          )
+          no-repeat;
+
+        height: 100vh; /* Đảm bảo chiều cao toàn bộ cửa sổ */
+        margin: 0; /* Bỏ lề mặc định */
+      }
+
+      .wrapper {
+        max-width: 500px;
+        border-radius: 10px;
+        margin: 50px auto;
+        padding: 30px 40px;
+        box-shadow: 20px 20px 80px rgb(206, 206, 206);
+      }
+
+      .h4 {
+        font-family: "Poppins", sans-serif;
+      }
+
+      .input-field {
+        border-radius: 5px;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        border: 1px solid #400485;
+        color: #400485;
+      }
+
+      .input-field:hover {
+        color: #3a6d8c;
+        border: 1px solid #001f3f;
+      }
+
+      input {
+        border: none;
+        outline: none;
+        box-shadow: none;
+        width: 100%;
+        padding: 0px 2px;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .fa-eye-slash.btn {
+        border: none;
+        outline: none;
+        box-shadow: none;
+      }
+
+      a {
+        text-decoration: none;
+        color: #6a9ab0;
+        font-weight: 700;
+      }
+
+      a:hover {
+        text-decoration: none;
+        color: #ead8b1;
+      }
+
+      .option {
+        position: relative;
+        padding-left: 30px;
+        cursor: pointer;
+      }
+
+      .option label.text-muted {
+        display: block;
+        cursor: pointer;
+      }
+
+      .option input {
+        display: none;
+      }
+
+      .btn.btn-block {
+        border-radius: 20px;
+        background: linear-gradient(to right, #001f3f, #6a9ab0);
+        color: #fff;
+        border: none; /* Bỏ border mặc định */
+      }
+
+      @media (max-width: 575px) {
+        .wrapper {
+          margin: 10px;
+        }
+      }
+
+      @media (max-width: 424px) {
+        .wrapper {
+          padding: 30px 10px;
+          margin: 5px;
+        }
+
+        .option {
+          position: relative;
+          padding-left: 22px;
+        }
+
+        .option label.text-muted {
+          font-size: 0.95rem;
+        }
+
+        .checkmark {
+          position: absolute;
+          top: 2px;
+        }
+
+        .option .checkmark:after {
+          top: 50%;
+        }
+
+        #forgot {
+          font-size: 0.95rem;
+        }
+      }
+
+      .alert {
+        padding: 15px;
+        margin: 10px 0;
+        border: 1px solid transparent;
+        border-radius: 5px;
+        background-color: #f8d7da; /* Màu nền đỏ nhạt */
+        color: #721c24; /* Màu chữ đỏ */
+        font-weight: bold; /* Chữ đậm */
+        display: none; /* Ẩn thông báo lỗi mặc định */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper bg-white">
+      <div class="h2 text-center pt-2">ĐĂNG NHẬP</div>
+      <form id="loginForm" class="pt-3">
+        <div id="error-message" class="alert text-center"></div>
+        <div class="form-group py-2">
+          <div class="input-field">
+            <span class="far fa-user p-2"></span>
+            <input
+              id="email"
+              type="email"
+              placeholder="Email"
+              required
+              class=""
+            />
+          </div>
+        </div>
+        <div class="form-group py-1 pb-2">
+          <div class="input-field">
+            <span class="fas fa-lock p-2"></span>
+            <input
+              id="password"
+              type="password"
+              placeholder="Mật khẩu"
+              required
+              class=""
+            />
+            <button
+              class="btn bg-white text-muted"
+              type="button"
+              onclick="togglePasswordVisibility()"
+            >
+              <span class="far fa-eye-slash"></span>
+            </button>
+          </div>
+        </div>
+
+        <button class="btn btn-block text-center my-3" type="submit">
+          Đăng nhập
+        </button>
+        <div class="text-center pt-3 text-muted">
+          Bạn chưa có tài khoản? <a href="#">Đăng ký ngay</a>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      function togglePasswordVisibility() {
+        const passwordInput = document.getElementById("password");
+        const eyeIcon = passwordInput.nextElementSibling.querySelector("span");
+
+        if (passwordInput.type === "password") {
+          passwordInput.type = "text";
+          eyeIcon.classList.remove("fa-eye-slash");
+          eyeIcon.classList.add("fa-eye");
+        } else {
+          passwordInput.type = "password";
+          eyeIcon.classList.remove("fa-eye");
+          eyeIcon.classList.add("fa-eye-slash");
+        }
+      }
+
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+
+          try {
+            const response = await fetch(
+              "https://localhost:7060/api/Auth/login",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  email: email,
+                  password: password,
+                }),
+              }
+            );
+
+            if (response.ok) {
+              const data = await response.json();
+              const token = data.token;
+
+              // Giải mã token để lấy role
+              const decodedToken = jwt_decode(token);
+              const userRole =
+                decodedToken[
+                  "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+                ];
+
+              // Lưu token vào localStorage hoặc sessionStorage nếu cần
+              localStorage.setItem("token", token);
+
+              // Chuyển hướng dựa theo role
+              if (userRole === "1") {
+                window.location.href = "/admin/dashboard.html";
+              } else if (userRole === "2") {
+                window.location.href = "index.html";
+              } else {
+                window.location.href = "/shop/dashboard.html";
+              }
+            } else {
+              const errorMessage = await response.json();
+
+              // Khởi tạo thông báo lỗi mặc định
+              let customMessage = "Đăng nhập thất bại";
+
+              // Kiểm tra xem có lỗi về mật khẩu hay không
+              if (response.status === 400 && errorMessage.Password) {
+                const passwordLength = password.length; // Lấy chiều dài của mật khẩu đã nhập
+                customMessage =
+                  "Mật khẩu phải có ít nhất 8 ký tự. Bạn đã nhập " +
+                  passwordLength +
+                  " ký tự.";
+              }
+              // Kiểm tra lỗi khác nếu cần
+              else if (response.status === 401) {
+                // Thông điệp tùy chỉnh cho email/mật khẩu sai
+                customMessage =
+                  " Email hoặc mật khẩu không đúng. Vui lòng thử lại.";
+              }
+
+              // Hiển thị thông báo lỗi trên front-end
+              const errorMessageDiv = document.getElementById("error-message");
+              errorMessageDiv.textContent = customMessage;
+              errorMessageDiv.style.display = "block"; // Hiện thông báo lỗi
+            }
+          } catch (error) {
+            document.getElementById("error-message").textContent =
+              "Đã có lỗi xảy ra trong quá trình đăng nhập";
+            document.getElementById("error-message").style.display = "block"; // Hiện thông báo lỗi
+          }
+        });
+    </script>
+  </body>
+</html>
