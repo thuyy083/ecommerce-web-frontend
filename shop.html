@@ -339,16 +339,16 @@
             // Sự kiện chuyển trang trước
             $('#prevPage').click(function () {
                 if (currentPage > 1) {
-                    currentPage--; // Giảm currentPage
-                    loadProducts(); // Tải lại danh sách sản phẩm
+                    currentPage--; 
+                    loadProducts(); 
                 }
             });
     
             // Sự kiện chuyển trang tiếp theo
             $('#nextPage').click(function () {
                 if (currentPage < totalPages) {
-                    currentPage++; // Tăng currentPage
-                    loadProducts(); // Tải lại danh sách sản phẩm
+                    currentPage++; 
+                    loadProducts(); 
                 }
             });
     
@@ -397,28 +397,28 @@
             });
     
             $('#sortBy').change(function () {
-                sortBy = $(this).val(); // Lấy giá trị từ dropdown
-                currentPage = 1; // Reset về trang 1 khi thay đổi sắp xếp
-                loadProducts(); // Gọi hàm tải sản phẩm với kiểu sắp xếp mới
+                sortBy = $(this).val(); 
+                currentPage = 1; 
+                loadProducts(); 
             });
         });
     
         // Hàm cập nhật trạng thái của các nút phân trang và số trang
         function updatePaginationButtons() {
-            // Vô hiệu hóa nút "Trang trước" nếu là trang đầu tiên
+            
             $('#prevPage').prop('disabled', currentPage <= 1);
     
-            // Vô hiệu hóa nút "Trang sau" nếu là trang cuối cùng
+            
             $('#nextPage').prop('disabled', currentPage >= totalPages);
     
-            // Hiển thị thông tin trang hiện tại và tổng số trang
+            
             $('#pageInfo').text(`Trang ${currentPage} / ${totalPages}`);
         }
         
         // Hàm tải danh sách loại sản phẩm
         function loadProductTypes() {
             $.ajax({
-                url: 'https://localhost:7060/api/ProductTypes', // URL lấy danh sách loại sản phẩm
+                url: 'https://localhost:7060/api/ProductTypes', 
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
