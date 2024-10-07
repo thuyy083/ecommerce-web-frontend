@@ -318,12 +318,103 @@
    
    
     <script>
+        let totalItems = 0; 
+        let totalPages = 1; 
         let currentPage = 1;
         let typeId = null;
         let sortType = 'asc'; 
         let sortBy = ''; 
         let minPrice, maxPrice;
     
+        $(document).ready(function () {
+            loadProductTypes(); 
+            loadProducts(); 
+            
+            // Sự kiện khi nhấn nút tìm kiếm
+            $('#filterSearch').click(function () {
+                currentPage = 1; // Reset về trang 1 khi tìm kiếm
+                loadProducts();
+            });
+    
+            // Sự kiện chuyển trang trước
+            $('#prevPage').click(function () {
+                if (currentPage > 1) {
+                    currentPage--; // Giảm currentPage
+                    loadProducts(); // Tải lại danh sách sản phẩm
+                }
+            });
+    
+            // Sự kiện chuyển trang tiếp theo
+            $('#nextPage').click(function () {
+                if (currentPage < totalPages) {
+                    currentPage++; // Tăng currentPage
+                    loadProducts(); // Tải lại danh sách sản phẩm
+                }
+            });
+    
+            // Sự kiện thay đổi giá trị min/max giá trị của slider
+            $("#slider-range").slider({
+                range: true,
+                min: 0,
+                max: 10000, 
+                values: [3000, 8000], 
+                slide: function(event, ui) {
+                    $("#amount").val("Giá: " + ui.values[0] + " - " + ui.values[1]);
+                }
+            });
+            $("#amount").val("Giá: " + $("#slider-range").slider("values", 0) + " - " + $("#slider-range").slider("values", 1));
+    
+            // Lọc sản phẩm theo giá
+            $("#filterBtn").on("click", function() {
+                minPrice = $("#slider-range").slider("values", 0);
+                maxPrice = $("#slider-range").slider("values", 1);
+                currentPage = 1;
+                loadProducts();
+            });
+    
+            // Sự kiện sắp xếp tăng dần
+            $('#sortAsc').click(function () {
+                sortType = 'asc';
+                currentPage = 1;
+                loadProducts();
+            });
+    
+            // Sự kiện sắp xếp giảm dần
+            $('#sortDesc').click(function () {
+                sortType = 'desc';
+                currentPage = 1;
+                loadProducts();
+            });
+    
+            // Lọc theo loại sản phẩm
+            $('#productType').on('click', '.list-group-item', function (event) {
+                event.preventDefault();
+                typeId = $(this).data('id'); 
+                currentPage = 1; 
+                loadProducts();
+                $('.list-group-item').removeClass('active'); 
+                $(this).addClass('active'); 
+            });
+    
+            $('#sortBy').change(function () {
+                sortBy = $(this).val(); // Lấy giá trị từ dropdown
+                currentPage = 1; // Reset về trang 1 khi thay đổi sắp xếp
+                loadProducts(); // Gọi hàm tải sản phẩm với kiểu sắp xếp mới
+            });
+        });
+    
+        // Hàm cập nhật trạng thái của các nút phân trang và số trang
+        function updatePaginationButtons() {
+            // Vô hiệu hóa nút "Trang trước" nếu là trang đầu tiên
+            $('#prevPage').prop('disabled', currentPage <= 1);
+    
+            // Vô hiệu hóa nút "Trang sau" nếu là trang cuối cùng
+            $('#nextPage').prop('disabled', currentPage >= totalPages);
+    
+            // Hiển thị thông tin trang hiện tại và tổng số trang
+            $('#pageInfo').text(`Trang ${currentPage} / ${totalPages}`);
+        }
+        
         // Hàm tải danh sách loại sản phẩm
         function loadProductTypes() {
             $.ajax({
@@ -342,13 +433,13 @@
             });
         }
     
-        // Hàm tải danh sách sản phẩm
         function loadProducts() {
             const search = $('#search').val().trim();
             const pageSize = $('#pageSize').val() || 10;
+           
     
             let url = `https://localhost:7060/api/Products?page=${currentPage}&pageSize=${pageSize}`;
-            
+    
             if (search) {
                 url += `&search=${encodeURIComponent(search)}`;
             }
@@ -360,11 +451,11 @@
             if (typeId) {
                 url += `&fByType=${typeId}`;
             }
-
+    
             if (sortBy) {
                 url += `&sortBy=${sortBy}`;
             }
-
+    
             if (sortType) {
                 url += `&sortType=${sortType}`;
             }
@@ -429,89 +520,22 @@
     
                     $('#productgrid').html(productGridHtml); 
                     $('#productlist').html(productListHtml); 
-                    $('#currentPage').text(currentPage); 
+                    $('#currentPage').text(currentPage);
+    
+                    // Cập nhật tổng số sản phẩm và tính tổng số trang
+                    totalPages = data.totalPage;
+    
+                    // Cập nhật nút phân trang
+                    updatePaginationButtons();
+                    console.log("Total Pages: ", totalPages);
                 },
                 error: function (xhr, status, error) {
                     console.error("Đã xảy ra lỗi: " + error);
                 }
             });
         }
-    
-        $(document).ready(function () {
-            loadProductTypes(); 
-            loadProducts(); 
-            
-            // Sự kiện khi nhấn nút tìm kiếm
-            $('#filterSearch').click(function () {
-                currentPage = 1; // Reset về trang 1 khi tìm kiếm
-                loadProducts();
-            });
-    
-            // Sự kiện chuyển trang trước
-            $('#prevPage').click(function () {
-                if (currentPage > 1) {
-                    currentPage--;
-                    loadProducts();
-                }
-            });
-    
-            // Sự kiện chuyển trang tiếp theo
-            $('#nextPage').click(function () {
-                currentPage++;
-                loadProducts();
-            });
-    
-            // Sự kiện thay đổi giá trị min/max giá trị của slider
-            $("#slider-range").slider({
-                range: true,
-                min: 0,
-                max: 10000, 
-                values: [3000, 8000], 
-                slide: function(event, ui) {
-                    $("#amount").val("Giá: " + ui.values[0] + " - " + ui.values[1]);
-                }
-            });
-            $("#amount").val("Giá: " + $("#slider-range").slider("values", 0) + " - " + $("#slider-range").slider("values", 1));
-    
-            // Lọc sản phẩm theo giá
-            $("#filterBtn").on("click", function() {
-                minPrice = $("#slider-range").slider("values", 0);
-                maxPrice = $("#slider-range").slider("values", 1);
-                currentPage = 1;
-                loadProducts();
-            });
-    
-            // Sự kiện sắp xếp tăng dần
-            $('#sortAsc').click(function () {
-                sortType = 'asc';
-                currentPage = 1;
-                loadProducts();
-            });
-    
-            // Sự kiện sắp xếp giảm dần
-            $('#sortDesc').click(function () {
-                sortType = 'desc';
-                currentPage = 1;
-                loadProducts();
-            });
-    
-            // Lọc theo loại sản phẩm
-            $('#productType').on('click', '.list-group-item', function (event) {
-                event.preventDefault();
-                typeId = $(this).data('id'); 
-                currentPage = 1; 
-                loadProducts();
-                $('.list-group-item').removeClass('active'); 
-                $(this).addClass('active'); 
-            });
-
-            $('#sortBy').change(function () {
-                sortBy = $(this).val(); // Lấy giá trị từ dropdown
-                currentPage = 1; // Reset về trang 1 khi thay đổi sắp xếp
-                loadProducts(); // Gọi hàm tải sản phẩm với kiểu sắp xếp mới
-            });
-        });
     </script>
+    
     
     
 
