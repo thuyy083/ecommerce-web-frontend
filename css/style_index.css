@@ -1,0 +1,57 @@
+
+.logo {
+    max-width: 190px;
+}
+
+.btn-auth {
+    background-color: #3A6D8C;
+    color: #EAD8B1;
+}
+
+.btn-auth:hover {
+    background-color: #6A9AB0;
+}
+
+.navbar,
+footer {
+    background-color: #001F3F;
+}
+
+.navbar-nav .nav-link,
+footer {
+    color: #EAD8B1 !important;
+}
+
+.slogan {
+    background-color: #3A6D8C;
+    color: #EAD8B1;
+    padding: 20px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: Palatino Linotype;
+}
+
+.section-title {
+    color: #001F3F;
+}
+
+.product-image {
+    width: 100%;
+    max-width: 150px;
+    height: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    margin: 0 auto;
+}
+
+.price-original {
+    text-decoration: line-through;
+    color: #6A9AB0;
+}
+
+.price-discount {
+    color: #E74C3C;
+    font-weight: bold;
+}
+

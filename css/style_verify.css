@@ -1,0 +1,64 @@
+
+* {
+padding: 0;
+margin: 0;
+box-sizing: border-box;
+}
+
+body {
+background-color: #eee;
+height: 100vh;
+font-family: "Poppins", sans-serif;
+background: linear-gradient(
+    to top,
+    #fff 10%,
+    rgba(58, 109, 140, 0.4) 90%
+    )
+    no-repeat;
+margin: 0;
+}
+
+.wrapper {
+max-width: 500px;
+border-radius: 10px;
+margin: 50px auto;
+padding: 30px 40px;
+box-shadow: 20px 20px 80px rgb(206, 206, 206);
+background-color: #fff; /* Thay đổi nền thành màu trắng */
+}
+
+.h2 {
+font-family: "Poppins", sans-serif;
+margin-bottom: 20px;
+}
+
+.alert {
+padding: 15px;
+margin: 10px 0;
+border: 1px solid transparent;
+border-radius: 5px;
+background-color: #f8d7da;
+color: #721c24;
+font-weight: bold;
+display: none; /* Ẩn thông báo lỗi mặc định */
+}
+
+.btn.btn-block {
+border-radius: 20px;
+background: linear-gradient(to right, #001f3f, #6a9ab0);
+color: #fff;
+border: none;
+}
+
+@media (max-width: 575px) {
+.wrapper {
+    margin: 10px;
+}
+}
+
+@media (max-width: 424px) {
+.wrapper {
+    padding: 30px 10px;
+    margin: 5px;
+}
+}

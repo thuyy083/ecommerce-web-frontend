@@ -4,139 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Đăng ký</title>
-
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-
-    <!-- Bootstrap JS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" rel="stylesheet"/>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
-
-    <!-- Font Awesome 5 CDN -->
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
-    />
-
-    <!-- jQuery -->
+    <link rel="stylesheet"  href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-    <!-- JWT Decode -->
     <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
-
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"/>
     <link rel="icon" href="Logo/icon.png" type="image/x-icon" />
-    <style>
-      * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-      }
+    <link rel="stylesheet" href="./css/style_index.css" />
+    <link rel="stylesheet" href="./css/style_register.css" />
 
-      body {
-        background-color: #eee;
-        height: 100vh;
-        font-family: "Poppins", sans-serif;
-        background: linear-gradient(
-            to top,
-            #fff 10%,
-            rgba(58, 109, 140, 0.4) 90%
-          )
-          no-repeat;
-        margin: 0;
-      }
-
-      .wrapper {
-        max-width: 500px;
-        border-radius: 10px;
-        margin: 50px auto;
-        padding: 30px 40px;
-        box-shadow: 20px 20px 80px rgb(206, 206, 206);
-      }
-
-      .h4 {
-        font-family: "Poppins", sans-serif;
-      }
-
-      .input-field {
-        border-radius: 5px;
-        padding: 5px;
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        border: 1px solid #400485;
-        color: #400485;
-      }
-
-      .input-field:hover {
-        color: #3a6d8c;
-        border: 1px solid #001f3f;
-      }
-
-      input {
-        border: none;
-        outline: none;
-        box-shadow: none;
-        width: 100%;
-        padding: 0px 2px;
-        font-family: "Poppins", sans-serif;
-      }
-
-      .fa-eye-slash.btn {
-        border: none;
-        outline: none;
-        box-shadow: none;
-      }
-
-      a {
-        text-decoration: none;
-        color: #6a9ab0;
-        font-weight: 700;
-      }
-
-      a:hover {
-        text-decoration: none;
-        color: #ead8b1;
-      }
-
-      .btn.btn-block {
-        border-radius: 20px;
-        background: linear-gradient(to right, #001f3f, #6a9ab0);
-        color: #fff;
-        border: none;
-      }
-
-      @media (max-width: 575px) {
-        .wrapper {
-          margin: 10px;
-        }
-      }
-
-      @media (max-width: 424px) {
-        .wrapper {
-          padding: 30px 10px;
-          margin: 5px;
-        }
-      }
-
-      .alert {
-        padding: 15px;
-        margin: 10px 0;
-        border: 1px solid transparent;
-        border-radius: 5px;
-        background-color: #f8d7da;
-        color: #721c24;
-        font-weight: bold;
-        display: none; /* Ẩn thông báo lỗi mặc định */
-      }
-    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" 
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="crossorigin="anonymous"></script>
+    
   </head>
   <body>
+
+    <div id="navbar-container"> </div>
+
     <div class="wrapper bg-white">
       <div class="h2 text-center pt-2">ĐĂNG KÝ</div>
       <form id="registerForm" class="pt-3">
@@ -209,6 +94,8 @@
         </div>
       </form>
     </div>
+
+    <div id="footer-container"></div>
 
     <script>
       // Hàm để thay đổi favicon
@@ -381,5 +268,14 @@
         input.type = input.type === "password" ? "text" : "password";
       }
     </script>
+
+    <!-- KHA AI -->
+    <script>
+      $(document).ready(function() { 
+          $('#navbar-container').load('./fragments/navbar.html', function(response, status, xhr) {});
+          $('#footer-container').load('./fragments/footer.html', function(response, status, xhr) {});
+      });
+
+  </script>
   </body>
 </html>

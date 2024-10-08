@@ -1,0 +1,142 @@
+
+* {
+padding: 0;
+margin: 0;
+box-sizing: border-box;
+}
+
+body {
+background-color: #eee;
+height: 100vh;
+font-family: "Poppins", sans-serif;
+background: linear-gradient(
+    to top,
+    #fff 10%,
+    rgba(58, 109, 140, 0.4) 90%
+    )
+    no-repeat;
+
+height: 100vh; /* Đảm bảo chiều cao toàn bộ cửa sổ */
+margin: 0; /* Bỏ lề mặc định */
+}
+
+.wrapper {
+max-width: 500px;
+border-radius: 10px;
+margin: 50px auto;
+padding: 30px 40px;
+box-shadow: 20px 20px 80px rgb(206, 206, 206);
+}
+
+.h4 {
+font-family: "Poppins", sans-serif;
+}
+
+.input-field {
+border-radius: 5px;
+padding: 5px;
+display: flex;
+align-items: center;
+cursor: pointer;
+border: 1px solid #400485;
+color: #400485;
+}
+
+.input-field:hover {
+color: #3a6d8c;
+border: 1px solid #001f3f;
+}
+
+input {
+border: none;
+outline: none;
+box-shadow: none;
+width: 100%;
+padding: 0px 2px;
+font-family: "Poppins", sans-serif;
+}
+
+.fa-eye-slash.btn {
+border: none;
+outline: none;
+box-shadow: none;
+}
+
+a {
+text-decoration: none;
+color: #6a9ab0;
+font-weight: 700;
+}
+
+a:hover {
+text-decoration: none;
+color: #ead8b1;
+}
+
+.option {
+position: relative;
+padding-left: 30px;
+cursor: pointer;
+}
+
+.option label.text-muted {
+display: block;
+cursor: pointer;
+}
+
+.option input {
+display: none;
+}
+
+.btn.btn-block {
+border-radius: 20px;
+background: linear-gradient(to right, #001f3f, #6a9ab0);
+color: #fff;
+border: none; /* Bỏ border mặc định */
+}
+
+@media (max-width: 575px) {
+.wrapper {
+    margin: 10px;
+}
+}
+
+@media (max-width: 424px) {
+.wrapper {
+    padding: 30px 10px;
+    margin: 5px;
+}
+
+.option {
+    position: relative;
+    padding-left: 22px;
+}
+
+.option label.text-muted {
+    font-size: 0.95rem;
+}
+
+.checkmark {
+    position: absolute;
+    top: 2px;
+}
+
+.option .checkmark:after {
+    top: 50%;
+}
+
+#forgot {
+    font-size: 0.95rem;
+}
+}
+
+.alert {
+padding: 15px;
+margin: 10px 0;
+border: 1px solid transparent;
+border-radius: 5px;
+background-color: #f8d7da; /* Màu nền đỏ nhạt */
+color: #721c24; /* Màu chữ đỏ */
+font-weight: bold; /* Chữ đậm */
+display: none; /* Ẩn thông báo lỗi mặc định */
+}
