@@ -3,260 +3,306 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Đăng ký Shop</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"rel="stylesheet" />
+    <title>Đăng ký shop</title>
+    <link  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"rel="stylesheet"/>
     <link rel="icon" href="Logo/icon.png" type="image/x-icon" />
     <link rel="stylesheet" href="./css/style_index.css" />
     <link rel="stylesheet" href="./css/style_register_shop.css" />
     <script src="https://code.jquery.com/jquery-3.7.1.js" 
       integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="crossorigin="anonymous"></script>
-   
+    
   </head>
   <body>
-    <div id="navbar-container"> </div>
 
-    <div class="wrapper bg-white">
-      <div class="h2 text-center pt-2">ĐĂNG KÝ SHOP</div>
+    <div id="navbar-container"> </div>
+    <div class="register-shop-page-wrapper">
+    <div class="wrapper">
+      <h2 class="text-center">ĐĂNG KÝ SHOP</h2>
+      <div id="verify-error-message" class="alert text-center"></div>
       <form id="registerShopForm" class="pt-3">
         <div id="error-message" class="alert text-center"></div>
-
+    
         <div class="form-group py-2">
-          <div class="input-field">
-            <span class="far fa-user p-2"></span>
-            <input id="name" type="text" placeholder="Tên" required />
-          </div>
+            <div class="input-field">
+                <span class="far fa-user p-2"></span>
+                <input id="name" type="text" placeholder="Tên" required />
+            </div>
         </div>
-
+    
         <div class="form-group py-2">
-          <div class="input-field">
-            <span class="fas fa-phone p-2"></span>
-            <input id="phone" type="tel" placeholder="Số điện thoại" required />
-          </div>
+            <div class="input-field">
+                <span class="fas fa-phone p-2"></span>
+                <input id="phone" type="tel" placeholder="Số điện thoại" required />
+            </div>
         </div>
-
+    
         <div class="form-group py-2">
-          <div class="input-field">
-            <span class="far fa-envelope p-2"></span>
-            <input id="email" type="email" placeholder="Email" required />
-          </div>
+            <div class="input-field">
+                <span class="far fa-envelope p-2"></span>
+                <input id="email" type="email" placeholder="Email" required />
+            </div>
         </div>
-
+    
         <div class="form-group py-1 pb-2">
-          <div class="input-field">
-            <span class="fas fa-lock p-2"></span>
-            <input
-              id="password"
-              type="password"
-              placeholder="Mật khẩu"
-              required
-            />
-            <button
-              class="btn bg-white text-muted"
-              type="button"
-              onclick="togglePasswordVisibility('password')"
-            >
-              <span class="far fa-eye-slash"></span>
-            </button>
-          </div>
+            <div class="input-field">
+                <span class="fas fa-lock p-2"></span>
+                <input
+                    id="password"
+                    type="password"
+                    placeholder="Mật khẩu (8 đến 20 ký tự)"
+                    required
+                />
+                <button
+                    class="btn bg-white text-muted"
+                    type="button"
+                    onclick="togglePasswordVisibility('password')"
+                >
+                    <span class="far fa-eye-slash"></span>
+                </button>
+            </div>
         </div>
-
+    
         <div class="form-group py-1 pb-2">
-          <div class="input-field">
-            <span class="fas fa-lock p-2"></span>
-            <input
-              id="confirmPassword"
-              type="password"
-              placeholder="Nhập lại mật khẩu"
-              required
-            />
-            <button
-              class="btn bg-white text-muted"
-              type="button"
-              onclick="togglePasswordVisibility('confirmPassword')"
-            >
-              <span class="far fa-eye-slash"></span>
-            </button>
-          </div>
+            <div class="input-field">
+                <span class="fas fa-lock p-2"></span>
+                <input
+                    id="confirmPassword"
+                    type="password"
+                    placeholder="Nhập lại mật khẩu"
+                    required
+                />
+                <button
+                    class="btn bg-white text-muted"
+                    type="button"
+                    onclick="togglePasswordVisibility('confirmPassword')"
+                >
+                    <span class="far fa-eye-slash"></span>
+                </button>
+            </div>
         </div>
-
-        <button class="btn btn-block text-center my-3 w-100" type="submit">
-          Đăng ký Shop
+    
+        <button class="btn btn-block text-center my-3" type="submit">
+            Đăng ký
         </button>
         <div class="text-center pt-3 text-muted">
-          Bạn đã có tài khoản? <a href="login.html">Đăng nhập ngay</a>
+            Bạn đã có tài khoản? <a href="login.html">Đăng nhập ngay</a>
         </div>
-      </form>
+    </form>
     </div>
+    </div>
+
     <div id="footer-container"></div>
 
     <script>
-      // Hàm để thay đổi favicon
-      function changeFavicon(faviconUrl) {
-        const link =
-          document.querySelector("link[rel*='icon']") ||
-          document.createElement("link");
-        link.type = "image/x-icon";
-        link.rel = "icon";
-        link.href = faviconUrl;
-        document.getElementsByTagName("head")[0].appendChild(link);
-      }
-
-      document
-        .getElementById("registerShopForm")
-        .addEventListener("submit", async function (e) {
-          e.preventDefault();
-
-          // Đặt favicon thành loading
-          changeFavicon("Logo/loading.gif");
-
-          const name = document.getElementById("name").value.trim();
-          const phone = document.getElementById("phone").value.trim();
-          const email = document.getElementById("email").value.trim();
-          const password = document.getElementById("password").value;
-          const confirmPassword =
-            document.getElementById("confirmPassword").value;
-          const errorMessageElement = document.getElementById("error-message");
-
-          // Khởi tạo biến để theo dõi xem có lỗi hay không
-          let hasError = false;
-
-          // Xóa nội dung thông báo lỗi trước đó
-          errorMessageElement.textContent = ""; // Xóa nội dung trước đó
-          errorMessageElement.style.display = "none"; // Ẩn thông báo lỗi
-
-          // Kiểm tra các điều kiện lỗi
-          if (!name) {
-            errorMessageElement.textContent = "Tên không được để trống.";
-            errorMessageElement.style.display = "block";
-            hasError = true; // Đánh dấu có lỗi
-          }
-
-          if (!phone) {
-            errorMessageElement.textContent =
-              "Số điện thoại không được để trống.";
-            errorMessageElement.style.display = "block";
-            hasError = true; // Đánh dấu có lỗi
-          } else {
-            const phoneRegex = /^(?:\+84|0)(?:3|5|7|8|9)\d{8}$/; // Biểu thức chính quy để kiểm tra định dạng số điện thoại
-            if (!phoneRegex.test(phone)) {
-              errorMessageElement.textContent =
-                "Số điện thoại không đúng định dạng.";
-              errorMessageElement.style.display = "block";
-              hasError = true; // Đánh dấu có lỗi
-            }
-          }
-
-          if (!email) {
-            errorMessageElement.textContent = "Email không được để trống.";
-            errorMessageElement.style.display = "block";
-            hasError = true; // Đánh dấu có lỗi
-          } else {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Kiểm tra định dạng email
-            if (!emailRegex.test(email)) {
-              errorMessageElement.textContent = "Email không đúng định dạng.";
-              errorMessageElement.style.display = "block";
-              hasError = true; // Đánh dấu có lỗi
-            }
-          }
-
-          if (!password) {
-            errorMessageElement.textContent = "Mật khẩu không được để trống.";
-            errorMessageElement.style.display = "block";
-            hasError = true; // Đánh dấu có lỗi
-          } else if (password.length < 8 || password.length > 20) {
-            // Kiểm tra độ dài mật khẩu
-            errorMessageElement.textContent =
-              "Mật khẩu phải có từ 8 đến 20 ký tự.";
-            errorMessageElement.style.display = "block";
-            hasError = true; // Đánh dấu có lỗi
-          }
-
-          if (!confirmPassword) {
-            errorMessageElement.textContent =
-              "Mật khẩu xác nhận không được để trống.";
-            errorMessageElement.style.display = "block";
-            hasError = true; // Đánh dấu có lỗi
-          } else if (password !== confirmPassword) {
-            errorMessageElement.textContent = "Mật khẩu xác nhận không khớp.";
-            errorMessageElement.style.display = "block";
-            hasError = true; // Đánh dấu có lỗi
-          }
-
-          // Nếu có lỗi thì ngừng thực hiện
-          if (hasError) {
-            // Đặt lại favicon về mặc định nếu có lỗi
-            changeFavicon("Logo/icon.png");
-            return;
-          }
-
-          try {
-            const response = await fetch(
-              "https://localhost:7060/api/Auth/register/shop",
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  name: name,
-                  phone: phone,
-                  email: email,
-                  password: password,
-                  confirmPassword: confirmPassword,
-                }),
-              }
-            );
-
-            // Kiểm tra kết quả phản hồi
-            if (response.status === 204) {
-              // Chuyển hướng đến trang xác thực
-              window.location.href = `verify.html?email=${encodeURIComponent(
-                email
-              )}`;
-            } else {
-              const errorData = await response.json();
-              // Chuyển đổi thông báo lỗi từ API sang tiếng Việt
-              if (errorData.message === "Email account is registerd!") {
-                errorMessageElement.textContent = "Email đã tồn tại!";
-              } else {
-                errorMessageElement.textContent =
-                  "Đã xảy ra lỗi. Vui lòng thử lại.";
-              }
-              errorMessageElement.style.display = "block";
-            }
-          } catch (error) {
-            console.error("Fetch error:", error);
-            errorMessageElement.textContent =
-              "Đã xảy ra lỗi. Vui lòng thử lại.";
-            errorMessageElement.style.display = "block";
-          } finally {
-            // Đặt lại favicon về mặc định sau khi hoàn tất xử lý
-            changeFavicon("Logo/icon.png");
-          }
-        });
-
-      // Hàm để chuyển đổi chế độ hiển thị mật khẩu
-      function togglePasswordVisibility(id) {
-        const passwordField = document.getElementById(id);
-        if (passwordField.type === "password") {
-          passwordField.type = "text";
-        } else {
-          passwordField.type = "password";
+        // Hàm để thay đổi favicon
+        function changeFavicon(faviconUrl) {
+          const link =
+            document.querySelector("link[rel*='icon']") ||
+            document.createElement("link");
+          link.type = "image/x-icon";
+          link.rel = "icon";
+          link.href = faviconUrl;
+          document.getElementsByTagName("head")[0].appendChild(link);
         }
-      }
+  
+        document
+          .getElementById("registerShopForm")
+          .addEventListener("submit", async function (e) {
+            e.preventDefault();
+  
+            // Đặt favicon thành loading
+            changeFavicon("Logo/loading.gif");
+  
+            const name = document.getElementById("name").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value;
+            const confirmPassword =
+              document.getElementById("confirmPassword").value;
+            const errorMessageElement = document.getElementById("error-message");
+  
+            // Khởi tạo biến để theo dõi xem có lỗi hay không
+            let hasError = false;
+  
+            // Xóa nội dung thông báo lỗi trước đó
+            errorMessageElement.textContent = ""; // Xóa nội dung trước đó
+            errorMessageElement.style.display = "none"; // Ẩn thông báo lỗi
+  
+            // Kiểm tra các điều kiện lỗi
+            if (!name) {
+              errorMessageElement.textContent = "Tên không được để trống.";
+              errorMessageElement.style.display = "block";
+              hasError = true; // Đánh dấu có lỗi
+            }
+  
+            if (!phone) {
+              errorMessageElement.textContent =
+                "Số điện thoại không được để trống.";
+              errorMessageElement.style.display = "block";
+              hasError = true; // Đánh dấu có lỗi
+            } else {
+              const phoneRegex = /^(?:\+84|0)(?:3|5|7|8|9)\d{8}$/; // Biểu thức chính quy để kiểm tra định dạng số điện thoại
+              if (!phoneRegex.test(phone)) {
+                errorMessageElement.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Số điện thoại không đúng định dạng';
+                errorMessageElement.style.display = "block";
+                hasError = true; // Đánh dấu có lỗi
+              }
+            }
+  
+            if (!email) {
+              errorMessageElement.textContent = "Email không được để trống.";
+              errorMessageElement.style.display = "block";
+              hasError = true; // Đánh dấu có lỗi
+            } else {
+              const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Kiểm tra định dạng email
+              if (!emailRegex.test(email)) {
+                errorMessageElement.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Email không đúng định dạng';
+                errorMessageElement.style.display = "block";
+                hasError = true; // Đánh dấu có lỗi
+              }
+            }
+  
+            if (!password) {
+              errorMessageElement.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> "Mật khẩu không được để trống';
+              errorMessageElement.style.display = "block";
+              hasError = true; // Đánh dấu có lỗi
+            } else if (password.length < 8 || password.length > 20) {
+              // Kiểm tra độ dài mật khẩu
+              errorMessageElement.textContent =
+                "Mật khẩu phải có từ 8 đến 20 ký tự.";
+              errorMessageElement.style.display = "block";
+              hasError = true; // Đánh dấu có lỗi
+            }
+  
+            if (!confirmPassword) {
+              errorMessageElement.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Mật khẩu xác nhận không được để trống';
+              errorMessageElement.style.display = "block";
+              hasError = true; // Đánh dấu có lỗi
+            } else if (password !== confirmPassword) {
+              errorMessageElement.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i>Mật khẩu xác nhận không khớp';
+              errorMessageElement.style.display = "block";
+              hasError = true; // Đánh dấu có lỗi
+            }
+  
+            // Nếu có lỗi thì ngừng thực hiện
+            if (hasError) {
+              // Đặt lại favicon về mặc định nếu có lỗi
+              changeFavicon("Logo/icon.png");
+              return;
+            }
+  
+            try {
+              const response = await fetch(
+                "https://localhost:7060/api/Auth/register/shop",
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    name: name,
+                    phone: phone,
+                    email: email,
+                    password: password,
+                    confirmPassword: confirmPassword,
+                  }),
+                }
+              );
+  
+              // Kiểm tra kết quả phản hồi
+              if (response.status === 204) {
+                // Chuyển hướng đến trang xác thực
+                window.location.href = `verify.html?email=${encodeURIComponent(
+                  email
+                )}`;
+              } else {
+                const errorData = await response.json();
+                // Chuyển đổi thông báo lỗi từ API sang tiếng Việt
+                if (errorData.message === "Email account is registerd!") {
+                  errorMessageElement.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Email đã tồn tại';
+                } else {
+                  errorMessageElement.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Đã xảy ra lỗi. Vui lòng thử lại';
+                }
+                errorMessageElement.style.display = "block";
+              }
+            } catch (error) {
+              console.error("Fetch error:", error);
+              errorMessageElement.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Đã xảy ra lỗi. Vui lòng thử lại';
+              errorMessageElement.style.display = "block";
+            } finally {
+              // Đặt lại favicon về mặc định sau khi hoàn tất xử lý
+              changeFavicon("Logo/icon.png");
+            }
+          });
+  
+        // Hàm để chuyển đổi chế độ hiển thị mật khẩu
+        function togglePasswordVisibility(id) {
+          const passwordField = document.getElementById(id);
+          if (passwordField.type === "password") {
+            passwordField.type = "text";
+          } else {
+            passwordField.type = "password";
+          }
+        }
+      </script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+   <script>
+     $(document).ready(function () {
+       $("#navbar-container").load(
+         "./fragments/navbar.html",
+         function (response, status, xhr) {
+           if (status === "success") {
+             // Đảm bảo rằng tất cả các phần tử đã được nạp trước khi thực hiện kiểm tra trạng thái
+             const token = localStorage.getItem("token");
+             const avatar = localStorage.getItem("avatar");
+
+             const userAvatar = document.getElementById("user-avatar");
+             const loginRegister = document.getElementById("login-register");
+             const logoutBtn = document.getElementById("logout-btn");
+
+             if (token && avatar) {
+               userAvatar.style.display = "block";
+               loginRegister.style.display = "none";
+               userAvatar.src = `./Images/avatar/${avatar}`;
+               logoutBtn.style.display = "block";
+
+               logoutBtn.addEventListener("click", function () {
+                 localStorage.removeItem("token");
+                 localStorage.removeItem("avatar");
+                 window.location.href = "/login.html";
+               });
+             } else {
+               userAvatar.style.display = "none";
+               logoutBtn.style.display = "none";
+               loginRegister.style.display = "block";
+             }
+           } else {
+             console.error(
+               "Error loading navbar:",
+               xhr.status,
+               xhr.statusText
+             );
+           }
+         }
+       );
+     });
+   </script>
+   
+ 
+      <script>
+        $(document).ready(function() { 
+          //  $('#navbar-container').load('./fragments/navbar.html', function(response, status, xhr) {});
+            $('#footer-container').load('./fragments/footer.html', function(response, status, xhr) {});
+        });
+  
     </script>
-
-    <!-- KHA AI -->
-    <script>
-      $(document).ready(function() { 
-          $('#navbar-container').load('./fragments/navbar.html', function(response, status, xhr) {});
-          $('#footer-container').load('./fragments/footer.html', function(response, status, xhr) {});
-      });
-
-  </script>
+      
   </body>
 </html>

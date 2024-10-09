@@ -1,7 +1,7 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="index.html">
             <img src="Logo/Logo.png" alt="Logo" class="logo">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -14,10 +14,13 @@
                     <a class="nav-link active" aria-current="page" href="#">Trang chủ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Sản Phẩm</a>
+                    <a class="nav-link" href="shop.html">Sản Phẩm</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Liên Hệ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="register-shop.html">Bán Hàng Cùng TATLN</a>
                 </li>
             </ul>
             <form class="d-flex">
@@ -27,11 +30,22 @@
                 </button>
             </form>
             
-            <a href="../login.html" class="btn btn-auth ms-2">Đăng nhập</a>
-            <a href="../register.html" class="btn btn-auth ms-2">Đăng ký</a>
+            <div id="user-auth" class="d-flex align-items-center ms-2">
+                <!-- Nếu người dùng đã đăng nhập -->
+                <a id="logout-btn" href="./index.html" class="btn btn-auth ms-2" style="display: none;">Đăng xuất</a>
+                <img id="user-avatar" src="" alt="Avatar" class="avatar" 
+                style="display: none; width: 40px; height: 40px; border-radius: 50%; margin-left: 10px;">
+              
+                <!-- Nếu người dùng chưa đăng nhập -->
+                <div id="login-register">
+                    <a href="./login.html" class="btn btn-auth ms-2">Đăng nhập</a>
+                    <a href="./register.html" class="btn btn-auth ms-2">Đăng ký</a>
+                </div>
+            </div>
         </div>
     </div>
 </nav>
+
 
 <!-- Header-->
 <header>
@@ -41,3 +55,27 @@
                 tất cả chỉ trong một chạm. Khám phá thế giới mua sắm trực tuyến đa dạng, tiện lợi và đáng tin cậy, nơi mọi sản phẩm chất lượng đều được mang đến tận tay bạn với giá ưu đãi mỗi ngày. Mua sắm thông minh, tiết kiệm thời gian và nhận ngay niềm vui!</marquee>
     </div>
 </header>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+        // Kiểm tra token
+        function isLoggedIn() {
+            return localStorage.getItem('token') !== null; // Kiểm tra xem token có trong localStorage hay không
+        }
+
+        const userAvatar = "./Images/avatar/no-avatar.jpg"; // Đường dẫn đến hình đại diện của người dùng
+
+        // Kiểm tra trạng thái đăng nhập
+        if (isLoggedIn()) {
+            document.getElementById("user-avatar").src = userAvatar; // Cập nhật đường dẫn hình đại diện
+            document.getElementById("user-avatar").style.display = "block"; // Hiển thị hình đại diện
+            document.getElementById("logout-btn").style.display = "block"; // Hiển thị nút Đăng xuất
+            document.getElementById("login-register").style.display = "none"; // Ẩn nút đăng nhập và đăng ký
+        } else {
+            document.getElementById("user-avatar").style.display = "none"; // Ẩn hình đại diện
+            document.getElementById("logout-btn").style.display = "none"; // Ẩn nút đăng xuất
+            document.getElementById("login-register").style.display = "block"; // Hiển thị lại nút đăng nhập và đăng ký
+        }
+    });
+</script>

@@ -1,108 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TATLN</title>
     <link rel="icon" type="image/x-icon" href="Logo/icon.png" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/style_index.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.js"
-        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./css/style_index.css" />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
 
-</head>
-
-<body>
-    <div id="navbar-container"> </div>
-
+  <body>
+    <div id="navbar-container"></div>
 
     <!-- Sản phẩm khuyến mãi -->
     <section class="py-5 container">
-        <!-- Chương trình khuyến mãi -->
-        <!-- Carousel -->
-        <div id="salesCarousel" class="carousel slide" data-bs-ride="carousel" style="display: none;">
+      <!-- Chương trình khuyến mãi -->
+      <!-- Carousel -->
+      <div
+        id="salesCarousel"
+        class="carousel slide"
+        data-bs-ride="carousel"
+        style="display: none"
+      >
+        <!-- Indicators/dots -->
+        <div class="carousel-indicators" id="carousel-indicators"></div>
 
-            <!-- Indicators/dots -->
-            <div class="carousel-indicators" id="carousel-indicators"></div>
+        <!-- The slideshow/carousel -->
+        <div class="carousel-inner" id="carousel-inner"></div>
 
-            <!-- The slideshow/carousel -->
-            <div class="carousel-inner" id="carousel-inner"></div>
-
-            <!-- Left and right controls/icons -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#salesCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#salesCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </button>
-        </div>
-        <div class="px-4 px-lg-5 mt-5">
-            <h3 class="section-title text-center">Sản Phẩm Đang Khuyến Mãi</h3>
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
-                id="product-list">
-
-            </div>
-        </div>
-        <!-- Sản phẩm sắp khuyến mãi -->
-        <div class="px-4 px-lg-5 mt-5">
-            <h3 class="section-title text-center">Sản Phẩm Sắp Khuyến Mãi</h3>
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
-                id="upcoming-sales-products">
-
-            </div>
-        </div>
-        <!-- Sản phẩm đánh giá cao -->
-        <div class="px-4 px-lg-5 mt-5">
-            <h3 class="section-title text-center">Sản Phẩm Đánh Giá Cao</h3>
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
-                id="top-rated-products">
-            </div>
-        </div>
-
+        <!-- Left and right controls/icons -->
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#salesCarousel"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#salesCarousel"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </div>
+      <div class="px-4 px-lg-5 mt-5">
+        <h3 class="section-title text-center">Sản Phẩm Đang Khuyến Mãi</h3>
+        <div
+          class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
+          id="product-list"
+        ></div>
+      </div>
+      <!-- Sản phẩm sắp khuyến mãi -->
+      <div class="px-4 px-lg-5 mt-5">
+        <h3 class="section-title text-center">Sản Phẩm Sắp Khuyến Mãi</h3>
+        <div
+          class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
+          id="upcoming-sales-products"
+        ></div>
+      </div>
+      <!-- Sản phẩm đánh giá cao -->
+      <div class="px-4 px-lg-5 mt-5">
+        <h3 class="section-title text-center">Sản Phẩm Đánh Giá Cao</h3>
+        <div
+          class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
+          id="top-rated-products"
+        ></div>
+      </div>
     </section>
 
-    <div id="footer-container">
-
-    </div>
+    <div id="footer-container"></div>
     <!-- Script -->
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const productList = document.getElementById("product-list");
-            const topRatedProductList = document.getElementById("top-rated-products");
-            const upcomingSalesProductList = document.getElementById("upcoming-sales-products");
+      document.addEventListener("DOMContentLoaded", function () {
+        const productList = document.getElementById("product-list");
+        const topRatedProductList =
+          document.getElementById("top-rated-products");
+        const upcomingSalesProductList = document.getElementById(
+          "upcoming-sales-products"
+        );
 
-            const carousel = document.getElementById("salesCarousel");
-            const carouselInner = document.getElementById("carousel-inner");
-            const carouselIndicators = document.getElementById("carousel-indicators");
+        const carousel = document.getElementById("salesCarousel");
+        const carouselInner = document.getElementById("carousel-inner");
+        const carouselIndicators = document.getElementById(
+          "carousel-indicators"
+        );
 
-            // Gọi API để lấy danh sách sản phẩm khuyến mãi
-            fetch("https://localhost:7060/api/Sales/current/products")
-                .then(response => response.json())
-                .then(data => {
-                    const products = data.data;  // Lấy danh sách sản phẩm từ API
-                    if (products && products.length > 0) {
-                        products.forEach(saleEvent => {
-                            saleEvent.products.forEach(product => {
-                                // Đường dẫn hình ảnh trong thư mục Images phía frontend
-                                let imagePath = 'Images/';
-                                if (product.images && product.images.length > 0) {
-                                    imagePath += product.images[0].path; // Hình ảnh đầu tiên của sản phẩm
-                                } else {
-                                    imagePath += 'default-image.jpg'; // Hình ảnh mặc định nếu không có ảnh
-                                }
+        // Gọi API để lấy danh sách sản phẩm khuyến mãi
+        fetch("https://localhost:7060/api/Sales/current/products")
+          .then((response) => response.json())
+          .then((data) => {
+            const products = data.data; // Lấy danh sách sản phẩm từ API
+            if (products && products.length > 0) {
+              products.forEach((saleEvent) => {
+                saleEvent.products.forEach((product) => {
+                  // Đường dẫn hình ảnh trong thư mục Images phía frontend
+                  let imagePath = "Images/";
+                  if (product.images && product.images.length > 0) {
+                    imagePath += product.images[0].path; // Hình ảnh đầu tiên của sản phẩm
+                  } else {
+                    imagePath += "default-image.jpg"; // Hình ảnh mặc định nếu không có ảnh
+                  }
 
-                                // Giá gốc và giá khuyến mãi
-                                const originalPrice = product.price.toFixed(2);
-                                const discountPrice = (product.price * (1 - product.discountPercent)).toFixed(2);
+                  // Giá gốc và giá khuyến mãi
+                  const originalPrice = product.price.toFixed(2);
+                  const discountPrice = (
+                    product.price *
+                    (1 - product.discountPercent)
+                  ).toFixed(2);
 
-                                // Tạo HTML cho từng sản phẩm
-                                const productHTML = `
+                  // Tạo HTML cho từng sản phẩm
+                  const productHTML = `
                                     <div class="col mb-5">
                                         <div class="card h-100">
                                                 <img src="${imagePath}" 
@@ -128,71 +158,80 @@
                                         </div>
                                     </div>`;
 
-                                // Thêm sản phẩm vào danh sách
-                                productList.innerHTML += productHTML;
-                            });
-                        });
-                    } else {
-                        productList.innerHTML = "<p>Không có sản phẩm nào đang khuyến mãi.</p>";
-                    }
-                })
-                .catch(error => {
-                    console.error("Có lỗi xảy ra:", error);
-                    productList.innerHTML = "<p>Không thể tải dữ liệu sản phẩm.</p>";
+                  // Thêm sản phẩm vào danh sách
+                  productList.innerHTML += productHTML;
                 });
+              });
+            } else {
+              productList.innerHTML =
+                "<p>Không có sản phẩm nào đang khuyến mãi.</p>";
+            }
+          })
+          .catch((error) => {
+            console.error("Có lỗi xảy ra:", error);
+            productList.innerHTML = "<p>Không thể tải dữ liệu sản phẩm.</p>";
+          });
 
-            // Gọi API để lấy danh sách chương trình khuyến mãi hiện tại
-            fetch("https://localhost:7060/api/Sales/current")
-                .then(response => response.json())
-                .then(data => {
-                    const sales = data.data;
-                    if (sales && sales.length > 0) {
-                        // Hiển thị carousel nếu có khuyến mãi
-                        carousel.style.display = "block";
+        // Gọi API để lấy danh sách chương trình khuyến mãi hiện tại
+        fetch("https://localhost:7060/api/Sales/current")
+          .then((response) => response.json())
+          .then((data) => {
+            const sales = data.data;
+            if (sales && sales.length > 0) {
+              // Hiển thị carousel nếu có khuyến mãi
+              carousel.style.display = "block";
 
-                        sales.forEach((sale, index) => {
-                            // Đường dẫn ảnh minh họa (giả sử ảnh được lưu trong thư mục Images)
-                            let imagePath = `Images/${sale.illustration}`;
+              sales.forEach((sale, index) => {
+                // Đường dẫn ảnh minh họa (giả sử ảnh được lưu trong thư mục Images)
+                let imagePath = `Images/${sale.illustration}`;
 
-                            // Tạo HTML cho mỗi chương trình khuyến mãi trong carousel
-                            const saleHTML = `
-                        <div class="carousel-item ${index === 0 ? 'active' : ''}">
-                            <img src="${imagePath}" alt="${sale.name}" class="d-block image-carousel" style="width:100%">
+                // Tạo HTML cho mỗi chương trình khuyến mãi trong carousel
+                const saleHTML = `
+                        <div class="carousel-item ${
+                          index === 0 ? "active" : ""
+                        }">
+                            <img src="${imagePath}" alt="${
+                  sale.name
+                }" class="d-block image-carousel" style="width:100%">
                         </div>`;
 
-                            // Thêm indicator cho mỗi item trong carousel
-                            const indicatorHTML = `<button type="button" data-bs-target="#salesCarousel" data-bs-slide-to="${index}" class="${index === 0 ? 'active' : ''}"></button>`;
+                // Thêm indicator cho mỗi item trong carousel
+                const indicatorHTML = `<button type="button" data-bs-target="#salesCarousel" data-bs-slide-to="${index}" class="${
+                  index === 0 ? "active" : ""
+                }"></button>`;
 
-                            // Thêm chương trình khuyến mãi vào carousel
-                            carouselInner.innerHTML += saleHTML;
-                            carouselIndicators.innerHTML += indicatorHTML;
-                        });
-                    }
-                })
-                .catch(error => {
-                    console.error("Có lỗi xảy ra:", error);
-                });
-            // Gọi API để lấy sản phẩm có đánh giá cao
+                // Thêm chương trình khuyến mãi vào carousel
+                carouselInner.innerHTML += saleHTML;
+                carouselIndicators.innerHTML += indicatorHTML;
+              });
+            }
+          })
+          .catch((error) => {
+            console.error("Có lỗi xảy ra:", error);
+          });
+        // Gọi API để lấy sản phẩm có đánh giá cao
 
-            fetch("https://localhost:7060/api/Products?SortBy=rating&SortType=desc")
-                .then(response => response.json())
-                .then(data => {
+        fetch("https://localhost:7060/api/Products?SortBy=rating&SortType=desc")
+          .then((response) => response.json())
+          .then((data) => {
+            const products = data.data;
+            if (products && products.length > 0) {
+              products.forEach((product) => {
+                let imagePath = "Images/";
+                if (product.images && product.images.length > 0) {
+                  imagePath += product.images[0].path;
+                } else {
+                  imagePath += "default-image.jpg";
+                }
 
-                    const products = data.data;
-                    if (products && products.length > 0) {
-                        products.forEach(product => {
-                            let imagePath = 'Images/';
-                            if (product.images && product.images.length > 0) {
-                                imagePath += product.images[0].path;
-                            } else {
-                                imagePath += 'default-image.jpg';
-                            }
+                // Tính điểm trung bình rating của sản phẩm
+                let avgRating =
+                  product.rating > 0
+                    ? product.rating.toFixed(1)
+                    : "Chưa có đánh giá";
 
-                            // Tính điểm trung bình rating của sản phẩm
-                            let avgRating = product.rating > 0 ? product.rating.toFixed(1) : "Chưa có đánh giá";
-
-                            // Tạo HTML cho từng sản phẩm
-                            const productHTML = `
+                // Tạo HTML cho từng sản phẩm
+                const productHTML = `
                                 <div class="col mb-5">
                                     <div class="card h-100">
                                         <img src="${imagePath}" alt="${product.name}" class="product-image card-img-top">
@@ -213,51 +252,62 @@
                                     </div>
                                 </div>`;
 
-                            // Thêm sản phẩm vào danh sách
-                            topRatedProductList.innerHTML += productHTML;
-                        });
-                    } else {
-                        topRatedProductList.innerHTML = "<p>Không có sản phẩm nào có đánh giá cao.</p>";
-                    }
-                })
-                .catch(error => {
-                    console.error("Có lỗi xảy ra:", error);
-                    topRatedProductList.innerHTML = "<p>Không thể tải dữ liệu sản phẩm đánh giá cao.</p>";
-                });
-            // Gọi API để lấy danh sách sản phẩm sắp khuyến mãi
-            fetch("https://localhost:7060/api/Sales/upcoming/products")
-                .then(response => response.json())
-                .then(data => {
-                    const salesEvents = data.data; // Dữ liệu khuyến mãi
-                    if (salesEvents && salesEvents.length > 0) {
-                        salesEvents.forEach(saleEvent => {
-                            saleEvent.products.forEach(product => {
-                                // Đường dẫn hình ảnh sản phẩm
-                                let imagePath = 'Images/';
-                                if (product.images && product.images.length > 0) {
-                                    imagePath += product.images[0].path;
-                                } else {
-                                    imagePath += 'default-image.jpg'; // Hình ảnh mặc định nếu không có ảnh
-                                }
+                // Thêm sản phẩm vào danh sách
+                topRatedProductList.innerHTML += productHTML;
+              });
+            } else {
+              topRatedProductList.innerHTML =
+                "<p>Không có sản phẩm nào có đánh giá cao.</p>";
+            }
+          })
+          .catch((error) => {
+            console.error("Có lỗi xảy ra:", error);
+            topRatedProductList.innerHTML =
+              "<p>Không thể tải dữ liệu sản phẩm đánh giá cao.</p>";
+          });
+        // Gọi API để lấy danh sách sản phẩm sắp khuyến mãi
+        fetch("https://localhost:7060/api/Sales/upcoming/products")
+          .then((response) => response.json())
+          .then((data) => {
+            const salesEvents = data.data; // Dữ liệu khuyến mãi
+            if (salesEvents && salesEvents.length > 0) {
+              salesEvents.forEach((saleEvent) => {
+                saleEvent.products.forEach((product) => {
+                  // Đường dẫn hình ảnh sản phẩm
+                  let imagePath = "Images/";
+                  if (product.images && product.images.length > 0) {
+                    imagePath += product.images[0].path;
+                  } else {
+                    imagePath += "default-image.jpg"; // Hình ảnh mặc định nếu không có ảnh
+                  }
 
-                                // Giá gốc và giá khuyến mãi
-                                const originalPrice = product.price.toFixed(2);
-                                const discountPrice = (product.price * (1 - saleEvent.discount)).toFixed(2);
+                  // Giá gốc và giá khuyến mãi
+                  const originalPrice = product.price.toFixed(2);
+                  const discountPrice = (
+                    product.price *
+                    (1 - saleEvent.discount)
+                  ).toFixed(2);
 
-                                // Tạo HTML cho từng sản phẩm
-                                const productHTML = `
+                  // Tạo HTML cho từng sản phẩm
+                  const productHTML = `
                                     <div class="col mb-5">
                                         <div class="card h-100">
-                                            <img src="${imagePath}" alt="${product.name}" class="product-image card-img-top">
+                                            <img src="${imagePath}" alt="${
+                    product.name
+                  }" class="product-image card-img-top">
                                             <div class="card-body p-2">
                                                 <div class="text-center">
-                                                    <h5 class="product-title mt-3">${product.name}</h5>
+                                                    <h5 class="product-title mt-3">${
+                                                      product.name
+                                                    }</h5>
                                                     <p class="product-price">
                                                         <span class="price-original">$${originalPrice}</span>
                                                         <br>
                                                         <span class="price-discount ms-2">$${discountPrice}</span>
                                                     </p>
-                                                    <p class="sale-start-date">Bắt đầu khuyến mãi: ${new Date(saleEvent.startDate).toLocaleDateString()}</p>
+                                                    <p class="sale-start-date">Bắt đầu khuyến mãi: ${new Date(
+                                                      saleEvent.startDate
+                                                    ).toLocaleDateString()}</p>
                                                 </div>
                                             </div>
                                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
@@ -266,30 +316,75 @@
                                         </div>
                                     </div>`;
 
-                                // Thêm sản phẩm vào danh sách
-                                upcomingSalesProductList.innerHTML += productHTML;
-                            });
-                        });
-                    } else {
-                        upcomingSalesProductList.innerHTML = "<p>Không có sản phẩm sắp khuyến mãi.</p>";
-                    }
-                })
-                .catch(error => {
-                    console.error("Có lỗi xảy ra:", error);
-                    upcomingSalesProductList.innerHTML = "<p>Không thể tải dữ liệu sản phẩm sắp khuyến mãi.</p>";
+                  // Thêm sản phẩm vào danh sách
+                  upcomingSalesProductList.innerHTML += productHTML;
                 });
-        });
+              });
+            } else {
+              upcomingSalesProductList.innerHTML =
+                "<p>Không có sản phẩm sắp khuyến mãi.</p>";
+            }
+          })
+          .catch((error) => {
+            console.error("Có lỗi xảy ra:", error);
+            upcomingSalesProductList.innerHTML =
+              "<p>Không thể tải dữ liệu sản phẩm sắp khuyến mãi.</p>";
+          });
+      });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
+    <script>
+      $(document).ready(function () {
+        $("#navbar-container").load(
+          "./fragments/navbar.html",
+          function (response, status, xhr) {
+            if (status === "success") {
+              // Đảm bảo rằng tất cả các phần tử đã được nạp trước khi thực hiện kiểm tra trạng thái
+              const token = localStorage.getItem("token");
+              const avatar = localStorage.getItem("avatar");
+
+              const userAvatar = document.getElementById("user-avatar");
+              const loginRegister = document.getElementById("login-register");
+              const logoutBtn = document.getElementById("logout-btn");
+
+              if (token && avatar) {
+                userAvatar.style.display = "block";
+                loginRegister.style.display = "none";
+                userAvatar.src = `./Images/avatar/${avatar}`;
+                logoutBtn.style.display = "block";
+
+                logoutBtn.addEventListener("click", function () {
+                  localStorage.removeItem("token");
+                  localStorage.removeItem("avatar");
+                  window.location.href = "/login.html";
+                });
+              } else {
+                userAvatar.style.display = "none";
+                logoutBtn.style.display = "none";
+                loginRegister.style.display = "block";
+              }
+            } else {
+              console.error(
+                "Error loading navbar:",
+                xhr.status,
+                xhr.statusText
+              );
+            }
+          }
+        );
+      });
+    </script>
+    
     <!-- KHA AI -->
     <script>
-        $(document).ready(function () {
-            $('#navbar-container').load('./fragments/navbar.html', function (response, status, xhr) { });
-            $('#footer-container').load('./fragments/footer.html', function (response, status, xhr) { });
-        });
-
+      $(document).ready(function () {
+        //$('#navbar-container').load('./fragments/navbar.html', function (response, status, xhr) { });
+        $("#footer-container").load(
+          "./fragments/footer.html",
+          function (response, status, xhr) {}
+        );
+      });
     </script>
-</body>
-
+  </body>
 </html>

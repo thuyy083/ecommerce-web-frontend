@@ -1,36 +1,70 @@
-
+/* Reset mặc định cho toàn bộ trang */
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
+.btn {
+  border-radius: .25rem;
+}
+
+/* Định dạng cho body của trang đăng ký shop */
 body {
   background-color: #eee;
   height: 100vh;
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(
-      to top,
-      #fff 10%,
-      rgba(58, 109, 140, 0.4) 90%
-    )
-    no-repeat;
+  background: linear-gradient(to top, #fff 10%, rgba(58, 109, 140, 0.4) 90%) no-repeat;
   margin: 0;
 }
 
-.wrapper {
+/* Wrapper chính của trang đăng ký shop */
+.register-shop-page-wrapper .wrapper {
   max-width: 500px;
   border-radius: 10px;
   margin: 50px auto;
   padding: 30px 40px;
   box-shadow: 20px 20px 80px rgb(206, 206, 206);
+  background-color: #fff;
 }
 
-.h4 {
-  font-family: "Poppins", sans-serif;
+/* Định dạng cho các thông báo lỗi */
+.register-shop-page-wrapper .alert {
+  padding: 15px;
+  margin: 10px 0;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background-color: #f8d7da;
+  color: #721c24;
+  font-weight: bold;
+  display: none; /* Ẩn thông báo lỗi mặc định */
 }
 
-.input-field {
+/* Nút đăng ký shop */
+.register-shop-page-wrapper .btn.btn-block {
+  border-radius: 20px;
+  background: linear-gradient(to right, #001f3f, #6a9ab0);
+  color: #fff;
+  border: none;
+  width: 100%;
+  height: 45px;
+}
+
+/* Responsive cho màn hình nhỏ */
+@media (max-width: 575px) {
+  .register-shop-page-wrapper .wrapper {
+      margin: 10px;
+  }
+}
+
+@media (max-width: 424px) {
+  .register-shop-page-wrapper .wrapper {
+      padding: 30px 10px;
+      margin: 5px;
+  }
+}
+
+/* Định dạng cho input và các field nhập liệu */
+.register-shop-page-wrapper .input-field {
   border-radius: 5px;
   padding: 5px;
   display: flex;
@@ -40,51 +74,35 @@ body {
   color: #400485;
 }
 
-.input-field:hover {
-  color: #3a6d8c;
-  border: 1px solid #001f3f;
-}
-
-input {
+.register-shop-page-wrapper input {
   border: none;
   outline: none;
   box-shadow: none;
   width: 100%;
   padding: 0px 2px;
-  font-family: "Poppins", sans-serif;
 }
 
-.fa-eye-slash.btn {
+/* Hiệu ứng hover cho input-field */
+.register-shop-page-wrapper .input-field:hover {
+  color: #3a6d8c;
+  border: 1px solid #001f3f;
+}
+
+/* Nút hiện/ẩn mật khẩu */
+.register-shop-page-wrapper .fa-eye-slash.btn {
   border: none;
   outline: none;
   box-shadow: none;
 }
 
-a {
+/* Định dạng cho liên kết đăng nhập */
+.register-shop-page-wrapper .text-center.pt-3.text-muted a {
   text-decoration: none;
   color: #6a9ab0;
   font-weight: 700;
 }
 
-a:hover {
+.register-shop-page-wrapper a:hover {
   text-decoration: none;
   color: #ead8b1;
-}
-
-.btn.btn-block {
-  border-radius: 20px;
-  background: linear-gradient(to right, #001f3f, #6a9ab0);
-  color: #fff;
-  border: none;
-}
-
-.alert {
-  padding: 15px;
-  margin: 10px 0;
-  border: 1px solid transparent;
-  border-radius: 5px;
-  background-color: #f8d7da;
-  color: #721c24;
-  font-weight: bold;
-  display: none; /* Ẩn thông báo lỗi mặc định */
 }
