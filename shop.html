@@ -384,10 +384,51 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/validator.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script> 
 
+    <script>
+        $(document).ready(function () {
+          $("#navbar-container").load(
+            "./fragments/navbar.html",
+            function (response, status, xhr) {
+              if (status === "success") {
+                // Đảm bảo rằng tất cả các phần tử đã được nạp trước khi thực hiện kiểm tra trạng thái
+                const token = localStorage.getItem("token");
+                const avatar = localStorage.getItem("avatar");
+  
+                const userAvatar = document.getElementById("user-avatar");
+                const loginRegister = document.getElementById("login-register");
+                const logoutBtn = document.getElementById("logout-btn");
+  
+                if (token && avatar) {
+                  userAvatar.style.display = "block";
+                  loginRegister.style.display = "none";
+                  userAvatar.src = `./Images/avatar/${avatar}`;
+                  logoutBtn.style.display = "block";
+  
+                  logoutBtn.addEventListener("click", function () {
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("avatar");
+                    window.location.href = "/login.html";
+                  });
+                } else {
+                  userAvatar.style.display = "none";
+                  logoutBtn.style.display = "none";
+                  loginRegister.style.display = "block";
+                }
+              } else {
+                console.error(
+                  "Error loading navbar:",
+                  xhr.status,
+                  xhr.statusText
+                );
+              }
+            }
+          );
+        });
+      </script>
      <!-- KHA AI -->
      <script>
         $(document).ready(function() { 
-            $('#navbar-container').load('./fragments/navbar.html', function(response, status, xhr) {});
+            //$('#navbar-container').load('./fragments/navbar.html', function(response, status, xhr) {});
             $('#footer-container').load('./fragments/footer.html', function(response, status, xhr) {});
         });
 

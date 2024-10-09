@@ -1,174 +1,167 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Đăng nhập</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" rel="stylesheet"/>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet"/>
-    <link rel="icon" href="icon.png" type="image/x-icon" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="Logo/icon.png" type="image/x-icon" />
     <link rel="stylesheet" href="./css/style_index.css" />
     <link rel="stylesheet" href="./css/style_login.css" />
-    <script src="https://code.jquery.com/jquery-3.7.1.js" 
-      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
+    <div id="navbar-container"></div>
 
-    <div id="navbar-container"> </div>
+    <!-- Bọc toàn bộ form với lớp login-page-wrapper -->
+    <div class="login-page-wrapper">
+      <div class="wrapper">
+        <h2 class="text-center">ĐĂNG NHẬP</h2>
 
-    <div class="wrapper bg-white">
-      <div class="h2 text-center pt-2">ĐĂNG NHẬP</div>
-      <form id="loginForm" class="pt-3">
-        <div id="error-message" class="alert text-center"></div>
-        <div class="form-group py-2">
-          <div class="input-field">
-            <span class="far fa-user p-2"></span>
-            <input
-              id="email"
-              type="email"
-              placeholder="Email"
-              required
-              class=""
-            />
+        <form id="loginForm" class="pt-3">
+          <div id="error-message" class="alert text-center"></div>
+          <div class="form-group py-2">
+            <div class="input-field">
+              <span class="far fa-user p-2"></span>
+              <input
+                id="email"
+                type="email"
+                placeholder="Email"
+                required
+                class=""
+              />
+            </div>
           </div>
-        </div>
-        <div class="form-group py-1 pb-2">
-          <div class="input-field">
-            <span class="fas fa-lock p-2"></span>
-            <input
-              id="password"
-              type="password"
-              placeholder="Mật khẩu"
-              required
-              class=""
-            />
-            <button
-              class="btn bg-white text-muted"
-              type="button"
-              onclick="togglePasswordVisibility()"
-            >
-              <span class="far fa-eye-slash"></span>
-            </button>
+          <div class="form-group py-2">
+            <div class="input-field">
+              <span class="fas fa-lock p-2"></span>
+              <input
+                id="password"
+                type="password"
+                placeholder="Mật khẩu"
+                required
+                class=""
+              />
+              <button
+                class="btn auth-btn bg-white text-muted"
+                type="button"
+                onclick="togglePasswordVisibility()"
+              >
+                <span class="far fa-eye-slash"></span>
+              </button>
+            </div>
           </div>
-        </div>
 
-        <button class="btn btn-block text-center my-3" type="submit">
-          Đăng nhập
-        </button>
-        <div class="text-center pt-3 text-muted">
-          Bạn chưa có tài khoản? <a href="register.html">Đăng ký ngay</a>
-        </div>
-      </form>
+          <button class="btn auth-btn btn-block text-center my-3" type="submit">
+            Đăng nhập
+          </button>
+          <div class="text-center pt-3 text-muted">
+            Bạn chưa có tài khoản? <a href="register.html">Đăng ký ngay</a>
+          </div>
+        </form>
+      </div>
     </div>
 
     <div id="footer-container"></div>
 
     <script>
-      function togglePasswordVisibility() {
-        const passwordInput = document.getElementById("password");
-        const eyeIcon = passwordInput.nextElementSibling.querySelector("span");
-
-        if (passwordInput.type === "password") {
-          passwordInput.type = "text";
-          eyeIcon.classList.remove("fa-eye-slash");
-          eyeIcon.classList.add("fa-eye");
-        } else {
-          passwordInput.type = "password";
-          eyeIcon.classList.remove("fa-eye");
-          eyeIcon.classList.add("fa-eye-slash");
-        }
-      }
-
       document
-        .getElementById("loginForm")
-        .addEventListener("submit", async function (e) {
-          e.preventDefault();
+  .getElementById("loginForm")
+  .addEventListener("submit", async function (e) {
+    e.preventDefault();
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
 
-          const email = document.getElementById("email").value;
-          const password = document.getElementById("password").value;
+    try {
+      const response = await fetch(
+        "https://localhost:7060/api/Auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          }),
+        }
+      );
 
-          try {
-            const response = await fetch(
-              "https://localhost:7060/api/Auth/login",
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  email: email,
-                  password: password,
-                }),
-              }
-            );
+      if (response.ok) {
+        const data = await response.json();
+        const token = data.token;
+        const decodedToken = jwt_decode(token);
+        const avatar = decodedToken["avatar"]; // Lấy thông tin avatar từ token
 
-            if (response.ok) {
-              const data = await response.json();
-              const token = data.token;
+        localStorage.setItem("token", token);
+        localStorage.setItem("avatar", avatar); // Lưu avatar vào localStorage
 
-              // Giải mã token để lấy role
-              const decodedToken = jwt_decode(token);
-              const userRole =
-                decodedToken[
-                  "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
-                ];
+         
+        const userRole =
+          decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
 
-              // Lưu token vào localStorage hoặc sessionStorage nếu cần
-              localStorage.setItem("token", token);
+        // Chuyển hướng dựa trên vai trò người dùng
+        if (userRole === "1") {
+          window.location.href = "/admin/dashboard.html";
+        } else if (userRole === "2") {
+          window.location.href = "index.html";
+        } else {
+          window.location.href = "/shop/dashboard.html";
+        }
+      } else {
+        const errorMessage = await response.json();
+        let customMessage = "Đăng nhập thất bại";
 
-              // Chuyển hướng dựa theo role
-              if (userRole === "1") {
-                window.location.href = "/admin/dashboard.html";
-              } else if (userRole === "2") {
-                window.location.href = "index.html";
-              } else {
-                window.location.href = "/shop/dashboard.html";
-              }
-            } else {
-              const errorMessage = await response.json();
+        if (response.status === 400 && errorMessage.Password) {
+          const passwordLength = password.length;
+          customMessage =
+            "Mật khẩu phải có ít nhất 8 ký tự. Bạn đã nhập " +
+            passwordLength +
+            " ký tự.";
+        } else if (response.status === 401) {
+          customMessage = "Email hoặc mật khẩu không đúng! Vui lòng thử lại";
+        }
 
-              // Khởi tạo thông báo lỗi mặc định
-              let customMessage = "Đăng nhập thất bại";
+        const errorMessageDiv = document.getElementById("error-message");
+        errorMessageDiv.textContent = customMessage;
+        errorMessageDiv.style.display = "block";
+      }
+    } catch (error) {
+      document.getElementById("error-message").textContent =
+        "Đã có lỗi xảy ra trong quá trình đăng nhập";
+      document.getElementById("error-message").style.display = "block";
+    }
+  });
 
-              // Kiểm tra xem có lỗi về mật khẩu hay không
-              if (response.status === 400 && errorMessage.Password) {
-                const passwordLength = password.length; // Lấy chiều dài của mật khẩu đã nhập
-                customMessage =
-                  "Mật khẩu phải có ít nhất 8 ký tự. Bạn đã nhập " +
-                  passwordLength +
-                  " ký tự.";
-              }
-              // Kiểm tra lỗi khác nếu cần
-              else if (response.status === 401) {
-                // Thông điệp tùy chỉnh cho email/mật khẩu sai
-                customMessage =
-                  " Email hoặc mật khẩu không đúng. Vui lòng thử lại.";
-              }
-
-              // Hiển thị thông báo lỗi trên front-end
-              const errorMessageDiv = document.getElementById("error-message");
-              errorMessageDiv.textContent = customMessage;
-              errorMessageDiv.style.display = "block"; // Hiện thông báo lỗi
-            }
-          } catch (error) {
-            document.getElementById("error-message").textContent =
-              "Đã có lỗi xảy ra trong quá trình đăng nhập";
-            document.getElementById("error-message").style.display = "block"; // Hiện thông báo lỗi
-          }
-        });
     </script>
-    
-    <!-- KHA AI -->
-    <script>
-      $(document).ready(function() { 
-          $('#navbar-container').load('./fragments/navbar.html', function(response, status, xhr) {});
-          $('#footer-container').load('./fragments/footer.html', function(response, status, xhr) {});
-      });
 
-  </script>
+    <script>
+      $(document).ready(function () {
+        $("#navbar-container").load("./fragments/navbar.html");
+        $("#footer-container").load("./fragments/footer.html");
+      });
+    </script>
   </body>
 </html>
