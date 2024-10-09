@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,46 +12,59 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/style_index.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.js" 
-        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="crossorigin="anonymous"></script>
-   
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 
 <body>
-
     <div id="navbar-container"> </div>
 
 
     <!-- Sản phẩm khuyến mãi -->
-    <section class="py-5">
-        <div class="container px-4 px-lg-5 mt-5">
-            <h3 class="section-title">Sản Phẩm Đang Khuyến Mãi</h3>
+    <section class="py-5 container">
+        <!-- Chương trình khuyến mãi -->
+        <!-- Carousel -->
+        <div id="salesCarousel" class="carousel slide" data-bs-ride="carousel" style="display: none;">
+
+            <!-- Indicators/dots -->
+            <div class="carousel-indicators" id="carousel-indicators"></div>
+
+            <!-- The slideshow/carousel -->
+            <div class="carousel-inner" id="carousel-inner"></div>
+
+            <!-- Left and right controls/icons -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#salesCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#salesCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+        <div class="px-4 px-lg-5 mt-5">
+            <h3 class="section-title text-center">Sản Phẩm Đang Khuyến Mãi</h3>
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
                 id="product-list">
 
             </div>
         </div>
         <!-- Sản phẩm sắp khuyến mãi -->
-        <div class="container px-4 px-lg-5 mt-5">
-            <h3 class="section-title">Sản Phẩm Sắp Khuyến Mãi</h3>
+        <div class="px-4 px-lg-5 mt-5">
+            <h3 class="section-title text-center">Sản Phẩm Sắp Khuyến Mãi</h3>
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
                 id="upcoming-sales-products">
 
             </div>
         </div>
         <!-- Sản phẩm đánh giá cao -->
-        <div class="container px-4 px-lg-5 mt-5">
-            <h3 class="section-title">Sản Phẩm Đánh Giá Cao</h3>
+        <div class="px-4 px-lg-5 mt-5">
+            <h3 class="section-title text-center">Sản Phẩm Đánh Giá Cao</h3>
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
                 id="top-rated-products">
             </div>
         </div>
-        <!-- Chương trình khuyến mãi -->
-        <!-- <div class="container">
-                <h3 class="section-title"><i class="fas fa-gift"></i> Chương Trình Khuyến Mãi</h3>
-                <div class="row" id="sale-list">
-                </div>
-            </div> -->
+
     </section>
 
     <div id="footer-container">
@@ -61,9 +74,12 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const productList = document.getElementById("product-list");
-            // const saleList = document.getElementById("sale-list");
             const topRatedProductList = document.getElementById("top-rated-products");
             const upcomingSalesProductList = document.getElementById("upcoming-sales-products");
+
+            const carousel = document.getElementById("salesCarousel");
+            const carouselInner = document.getElementById("carousel-inner");
+            const carouselIndicators = document.getElementById("carousel-indicators");
 
             // Gọi API để lấy danh sách sản phẩm khuyến mãi
             fetch("https://localhost:7060/api/Sales/current/products")
@@ -125,35 +141,37 @@
                     productList.innerHTML = "<p>Không thể tải dữ liệu sản phẩm.</p>";
                 });
 
-            // Gọi API để lấy danh sách khuyến mãi
-            // fetch("https://localhost:7060/api/Sales/current")
-            //     .then(response => response.json())
-            //     .then(data => {
-            //         const sales = data.data; 
-            //         if (sales && sales.length > 0) {
-            //             sales.forEach(sale => {
-            //                 const saleHTML = `
-            //                     <div class="col-md-4 mb-4">
-            //                         <div class="product-card">
-            //                             <a href="#" class="text-decoration-none">
-            //                                 <h4 class="product-title">${sale.name}</h4>
-            //                                 <p>${sale.description}</p>
-            //                                 <p>Giảm giá: ${sale.discount * 100}%</p>
-            //                                 <p>Thời gian: từ ${new Date(sale.startDate).toLocaleDateString()} đến ${new Date(sale.endDate).toLocaleDateString()}</p>
-            //                             </a>
-            //                         </div>
-            //                     </div>`;
-            //                 saleList.innerHTML += saleHTML;
-            //             });
-            //         } else {
-            //             saleList.innerHTML = "<p>Không có chương trình khuyến mãi nào hiện tại.</p>";
-            //         }
-            //     })
-            //     .catch(error => {
-            //         console.error("Có lỗi xảy ra:", error);
-            //         saleList.innerHTML = "<p>Không thể tải dữ liệu khuyến mãi.</p>";
-            //     });
+            // Gọi API để lấy danh sách chương trình khuyến mãi hiện tại
+            fetch("https://localhost:7060/api/Sales/current")
+                .then(response => response.json())
+                .then(data => {
+                    const sales = data.data;
+                    if (sales && sales.length > 0) {
+                        // Hiển thị carousel nếu có khuyến mãi
+                        carousel.style.display = "block";
 
+                        sales.forEach((sale, index) => {
+                            // Đường dẫn ảnh minh họa (giả sử ảnh được lưu trong thư mục Images)
+                            let imagePath = `Images/${sale.illustration}`;
+
+                            // Tạo HTML cho mỗi chương trình khuyến mãi trong carousel
+                            const saleHTML = `
+                        <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                            <img src="${imagePath}" alt="${sale.name}" class="d-block image-carousel" style="width:100%">
+                        </div>`;
+
+                            // Thêm indicator cho mỗi item trong carousel
+                            const indicatorHTML = `<button type="button" data-bs-target="#salesCarousel" data-bs-slide-to="${index}" class="${index === 0 ? 'active' : ''}"></button>`;
+
+                            // Thêm chương trình khuyến mãi vào carousel
+                            carouselInner.innerHTML += saleHTML;
+                            carouselIndicators.innerHTML += indicatorHTML;
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error("Có lỗi xảy ra:", error);
+                });
             // Gọi API để lấy sản phẩm có đánh giá cao
 
             fetch("https://localhost:7060/api/Products?SortBy=rating&SortType=desc")
@@ -266,9 +284,9 @@
 
     <!-- KHA AI -->
     <script>
-        $(document).ready(function() { 
-            $('#navbar-container').load('./fragments/navbar.html', function(response, status, xhr) {});
-            $('#footer-container').load('./fragments/footer.html', function(response, status, xhr) {});
+        $(document).ready(function () {
+            $('#navbar-container').load('./fragments/navbar.html', function (response, status, xhr) { });
+            $('#footer-container').load('./fragments/footer.html', function (response, status, xhr) { });
         });
 
     </script>

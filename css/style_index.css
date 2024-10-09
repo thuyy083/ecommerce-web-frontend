@@ -25,9 +25,7 @@ footer {
 .slogan {
     background-color: #3A6D8C;
     color: #EAD8B1;
-    padding: 20px;
-    text-align: center;
-    font-size: 24px;
+    font-size: 12px;
     font-weight: bold;
     font-family: Palatino Linotype;
 }
@@ -60,3 +58,10 @@ footer {
     text-decoration: none;
 }
 
+.image-carousel{
+    width: 20%;
+    height: 20%;
+    max-width: 1700px;
+    max-height: 1000px;
+
+}
