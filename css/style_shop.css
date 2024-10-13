@@ -226,3 +226,19 @@ ul.cart-list>li.total>.btn:hover{color:#fff}
 .product-item-filter{background:#c1d1ee}
 
 #filterBtn,.page-link{background:#3a6d8c;margin:10px;color:#fff;border-radius:10%;margin-left:50px}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+}
+
+.p-shop{
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin: 0px;
+    padding: 0px;
+}
