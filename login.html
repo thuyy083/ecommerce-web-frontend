@@ -88,74 +88,81 @@
 
     <script>
       document
-  .getElementById("loginForm")
-  .addEventListener("submit", async function (e) {
-    e.preventDefault();
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-
-    try {
-      const response = await fetch(
-        "https://localhost:7060/api/Auth/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: email,
-            password: password,
-          }),
-        }
-      );
-
-      if (response.ok) {
-        const data = await response.json();
-        const token = data.token;
-        const decodedToken = jwt_decode(token);
-        const avatar = decodedToken["avatar"]; // Lấy thông tin avatar từ token
-
-        localStorage.setItem("token", token);
-        localStorage.setItem("avatar", avatar); // Lưu avatar vào localStorage
-
-         
-        const userRole =
-          decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-
-        // Chuyển hướng dựa trên vai trò người dùng
-        if (userRole === "1") {
-          window.location.href = "/admin/dashboard.html";
-        } else if (userRole === "2") {
-          window.location.href = "index.html";
-        } else {
-          window.location.href = "/shop/dashboard.html";
-        }
-      } else {
-        const errorMessage = await response.json();
-        let customMessage = "Đăng nhập thất bại";
-
-        if (response.status === 400 && errorMessage.Password) {
-          const passwordLength = password.length;
-          customMessage =
-            "Mật khẩu phải có ít nhất 8 ký tự. Bạn đã nhập " +
-            passwordLength +
-            " ký tự.";
-        } else if (response.status === 401) {
-          customMessage = "Email hoặc mật khẩu không đúng! Vui lòng thử lại";
-        }
-
-        const errorMessageDiv = document.getElementById("error-message");
-        errorMessageDiv.textContent = customMessage;
-        errorMessageDiv.style.display = "block";
-      }
-    } catch (error) {
-      document.getElementById("error-message").textContent =
-        "Đã có lỗi xảy ra trong quá trình đăng nhập";
-      document.getElementById("error-message").style.display = "block";
-    }
-  });
-
+        .getElementById("loginForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+    
+          try {
+            const response = await fetch(
+              "https://localhost:7060/api/Auth/login",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  email: email,
+                  password: password,
+                }),
+              }
+            );
+    
+            if (response.ok) {
+              const data = await response.json();
+              const token = data.token;
+              const decodedToken = jwt_decode(token);
+              const avatar = decodedToken["avatar"]; // Lấy thông tin avatar từ token
+    
+              localStorage.setItem("token", token);
+              localStorage.setItem("avatar", avatar); // Lưu avatar vào localStorage
+    
+              const userRole =
+                decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+    
+              // Chuyển hướng dựa trên vai trò người dùng
+              if (userRole === "1") {
+                window.location.href = "/admin/dashboard.html";
+              } else if (userRole === "2") {
+                window.location.href = "index.html";
+              } else {
+                window.location.href = "/shop/dashboard.html";
+              }
+            } else {
+              const errorMessage = await response.json();
+              let customMessage = "Đăng nhập thất bại";
+    
+              if (response.status === 400 && errorMessage.Password) {
+                const passwordLength = password.length;
+                customMessage =
+                  "Mật khẩu phải có ít nhất 8 ký tự. Bạn đã nhập " +
+                  passwordLength +
+                  " ký tự.";
+              } else if (response.status === 401) {
+                if (errorMessage.message === "Account is not verified!") {
+                  // Thông báo tài khoản chưa xác thực
+                  customMessage =
+              "Tài khoản của bạn chưa được xác thực! Vui lòng kiểm tra email để xác thực. ";
+            customMessage += '<a class="warn" href="verify.html?email=' + encodeURIComponent(email) + '">Xác thực ngay</a>'; 
+                } else {
+                  // Thông báo khi email hoặc mật khẩu sai
+                  customMessage = "Email hoặc mật khẩu không đúng! Vui lòng thử lại";
+                }
+              }
+    
+              const errorMessageDiv = document.getElementById("error-message");
+              errorMessageDiv.innerHTML = customMessage; // Sử dụng innerHTML để hiển thị liên kết
+              errorMessageDiv.style.display = "block";
+            }
+          } catch (error) {
+            document.getElementById("error-message").textContent =
+              "Đã có lỗi xảy ra trong quá trình đăng nhập";
+            document.getElementById("error-message").style.display = "block";
+          }
+        });
     </script>
+    
 
     <script>
       $(document).ready(function () {
