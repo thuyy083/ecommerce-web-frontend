@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ hàng của bạn</title>
+    <link  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"rel="stylesheet"/>
+    <link rel="icon" href="Logo/icon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./css/style_index.css" />
+    <script src="https://code.jquery.com/jquery-3.7.1.js" 
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="crossorigin="anonymous"></script>
+    <style>
+        .cart-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+
+        .cart-total {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .shop-group {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js"
+    integrity="sha512-6sSYJqDreZRZGkJ3b+YfdhB3MzmuP9R7X1QZ6g5aIXhRvR1Y/N/P47jmnkENm7YL3oqsmI6AK+V6AD99uWDnIw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+    <div id="navbar-container"></div>
+
+    <div class="container mt-5">
+        <h2>Giỏ hàng của bạn</h2>
+        <div id="cartItems" class="mt-4"></div>
+        <div class="cart-total mt-4">
+            Tổng tiền: <span id="totalPrice">0</span>
+        </div>
+        <button id="clearCart" class="btn btn-danger mt-3">Xóa giỏ hàng</button>
+    </div>
+    <div id="footer-container"></div>
+
+    <script>
+        // Hàm để lấy tên cửa hàng từ API dựa trên productId
+        async function fetchShopName(productId) {
+            try {
+                const response = await fetch(`https://localhost:7060/api/Products/${productId}`);
+                if (response.ok) {
+                    const productData = await response.json();
+                    return productData.shop.name;
+                } else {
+                    console.error('Failed to fetch shop name:', response.status);
+                    return null;
+                }
+            } catch (error) {
+                console.error('Error fetching shop name:', error);
+                return null;
+            }
+        }
+        // Hàm để lấy giỏ hàng từ sessionStorage và hiển thị nhóm theo cửa hàng
+        async function displayCart() {
+        const cartItems = JSON.parse(sessionStorage.getItem('cart')) || [];
+        const cartItemsContainer = document.getElementById('cartItems');
+        let total = 0;
+
+        if (cartItems.length === 0) {
+            cartItemsContainer.innerHTML = "<p>Giỏ hàng của bạn đang trống!</p>";
+            document.getElementById('totalPrice').textContent = (total * 1000).toLocaleString() + " VND";
+            return;
+        }
+
+        // Nhóm sản phẩm theo shopId và chuẩn bị tên cửa hàng
+        const groupedItems = cartItems.reduce((acc, item) => {
+            acc[item.shopId] = acc[item.shopId] || { items: [], shopName: '' };
+            acc[item.shopId].items.push(item);
+            return acc;
+        }, {});
+
+        // Lấy tên cửa hàng cho từng shopId từ API
+        for (let shopId in groupedItems) {
+            if (groupedItems.hasOwnProperty(shopId)) {
+                const productId = groupedItems[shopId].items[0].id;
+                groupedItems[shopId].shopName = await fetchShopName(productId) || `Cửa hàng ID: ${shopId}`;
+            }
+        }
+
+        // Xây dựng HTML cho từng cửa hàng
+        cartItemsContainer.innerHTML = Object.keys(groupedItems).map(shopId => {
+            let shopTotal = 0;
+            const shopProductsHtml = groupedItems[shopId].items.map(item => {
+                const itemTotal = item.price * item.quantity * 1000;
+                shopTotal += itemTotal;
+                total += itemTotal;
+
+                return `
+        <div class="cart-item row mb-3">
+            <div class="col-2">
+                <img src="${item.image}" alt="${item.name}" class="img-fluid">
+            </div>
+            <div class="col-4">
+                <h5>${item.name}</h5>
+                <p>Giá: ${(item.price * 1000).toLocaleString()} VND</p>
+            </div>
+            <div class="col-3">
+                <label for="quantity-${item.id}">Số lượng:</label>
+                <input type="number" id="quantity-${item.id}" class="form-control" value="${item.quantity}" min="1" onchange="updateQuantity('${item.id}', ${shopId}, this.value)">
+            </div>
+            <div class="col-2">
+                <p id="itemTotal-${item.id}">Tổng: ${itemTotal.toLocaleString()} VND</p>
+            </div>
+            <div class="col-1">
+                <button class="btn btn-danger" onclick="removeItem('${item.id}', ${shopId})">Xóa</button>
+            </div>
+        </div>
+    `;
+            }).join('');
+
+            return `
+            <div class="shop-group">
+                <h4>${groupedItems[shopId].shopName}</h4>
+                ${shopProductsHtml}
+                <div class="text-right">
+                    <p><strong>Tổng tiền của cửa hàng:</strong> ${shopTotal.toLocaleString()} VND</p>
+                    <button class="btn btn-primary" onclick="checkoutShop(${shopId})">Thanh toán</button>
+                </div>
+            </div>
+        `;
+        }).join('');
+
+        document.getElementById('totalPrice').textContent = total.toLocaleString() + " VND";
+    }
+
+        // Hàm để thanh toán các sản phẩm của một shop cụ thể
+        async function checkoutShop(shopId) {
+            const cart = JSON.parse(sessionStorage.getItem('cart')) || [];
+            const shopItems = cart.filter(item => item.shopId === shopId);
+
+            if (shopItems.length === 0) {
+                alert("Không có sản phẩm nào trong cửa hàng này.");
+                return;
+            }
+
+            const token = localStorage.getItem("token");
+            if (!token) {
+                alert("Bạn cần đăng nhập để thanh toán.");
+                return;
+            }
+
+            try {
+                // Bước 1: Lấy addressId từ API Addresses
+                const addressResponse = await fetch('https://localhost:7060/api/Addresses', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token
+                    }
+                });
+
+                if (!addressResponse.ok) {
+                    const errorData = await addressResponse.json();
+                    console.log("Error Data:", errorData);
+                    throw new Error("Không thể lấy địa chỉ. Vui lòng thử lại.");
+                }
+
+                const addressData = await addressResponse.json();
+                const addresses = addressData.data;
+
+                if (!addresses || addresses.length === 0) {
+                    alert("Không có địa chỉ nào được lưu.");
+                    return;
+                }
+
+                // Chọn addressId từ địa chỉ đầu tiên hoặc tuỳ chọn khác theo yêu cầu
+                const addressId = addresses[0].id;
+
+                // Bước 2: Tạo requestBody với addressId lấy được
+                const requestBody = {
+                    addressId: addressId,
+                    detailOrderReqDtos: shopItems.map(item => ({
+                        productId: item.id,
+                        quantity: item.quantity
+                    }))
+                };
+
+                // Bước 3: Gửi yêu cầu thanh toán
+                const paymentResponse = await fetch('https://localhost:7060/api/Payments', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+
+                if (!paymentResponse.ok) {
+                    const errorData = await paymentResponse.json();
+                    console.log("Error Data:", errorData);
+                    throw new Error("Thanh toán thất bại. Vui lòng thử lại.");
+                }
+
+                const paymentData = await paymentResponse.json();
+
+                // Sau khi thanh toán thành công, lọc và lưu lại các sản phẩm không thuộc shop đã thanh toán
+                const remainingItems = cart.filter(item => item.shopId !== shopId);
+                sessionStorage.setItem('cart', JSON.stringify(remainingItems));
+
+                window.location.href = paymentData.paymentUrl;
+            } catch (error) {
+                console.error("Lỗi thanh toán:", error);
+                alert(error.message);
+            }
+        }
+
+
+        // Hàm cập nhật số lượng sản phẩm và tính lại tổng
+        function updateQuantity(productId, shopId, newQuantity) {
+            let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
+
+            console.log(`updateQuantity called for productId: ${productId}, shopId: ${shopId}, newQuantity: ${newQuantity}`);
+
+            // Tìm sản phẩm theo productId và shopId
+            const itemIndex = cart.findIndex(item => item.id == productId && item.shopId == shopId);
+
+            if (itemIndex !== -1 && newQuantity > 0) {
+                // Cập nhật số lượng
+                cart[itemIndex].quantity = parseInt(newQuantity);
+                sessionStorage.setItem('cart', JSON.stringify(cart));
+
+                // Cập nhật tổng cho sản phẩm
+                const itemTotal = cart[itemIndex].price * cart[itemIndex].quantity;
+                const itemTotalElement = document.getElementById(`itemTotal-${productId}`);
+                if (itemTotalElement) {
+                    itemTotalElement.textContent = `Tổng: $${itemTotal.toFixed(2)}`;
+                }
+
+                // Tính lại tổng tiền của giỏ hàng
+                let total = 0;
+                cart.forEach(item => {
+                    total += item.price * item.quantity;
+                });
+
+                const totalPriceElement = document.getElementById('totalPrice');
+                if (totalPriceElement) {
+                    totalPriceElement.textContent = total.toFixed(2);
+                }
+                displayCart();
+            }
+        }
+
+
+
+        // Hàm để xóa sản phẩm khỏi giỏ hàng
+        function removeItem(productId, shopId) {
+            console.log(`Xóa sản phẩm có ID: ${productId} từ cửa hàng ID: ${shopId}`);
+            let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
+
+            // Tìm sản phẩm dựa trên productId và shopId với kiểu dữ liệu nhất quán
+            const itemIndex = cart.findIndex(item => parseInt(item.id) === parseInt(productId) && parseInt(item.shopId) === parseInt(shopId));
+
+            if (itemIndex !== -1) {
+                cart.splice(itemIndex, 1); // Xóa sản phẩm tại vị trí tìm thấy
+                sessionStorage.setItem('cart', JSON.stringify(cart)); // Cập nhật giỏ hàng
+                console.log("Giỏ hàng sau khi xóa:", JSON.parse(sessionStorage.getItem('cart')));
+
+                displayCart(); // Hiển thị lại giỏ hàng
+            } else {
+                console.log("Không tìm thấy sản phẩm để xóa");
+            }
+        }
+
+
+
+
+
+        // Hàm để xóa toàn bộ giỏ hàng
+        document.getElementById('clearCart').addEventListener('click', function () {
+            sessionStorage.removeItem('cart');
+            displayCart();
+        });
+
+        // Hiển thị giỏ hàng khi trang được tải
+        displayCart();
+    </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    $("#navbar-container").load(
+      "./fragments/navbar.html",
+      function (response, status, xhr) {
+        if (status === "success") {
+          // Đảm bảo rằng tất cả các phần tử đã được nạp trước khi thực hiện kiểm tra trạng thái
+          const token = localStorage.getItem("token");
+          const avatar = localStorage.getItem("avatar");
+
+          const userAvatar = document.getElementById("user-avatar");
+          const loginRegister = document.getElementById("login-register");
+          const logoutBtn = document.getElementById("logout-btn");
+          const orders = document.getElementById("order");
+
+          if (token && avatar) {
+            userAvatar.style.display = "block";
+            loginRegister.style.display = "none";
+            userAvatar.src = `./Images/avatar/${avatar}`;
+            logoutBtn.style.display = "block";
+            orders.style.display = "block";
+
+            logoutBtn.addEventListener("click", function () {
+              localStorage.removeItem("token");
+              localStorage.removeItem("avatar");
+              window.location.href = "/login.html";
+            });
+          } else {
+            userAvatar.style.display = "none";
+            logoutBtn.style.display = "none";
+            orders.style.display = "none";
+            loginRegister.style.display = "block";
+          }
+        } else {
+          console.error(
+            "Error loading navbar:",
+            xhr.status,
+            xhr.statusText
+          );
+        }
+      }
+    );
+  });
+</script>
+
+<!-- KHA AI -->
+<script>
+  $(document).ready(function () {
+    //$('#navbar-container').load('./fragments/navbar.html', function (response, status, xhr) { });
+    $("#footer-container").load(
+      "./fragments/footer.html",
+      function (response, status, xhr) {}
+    );
+  });
+</script>
+</body>
+
+</html>

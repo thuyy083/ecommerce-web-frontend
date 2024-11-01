@@ -110,29 +110,31 @@
 
         // Gọi API để lấy danh sách sản phẩm khuyến mãi
         fetch("https://localhost:7060/api/Sales/current/products")
-          .then((response) => response.json())
-          .then((data) => {
-            const products = data.data; // Lấy danh sách sản phẩm từ API
-            if (products && products.length > 0) {
-              products.forEach((saleEvent) => {
-                saleEvent.products.forEach((product) => {
-                  // Đường dẫn hình ảnh trong thư mục Images phía frontend
-                  let imagePath = "Images/";
-                  if (product.images && product.images.length > 0) {
-                    imagePath += product.images[0].path; // Hình ảnh đầu tiên của sản phẩm
-                  } else {
-                    imagePath += "default-image.jpg"; // Hình ảnh mặc định nếu không có ảnh
-                  }
+                .then(response => response.json())
+                .then(data => {
+                    const products = data.data;  // Lấy danh sách sản phẩm từ API
+                    if (products && products.length > 0) {
+                        products.forEach(saleEvent => {
+                            saleEvent.products.forEach(product => {
+                                // Đường dẫn hình ảnh trong thư mục Images phía frontend
+                                let imagePath = 'Images/';
+                                if (product.images && product.images.length > 0) {
+                                    imagePath += product.images[0].path; // Hình ảnh đầu tiên của sản phẩm
+                                } else {
+                                    imagePath += 'default-image.jpg'; // Hình ảnh mặc định nếu không có ảnh
+                                }
 
-                  // Giá gốc và giá khuyến mãi
-                  const originalPrice = product.price.toFixed(2);
-                  const discountPrice = (
-                    product.price *
-                    (1 - product.discountPercent)
-                  ).toFixed(2);
+                                const VND = new Intl.NumberFormat('vi-VN', {
+                                    style: 'currency',
+                                    currency: 'VND',
+                                });
 
-                  // Tạo HTML cho từng sản phẩm
-                  const productHTML = `
+                                // Giá gốc và giá khuyến mãi
+                                const originalPrice = product.price.toFixed(2) * 1000;
+                                const discountPrice = (product.price * (1 - product.discountPercent)).toFixed(2) * 1000;
+
+                                // Tạo HTML cho từng sản phẩm
+                                const productHTML = `
                                     <div class="col mb-5">
                                         <div class="card h-100">
                                                 <img src="${imagePath}" 
@@ -147,9 +149,9 @@
                                                     </div>
                                                     <div class="text-center">
                                                             <p class="product-price">
-                                                                <span class="price-original">$${originalPrice}</span>
+                                                                <span class="price-original">${VND.format(originalPrice)}</span>
                                                                 <br>
-                                                                <span class="price-discount ms-2">$${discountPrice}</span>
+                                                                <span class="price-discount ms-2">${VND.format(discountPrice)}</span>
                                                             </p>  
                                                         </div>
                                                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
@@ -158,19 +160,19 @@
                                         </div>
                                     </div>`;
 
-                  // Thêm sản phẩm vào danh sách
-                  productList.innerHTML += productHTML;
+                                // Thêm sản phẩm vào danh sách
+                                productList.innerHTML += productHTML;
+                            });
+                        });
+                    } else {
+                        productList.innerHTML = "<p>Không có sản phẩm nào đang khuyến mãi.</p>";
+                    }
+                })
+                .catch(error => {
+                    console.error("Có lỗi xảy ra:", error);
+                    productList.innerHTML = "<p>Không thể tải dữ liệu sản phẩm.</p>";
                 });
-              });
-            } else {
-              productList.innerHTML =
-                "<p>Không có sản phẩm nào đang khuyến mãi.</p>";
-            }
-          })
-          .catch((error) => {
-            console.error("Có lỗi xảy ra:", error);
-            productList.innerHTML = "<p>Không thể tải dữ liệu sản phẩm.</p>";
-          });
+
 
         // Gọi API để lấy danh sách chương trình khuyến mãi hiện tại
         fetch("https://localhost:7060/api/Sales/current")
@@ -229,7 +231,10 @@
                   product.rating > 0
                     ? product.rating.toFixed(1)
                     : "Chưa có đánh giá";
-
+                    const VND = new Intl.NumberFormat('vi-VN', {
+                                    style: 'currency',
+                                    currency: 'VND',
+                                });
                 // Tạo HTML cho từng sản phẩm
                 const productHTML = `
                                 <div class="col mb-5">
@@ -241,7 +246,7 @@
                                             </div>
                                         </div>
                                         <div class="text-center">
-                                            <p class="product-price">$${product.price}</p>
+                                            <p class="product-price">${VND.format(product.price * 1000)}</p>
                                             <p class="product-rating">Đánh giá: ${avgRating}⭐</p> <!-- Hiển thị rating -->
                                         </div>
                                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
@@ -280,13 +285,13 @@
                   } else {
                     imagePath += "default-image.jpg"; // Hình ảnh mặc định nếu không có ảnh
                   }
-
+                  const VND = new Intl.NumberFormat('vi-VN', {
+                                    style: 'currency',
+                                    currency: 'VND',
+                                });
                   // Giá gốc và giá khuyến mãi
-                  const originalPrice = product.price.toFixed(2);
-                  const discountPrice = (
-                    product.price *
-                    (1 - saleEvent.discount)
-                  ).toFixed(2);
+                  const originalPrice = product.price.toFixed(2) *1000 ;
+                  const discountPrice = (product.price * (1 - saleEvent.discount)).toFixed(2) * 1000;
 
                   // Tạo HTML cho từng sản phẩm
                   const productHTML = `
@@ -301,9 +306,9 @@
                                                       product.name
                                                     }</h5>
                                                     <p class="product-price">
-                                                        <span class="price-original">$${originalPrice}</span>
+                                                        <span class="price-original">${VND.format(originalPrice)}</span>
                                                         <br>
-                                                        <span class="price-discount ms-2">$${discountPrice}</span>
+                                                        <span class="price-discount ms-2">${VND.format(discountPrice)}</span>
                                                     </p>
                                                     <p class="sale-start-date">Bắt đầu khuyến mãi: ${new Date(
                                                       saleEvent.startDate
@@ -347,12 +352,16 @@
               const userAvatar = document.getElementById("user-avatar");
               const loginRegister = document.getElementById("login-register");
               const logoutBtn = document.getElementById("logout-btn");
+              const orders = document.getElementById("order");
+
 
               if (token && avatar) {
                 userAvatar.style.display = "block";
                 loginRegister.style.display = "none";
                 userAvatar.src = `./Images/avatar/${avatar}`;
                 logoutBtn.style.display = "block";
+                orders.style.display = "block";
+
 
                 logoutBtn.addEventListener("click", function () {
                   localStorage.removeItem("token");
@@ -362,6 +371,7 @@
               } else {
                 userAvatar.style.display = "none";
                 logoutBtn.style.display = "none";
+                orders.style.display = "none";
                 loginRegister.style.display = "block";
               }
             } else {
