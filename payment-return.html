@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kết quả thanh toán</title>
+    <link  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"rel="stylesheet"/>
+    <link rel="icon" href="Logo/icon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./css/style_index.css" />
+    <script src="https://code.jquery.com/jquery-3.7.1.js" 
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="crossorigin="anonymous"></script>
+    <style>
+        .return {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 40vh;
+            margin: 0;
+        }
+        .container1 {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            text-align: center;
+        }
+        h3 {
+            color: #001F3F;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .icon-success {
+            color: #28a745;
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+        .details {
+            text-align: left;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+        .details p {
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+        .details strong {
+            color: #555;
+        }
+        .btn-group {
+            margin-top: 20px;
+        }
+        .btn-shopping {
+            background-color: #3A6D8C;
+            color: #fff;
+            border: none;
+        }
+        .btn-shopping:hover {
+            background-color: #001F3F;
+            color: #fff;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js"
+    integrity="sha512-6sSYJqDreZRZGkJ3b+YfdhB3MzmuP9R7X1QZ6g5aIXhRvR1Y/N/P47jmnkENm7YL3oqsmI6AK+V6AD99uWDnIw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <div id="navbar-container"></div>
+    <div class="return">
+        <div class="container1">
+            <i class="fas fa-check-circle icon-success"></i>
+            <h3>Thanh toán thành công!</h3>
+            <div class="details" id="paymentResult"></div>
+            <div class="btn-group">
+                <a href="index.html" class="btn btn-shopping">
+                    <i class="fas fa-shopping-cart"></i> Tiếp tục mua sắm
+                </a>
+            </div>
+        </div>
+    </div>
+    <div id="footer-container"></div>
+
+    <script>
+        function getUrlParameters() {
+            const params = {};
+            const queryString = window.location.search.slice(1);
+            const pairs = queryString.split("&");
+
+            for (const pair of pairs) {
+                const [key, value] = pair.split("=");
+                params[decodeURIComponent(key)] = decodeURIComponent(value.replace(/\+/g, " "));
+            }
+
+            return params;
+        }
+
+        function formatDateTime(dateString) {
+            if (!dateString) return "N/A";
+            const year = dateString.substring(0, 4);
+            const month = dateString.substring(4, 6);
+            const day = dateString.substring(6, 8);
+            const hour = dateString.substring(8, 10);
+            const minute = dateString.substring(10, 12);
+            const second = dateString.substring(12, 14);
+            return `${day}/${month}/${year} ${hour}:${minute}:${second}`;
+        }
+
+        function displayPaymentResult(params) {
+            const amount = (params.vnp_Amount / 100).toLocaleString("vi-VN", { style: "currency", currency: "VND" });
+            const dateTime = formatDateTime(params.vnp_PayDate);
+            const responseCode = params.vnp_ResponseCode === "00" ? "Thành công" : "Thất bại";
+            const transactionStatus = params.vnp_TransactionStatus === "00" ? "Giao dịch hoàn tất" : "Giao dịch chưa hoàn tất";
+
+            const paymentResultContainer = document.getElementById('paymentResult');
+            paymentResultContainer.innerHTML = `
+                <p><strong>Số tiền:</strong> ${amount || 'N/A'}</p>
+                <p><strong>Mã ngân hàng:</strong> ${params.vnp_BankCode || 'N/A'}</p>
+                <p><strong>Mã giao dịch ngân hàng:</strong> ${params.vnp_BankTranNo || 'N/A'}</p>
+                <p><strong>Loại thẻ:</strong> ${params.vnp_CardType || 'N/A'}</p>
+                <p><strong>Ngày thanh toán:</strong> ${dateTime}</p>
+                <p><strong>Kết quả phản hồi:</strong> ${responseCode}</p>
+                <p><strong>Trạng thái giao dịch:</strong> ${transactionStatus}</p>
+                <p><strong>Mã tham chiếu giao dịch:</strong> ${params.vnp_TxnRef || 'N/A'}</p>
+            `;
+        }
+
+        window.onload = function() {
+            const params = getUrlParameters();
+            displayPaymentResult(params);
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        $("#navbar-container").load(
+          "./fragments/navbar.html",
+          function (response, status, xhr) {
+            if (status === "success") {
+              // Đảm bảo rằng tất cả các phần tử đã được nạp trước khi thực hiện kiểm tra trạng thái
+              const token = localStorage.getItem("token");
+              const avatar = localStorage.getItem("avatar");
+
+              const userAvatar = document.getElementById("user-avatar");
+              const loginRegister = document.getElementById("login-register");
+              const logoutBtn = document.getElementById("logout-btn");
+              const orders = document.getElementById("order");
+
+              if (token && avatar) {
+                userAvatar.style.display = "block";
+                loginRegister.style.display = "none";
+                userAvatar.src = `./Images/avatar/${avatar}`;
+                logoutBtn.style.display = "block";
+                orders.style.display = "block";
+
+                logoutBtn.addEventListener("click", function () {
+                  localStorage.removeItem("token");
+                  localStorage.removeItem("avatar");
+                  window.location.href = "/login.html";
+                });
+              } else {
+                userAvatar.style.display = "none";
+                logoutBtn.style.display = "none";
+                orders.style.display = "none";
+                loginRegister.style.display = "block";
+              }
+            } else {
+              console.error(
+                "Error loading navbar:",
+                xhr.status,
+                xhr.statusText
+              );
+            }
+          }
+        );
+      });
+    </script>
+    
+    <!-- KHA AI -->
+    <script>
+      $(document).ready(function () {
+        //$('#navbar-container').load('./fragments/navbar.html', function (response, status, xhr) { });
+        $("#footer-container").load(
+          "./fragments/footer.html",
+          function (response, status, xhr) {}
+        );
+      });
+    </script>
+</body>
+</html>
