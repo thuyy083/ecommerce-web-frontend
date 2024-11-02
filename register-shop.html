@@ -266,12 +266,14 @@
              const userAvatar = document.getElementById("user-avatar");
              const loginRegister = document.getElementById("login-register");
              const logoutBtn = document.getElementById("logout-btn");
+             const orders = document.getElementById("order");
 
              if (token && avatar) {
                userAvatar.style.display = "block";
                loginRegister.style.display = "none";
                userAvatar.src = `./Images/avatar/${avatar}`;
                logoutBtn.style.display = "block";
+               orders.style.display = "block";
 
                logoutBtn.addEventListener("click", function () {
                  localStorage.removeItem("token");
@@ -281,6 +283,7 @@
              } else {
                userAvatar.style.display = "none";
                logoutBtn.style.display = "none";
+               orders.style.display = "none";
                loginRegister.style.display = "block";
              }
            } else {

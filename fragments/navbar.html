@@ -17,6 +17,9 @@
                     <a class="nav-link" href="shop1.html">Sản Phẩm</a>
                 </li>
                 <li class="nav-item">
+                    <a id="order" class="nav-link" href="order.html" style="display: none;">Đơn hàng</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="#">Liên Hệ</a>
                 </li>
                 <li class="nav-item">
@@ -24,10 +27,10 @@
                 </li>
             </ul>
             <form class="d-flex">
-                <button class="btn btn-outline-light" type="submit">
+                <a href="shopping_cart.html" class="btn btn-outline-light">
                     <i class="bi-cart-fill me-1"></i>
                     Giỏ hàng
-                </button>
+                </a>
             </form>
             
             <div id="user-auth" class="d-flex align-items-center ms-2">
@@ -71,10 +74,12 @@
             document.getElementById("user-avatar").src = userAvatar; // Cập nhật đường dẫn hình đại diện
             document.getElementById("user-avatar").style.display = "block"; // Hiển thị hình đại diện
             document.getElementById("logout-btn").style.display = "block"; // Hiển thị nút Đăng xuất
+            document.getElementById("order").style.display = "block"; // Hiển thị Đơn hàng
             document.getElementById("login-register").style.display = "none"; // Ẩn nút đăng nhập và đăng ký
         } else {
             document.getElementById("user-avatar").style.display = "none"; // Ẩn hình đại diện
             document.getElementById("logout-btn").style.display = "none"; // Ẩn nút đăng xuất
+            document.getElementById("order").style.display = "none"; // Ẩn Đơn hàng
             document.getElementById("login-register").style.display = "block"; // Hiển thị lại nút đăng nhập và đăng ký
         }
     });
