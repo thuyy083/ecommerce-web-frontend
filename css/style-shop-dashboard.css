@@ -1,4 +1,8 @@
 @charset "UTF-8";
+/* Kiểm tra trong các tệp CSS của bạn */
+#editProductTypeId {
+  display: block; /* Đảm bảo rằng nó hiển thị */
+}
 
 :root {
   --bs-blue: #0d6efd;
