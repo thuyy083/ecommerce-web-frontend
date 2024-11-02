@@ -11,7 +11,7 @@
     <meta name="author" content="" />
     <title>Quản lý sản phẩm</title>
 
-    <link href="../css/style-shop-dashboard.css" rel="stylesheet" />
+    <link href="../css/style_shop_dashboard.css" rel="stylesheet" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -127,7 +127,7 @@
                       class="btn btn-success"
                       data-bs-toggle="modal"
                       data-bs-target="#addProductModal"
-                      style="background-color: #6a9ab0; border: none"
+                      style="background-color: #3a6d8c; border: none"
                     >
                       <i class="fa-solid fa-plus"></i> Thêm sản phẩm
                     </button>
@@ -151,6 +151,9 @@
                     </table>
                   </div>
                 </div>
+                <ul class="pagination" id="paginationControls">
+                  <!-- Các trang sẽ được chèn tại đây bằng JavaScript -->
+                </ul>
               </div>
 
               <!-- Cột Bộ lọc và Tìm kiếm-->
@@ -178,7 +181,7 @@
 
                 <!-- Card Bộ lọc sản phẩm -->
                 <div class="card mb-4">
-                  <div class="card-header">
+                  <div class="card-header custom-card-header">
                     <h5 class="mb-0">Bộ lọc sản phẩm</h5>
                   </div>
                   <div class="card-body">
@@ -201,7 +204,7 @@
                               type="text"
                               class="form-control"
                               id="minPrice"
-                              placeholder="Tối thiểu"
+                              placeholder=".000 VND"
                             />
                           </div>
                           <span class="mx-2">-</span>
@@ -210,7 +213,7 @@
                               type="text"
                               class="form-control"
                               id="maxPrice"
-                              placeholder="Tối đa"
+                              placeholder=".000 VND"
                             />
                           </div>
                         </div>
@@ -265,7 +268,9 @@
                 ></textarea>
               </div>
               <div class="mb-3">
-                <label for="productPrice" class="form-label">Giá</label>
+                <label for="productPrice" class="form-label"
+                  >Giá (.000 VND)</label
+                >
                 <input
                   type="number"
                   class="form-control"
@@ -471,16 +476,15 @@
         });
 
         // Hàm gọi API để lấy danh sách sản phẩm với bộ lọc
-        function fetchProducts(shopId, accessToken) {
+        function fetchProducts(shopId, accessToken, page = 1) {
           const productType = $("#productTypeId").val();
           const minPrice = $("#minPrice").val();
           const maxPrice = $("#maxPrice").val();
           const searchQuery = $("#Search").val();
           const sortBy = $("#SortBy").val();
           const sortType = $("#SortType").val();
-          console.log("fetchProducts function called");
-          // Tạo URL API với các tham số lọc
-          let apiUrl = `https://localhost:7060/api/Products/shop/${shopId}?`;
+
+          let apiUrl = `https://localhost:7060/api/Products/shop/${shopId}?Page=${page}&`;
           console.log(apiUrl);
           if (productType) apiUrl += `FByType=${productType}&`;
           if (minPrice && maxPrice)
@@ -489,8 +493,7 @@
             apiUrl += `Search=${encodeURIComponent(searchQuery)}&`;
           if (sortBy) apiUrl += `SortBy=${sortBy}&`;
           if (sortType) apiUrl += `SortType=${sortType}`;
-          console.log(apiUrl);
-          // Gọi API với URL được xây dựng
+
           $.ajax({
             url: apiUrl,
             type: "GET",
@@ -498,8 +501,10 @@
               Authorization: `Bearer ${accessToken}`,
             },
             success: function (response) {
+              console.log(response.totalPage); // Kiểm tra xem totalPages có đúng không
               if (Array.isArray(response.data)) {
                 renderProductTable(response.data);
+                setupPagination(response.totalPage, page); // Thêm tổng số trang từ API
               } else {
                 console.error("Dữ liệu sản phẩm không đúng định dạng.");
               }
@@ -594,11 +599,51 @@
             });
           });
         }
+
+        // Hàm thiết lập phân trang
+        function setupPagination(totalPage, currentPage) {
+          const paginationControls =
+            document.getElementById("paginationControls");
+          paginationControls.innerHTML = "";
+
+          // Nút Previous
+          const prevButton = document.createElement("li");
+          prevButton.className =
+            "page-item" + (currentPage === 1 ? " disabled" : "");
+          prevButton.innerHTML = `<a class="page-link" href="#" tabindex="-1">Previous</a>`;
+          prevButton.onclick = () => {
+            if (currentPage > 1)
+              fetchProducts(shopId, accessToken, currentPage - 1);
+          };
+          paginationControls.appendChild(prevButton);
+
+          // Tạo nút cho từng trang
+          for (let i = 1; i <= totalPage; i++) {
+            const pageItem = document.createElement("li");
+            pageItem.className =
+              "page-item" + (i === currentPage ? " active" : "");
+            pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+            pageItem.onclick = () => fetchProducts(shopId, accessToken, i);
+            paginationControls.appendChild(pageItem);
+          }
+
+          // Nút Next
+          const nextButton = document.createElement("li");
+          nextButton.className =
+            "page-item" + (currentPage === totalPage ? " disabled" : "");
+          nextButton.innerHTML = `<a class="page-link" href="#">Next</a>`;
+          nextButton.onclick = () => {
+            if (currentPage < totalPage)
+              fetchProducts(shopId, accessToken, currentPage + 1);
+          };
+          paginationControls.appendChild(nextButton);
+        }
+
         $("#SortBy, #SortType, #Search, #minPrice, #maxPrice").on(
           "change",
           function () {
             const shopId = sessionStorage.getItem("shopId");
-            fetchProducts(shopId, accessToken);
+            fetchProducts(shopId, accessToken, 1);
           }
         );
         // Gọi API để lấy thông tin tài khoản
@@ -615,7 +660,7 @@
               const avatar = response.avatar;
               sessionStorage.setItem("shopId", shopId);
               // Gọi hàm để lấy danh sách sản phẩm
-              fetchProducts(shopId, accessToken);
+              fetchProducts(shopId, accessToken, 1);
 
               $(".text-white").text(`Xin chào, ${shopName}`);
               $("img.rounded-circle").attr(
@@ -649,8 +694,11 @@
               Authorization: `Bearer ${accessToken}`,
             },
             success: function (response) {
+              console.log(response); // In ra toàn bộ phản hồi
+              console.log(response.totalPage); // Kiểm tra giá trị totalPages
               if (Array.isArray(response.data)) {
                 renderProductTable(response.data);
+                setupPagination(response.totalPage, 1); // Cập nhật phân trang với trang đầu tiên
               } else {
                 console.error("Dữ liệu sản phẩm không đúng định dạng.");
               }
@@ -660,29 +708,6 @@
             },
           });
         }
-
-        // Hàm gọi API để lấy danh sách sản phẩm
-        // function fetchProducts(shopId, accessToken) {
-        //   const apiUrl = `https://localhost:7060/api/Products/shop/${shopId}`;
-
-        //   $.ajax({
-        //     url: apiUrl,
-        //     type: "GET",
-        //     headers: {
-        //       Authorization: `Bearer ${accessToken}`,
-        //     },
-        //     success: function (response) {
-        //       if (Array.isArray(response.data)) {
-        //         renderProductTable(response.data);
-        //       } else {
-        //         console.error("Dữ liệu sản phẩm không đúng định dạng.");
-        //       }
-        //     },
-        //     error: function (xhr) {
-        //       console.error("Lỗi khi gọi API:", xhr.responseText);
-        //     },
-        //   });
-        // }
 
         // Hàm xóa sản phẩm
         function deleteProduct(productId) {
@@ -696,7 +721,7 @@
             },
             success: function () {
               alert("Xóa sản phẩm thành công!");
-              fetchProducts(shopId, accessToken);
+              fetchProducts(shopId, accessToken, 1);
             },
             error: function (xhr) {
               console.error("Lỗi khi xóa sản phẩm:", xhr.responseText);
@@ -733,52 +758,13 @@
           });
         }
 
-        // // Hàm để lấy danh sách loại sản phẩm
-        // function fetchProductTypes() {
-        //   return new Promise((resolve, reject) => {
-        //     $.ajax({
-        //       url: "https://localhost:7060/api/ProductTypes",
-        //       type: "GET",
-        //       success: function (response) {
-        //         console.log("Dữ liệu loại sản phẩm:", response); // In dữ liệu trả về
-        //         if (Array.isArray(response.data)) {
-        //           $("#productTypeId").empty();
-        //           $("#editProductTypeId").empty();
-
-        //           $("#productTypeId").append(
-        //             '<option value="">Tất cả sản phẩm</option>'
-        //           );
-
-        //           response.data.forEach(function (productType) {
-        //             const option = `<option value="${productType.id}">${productType.name}</option>`;
-        //             $("#productTypeId").append(option); // Select ngoài modal
-        //             $("#editProductTypeId").append(option); // Select trong modal
-        //           });
-
-        //           resolve(); // Gọi resolve khi đã hoàn tất
-        //         } else {
-        //           console.error("Dữ liệu trả về không đúng định dạng.");
-        //           reject("Dữ liệu không hợp lệ");
-        //         }
-        //       },
-        //       error: function (xhr) {
-        //         console.error(
-        //           "Lỗi khi lấy danh sách loại sản phẩm:",
-        //           xhr.responseText
-        //         );
-        //         reject("Lỗi khi gọi API");
-        //       },
-        //     });
-        //   });
-        // }
-
         // Lắng nghe sự thay đổi trên <select> ngoài modal
         $("#productTypeId").on("change", function () {
           const productType = $(this).val(); // Lấy giá trị đã chọn
           const shopId = sessionStorage.getItem("shopId");
           if (productType === "") {
             // Nếu chọn "Tất cả sản phẩm" (giá trị rỗng)
-            fetchProducts(shopId, accessToken); // Gọi API để lấy tất cả sản phẩm
+            fetchProducts(shopId, accessToken, 1); // Gọi API để lấy tất cả sản phẩm
           } else {
             // Nếu chọn loại sản phẩm cụ thể
             fetchProductsByType(shopId, productType, accessToken); // Gọi API theo loại sản phẩm
@@ -830,7 +816,7 @@
 
             success: function (response) {
               alert("Thêm sản phẩm thành công!");
-              fetchProducts(shopId, accessToken);
+              fetchProducts(shopId, accessToken, 1);
               $("#addProductModal").modal("hide");
             },
             error: function (xhr) {
@@ -863,7 +849,7 @@
             contentType: "application/json",
             success: function () {
               alert("Cập nhật sản phẩm thành công!");
-              fetchProducts(shopId, accessToken);
+              fetchProducts(shopId, accessToken, 1);
 
               $("#editProductModal").modal("hide");
             },
@@ -955,8 +941,8 @@
 
         async function uploadImages(productId) {
           const accessToken = localStorage.getItem("token");
-
           const imageInput = document.getElementById("imageInput");
+
           if (imageInput.files.length > 0) {
             const images = Array.from(imageInput.files).map((file) => ({
               path: file.name,
@@ -984,11 +970,22 @@
                     "Response:",
                     xhr.responseText
                   );
+
+                  // Hiển thị thông báo lỗi cho người dùng
+                  if (xhr.status === 500) {
+                    alert("Có lỗi xảy ra khi tải ảnh. Vui lòng chọn ảnh khác.");
+                    // Xóa nội dung của trường nhập ảnh
+                    imageInput.value = ""; // hoặc imageInput.files = null; để xóa ảnh đã chọn
+                  } else {
+                    alert("Có lỗi: " + xhr.statusText);
+                  }
                 },
               });
             } catch (error) {
               console.error("Error uploading images:", error);
             }
+          } else {
+            alert("Vui lòng chọn ít nhất một ảnh để tải lên.");
           }
         }
       });
