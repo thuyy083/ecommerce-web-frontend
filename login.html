@@ -123,9 +123,9 @@
           decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
 
         // Chuyển hướng dựa trên vai trò người dùng
-        if (userRole === "1") {
+        if (userRole === "admin") {
           window.location.href = "/admin/dashboard.html";
-        } else if (userRole === "2") {
+        } else if (userRole === "user") {
           window.location.href = "index.html";
         } else {
           window.location.href = "/shop/dashboard.html";
