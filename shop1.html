@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< Updated upstream
     <head>
         <meta charset="utf-8">
        <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,27 +15,8 @@
        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
        
     </head>
-=======
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/x-icon" href="Logo/icon.png" />
-    <title>Sản Phẩm</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="css/style_shop.css">
-    <link rel="stylesheet" href="css/style_index.css">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-</head>
-
->>>>>>> Stashed changes
 <body>
-
+    
     <div id="navbar-container"> </div>
     <!-- chèn -->
     <div class="shop-box-inner">
@@ -47,29 +27,25 @@
                         <div class="product-item-filter row">
                             <div class="col-12 col-sm-8 text-center text-sm-left">
                                 <div class="toolbar-sorter-right d-flex justify-content-start align-items-center">
-                                    <div class="sort-icons">
-
+                                    <div class="sort-icons" >
+                                       
                                         <ul class="nav nav-tabs ml-auto">
                                             <li>
-                                                <a id="sortAsc" class="icon" data-toggle="tab"> <svg
-                                                        xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                        fill="currentColor" class="bi bi-caret-up-fill"
-                                                        viewBox="0 0 16 16">
-                                                        <path
-                                                            d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
-                                                    </svg> </a>
+                                                <a  id="sortAsc" class="icon" data-toggle="tab"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+                                                    <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                                                  </svg> </a>
                                             </li>
                                             <li>
-                                                <a id="sortDesc" class="icon"  href="#list-view" data-toggle="tab"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                                                <a id="sortDesc" class="icon"   data-toggle="tab"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
                                                     <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
                                                   </svg></i> </a>
                                             </li>
                                         </ul>
-
+                                        
                                     </div>
-
-                                    <select id="sortBy" class=" show-tick form-control">
-
+                                   
+                                    <select id="sortBy" class=" show-tick form-control" >
+                                        
                                         <option value="id">Sắp xếp theo ID sản phẩm</option>
                                         <option value="price">Sắp xếp sản phẩm theo giá</option>
                                         <option value="rating">Sắp xếp sản phẩm theo đánh giá</option>
@@ -77,17 +53,15 @@
                                         <option value="sold">Sắp xếp sản phẩm theo lượng sản phẩm bán ra</option>
                                     </select>
                                 </div>
-
+                                
                             </div>
                             <div class="col-12 col-sm-4 text-center text-sm-right">
                                 <ul class="nav nav-tabs ml-auto">
                                     <li>
-                                        <a class="nav-link active" href="#grid-view" data-toggle="tab"> <i
-                                                class="fa fa-th"></i> </a>
+                                        <a class="nav-link active" href="#grid-view" data-toggle="tab"> <i class="fa fa-th"></i> </a>
                                     </li>
                                     <li>
-                                        <a class="nav-link" href="#list-view" data-toggle="tab"> <i
-                                                class="fa fa-list-ul"></i> </a>
+                                        <a class="nav-link" href="#list-view" data-toggle="tab"> <i class="fa fa-list-ul"></i> </a>
                                     </li>
                                 </ul>
                             </div>
@@ -97,20 +71,19 @@
                                 <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
                                     <div class="row">
                                         <div id="productgrid"></div>
-
+                                        
                                     </div>
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="list-view">
                                     <div class="list-view-box">
                                         <div id="productlist"></div>
-
+                                        
                                     </div>
-
+                                    
                                 </div>
                             </div>
                         </div>
                         <div class="product-item-filter row">
-<<<<<<< Updated upstream
                               <!-- Phân trang -->
                                     <div class="pagination">
                                         <ul class="d-flex list-unstyled" style="margin-left: 300px;">
@@ -129,28 +102,9 @@
                                                 </li> 
                                         </ul>
                                     </div>
-=======
-                            <!-- Phân trang -->
-                            <div class="pagination">
-                                <ul class="d-flex list-unstyled" style="margin-left: 300px;">
-                                    <li class="page-item">
-                                        <a class="page-link" id="prevPage">
-                                            << </a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" id="currentPage"></a>
-                                    </li>
-                                    <li class="page-item">
-                                        <a class="page-link" id="nextPage">
-                                            >>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
->>>>>>> Stashed changes
                         </div>
-
-
+                            
+                            
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left" style="border: 1px solid #111111;">
@@ -165,8 +119,7 @@
                             <div class="title-left">
                                 <h3 class="h3-shop">Danh Sách Loại Sản Phẩm</h3>
                             </div>
-                            <div class="list-group list-group-collapse list-group-sm list-group-tree" id="productType"
-                                data-children=".sub-men">
+                            <div class="list-group list-group-collapse list-group-sm list-group-tree" id="productType" data-children=".sub-men">
                                 <a class="list-group-item list-group-item-action" data-id="">Tất cả sản phẩm</a>
                             </div>
                         </div>
@@ -187,9 +140,8 @@
             </div>
         </div>
     </div>
-
+    
     <div id="footer-container">
-<<<<<<< Updated upstream
    
     <script>
         let totalItems = 0; 
@@ -413,27 +365,50 @@
                 }
             });
         }
+        // Hàm thêm sản phẩm vào giỏ hàng
+        function addToCart(productId, productName, productPrice, productImage, shopId) {
+                let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
+
+                // Kiểm tra xem sản phẩm đã tồn tại trong giỏ chưa
+                const existingProduct = cart.find(item => item.id === productId && item.shopId === shopId);
+
+                if (existingProduct) {
+                    // Nếu sản phẩm đã có, tăng số lượng
+                    existingProduct.quantity += 1;
+                } else {
+                    // Nếu chưa, thêm sản phẩm mới với số lượng 1
+                    cart.push({
+                        id: productId,
+                        name: productName,
+                        price: productPrice,
+                        image: productImage,
+                        shopId: shopId, // Lưu thêm thuộc tính shopId
+                        quantity: 1
+                    });
+                }
+
+                sessionStorage.setItem('cart', JSON.stringify(cart));
+                alert('Đã thêm sản phẩm vào giỏ hàng!');
+            }
     </script>
     
     
     
 
-        <!-- ALL JS FILES -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/jquery.superslides/2.0.1/jquery.superslides.min.js"></script>
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta3/js/bootstrap-select.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inview/1.2.2/jquery.inview.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Isotope/3.0.6/isotope.pkgd.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation/1.19.3/jquery.validate.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/validator.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+    <!-- ALL JS FILES -->  
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.superslides/2.0.1/jquery.superslides.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta3/js/bootstrap-select.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inview/1.2.2/jquery.inview.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Isotope/3.0.6/isotope.pkgd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/validator.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script> 
 
     <script>
         $(document).ready(function () {
@@ -448,12 +423,16 @@
                 const userAvatar = document.getElementById("user-avatar");
                 const loginRegister = document.getElementById("login-register");
                 const logoutBtn = document.getElementById("logout-btn");
+                const orders = document.getElementById("order");
+
   
                 if (token && avatar) {
                   userAvatar.style.display = "block";
                   loginRegister.style.display = "none";
                   userAvatar.src = `./Images/avatar/${avatar}`;
                   logoutBtn.style.display = "block";
+                  orders.style.display = "block";
+
   
                   logoutBtn.addEventListener("click", function () {
                     localStorage.removeItem("token");
@@ -463,6 +442,7 @@
                 } else {
                   userAvatar.style.display = "none";
                   logoutBtn.style.display = "none";
+                  orders.style.display = "none";
                   loginRegister.style.display = "block";
                 }
               } else {
@@ -483,8 +463,7 @@
             $('#footer-container').load('./fragments/footer_2.html', function(response, status, xhr) {});
         });
 
-        </script>
-
+    </script>
+    
 </body>
-
 </html>
