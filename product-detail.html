@@ -51,7 +51,7 @@
         <div class="col-md-7 ms-9">
           <h2 id="product-name" class="mb-3"></h2>
           <div id="product-details" class="mb-4"></div>
-          <button class="btn btn-auth mt-4">Thêm vào giỏ hàng</button>
+          <button id="addToCartBtn" class="btn btn-auth mt-4">Thêm vào giỏ hàng</button>
           <a href="shop1.html" class="btn btn-auth mt-4 ms-3">Danh sách sản phẩm</a>
         </div>
       </div>
@@ -148,6 +148,12 @@
               `);
             });
 
+            // Gán sự kiện click cho nút "Thêm vào giỏ hàng"
+            $("#addToCartBtn").click(function() {
+                const imagePath = product.images && product.images.length > 0 ? `Images/${product.images[0].path}` : 'Images/default-image.jpg';
+                addToCart(product.id, product.name, product.price, imagePath, product.shop.id);
+            });
+
             // Gọi API để lấy sản phẩm liên quan
             fetch(`https://localhost:7060/api/Products/${productId}/related?top=3`)
               .then((response) => response.json())
@@ -189,6 +195,31 @@
             document.body.innerHTML = "<p>Không thể tải chi tiết sản phẩm.</p>";
           });
       });
+            // Hàm thêm sản phẩm vào giỏ hàng
+            function addToCart(productId, productName, productPrice, productImage, shopId) {
+                let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
+
+                // Kiểm tra xem sản phẩm đã tồn tại trong giỏ chưa
+                const existingProduct = cart.find(item => item.id === productId && item.shopId === shopId);
+
+                if (existingProduct) {
+                    // Nếu sản phẩm đã có, tăng số lượng
+                    existingProduct.quantity += 1;
+                } else {
+                    // Nếu chưa, thêm sản phẩm mới với số lượng 1
+                    cart.push({
+                        id: productId,
+                        name: productName,
+                        price: productPrice,
+                        image: productImage,
+                        shopId: shopId, // Lưu thêm thuộc tính shopId
+                        quantity: 1
+                    });
+                }
+
+                sessionStorage.setItem('cart', JSON.stringify(cart));
+                alert('Đã thêm sản phẩm vào giỏ hàng!');
+            }
     </script>
     <script>
       $(document).ready(function () {
