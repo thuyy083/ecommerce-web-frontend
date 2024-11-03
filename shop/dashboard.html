@@ -139,7 +139,7 @@
                         <tr>
                           <th>Ảnh</th>
                           <th>Tên</th>
-                          <th>Mô tả</th>
+
                           <th>Giá</th>
                           <th>Số lượng</th>
                           <th>Thao tác</th>
@@ -312,6 +312,86 @@
               style="background-color: #6a9ab0; border: none"
             >
               Thêm sản phẩm
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal chi tiết sản phẩm -->
+    <div
+      class="modal fade"
+      id="productDetailsModal"
+      tabindex="-1"
+      aria-labelledby="productDetailsModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="productDetailsModalLabel">
+              Chi tiết sản phẩm
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              <strong>Tên sản phẩm:</strong>
+              <span id="productDetailsName"></span>
+            </p>
+            <p>
+              <strong>Mô tả:</strong>
+              <span id="productDetailsDescription"></span>
+            </p>
+            <p><strong>Giá:</strong> <span id="productDetailsPrice"></span></p>
+            <p>
+              <strong>Phần trăm giảm giá:</strong>
+              <span id="productDetailsDiscount"></span>%
+            </p>
+            <p>
+              <strong>Số lượng:</strong>
+              <span id="productDetailsQuantity"></span>
+            </p>
+            <p>
+              <strong>Số lượng đã bán:</strong>
+              <span id="productDetailsSoldQuantity"></span>
+            </p>
+            <p>
+              <strong>Số lượng thích:</strong>
+              <span id="productDetailsLikeQuantity"></span>
+            </p>
+            <p>
+              <strong>Đánh giá:</strong> <span id="productDetailsRating"></span>
+            </p>
+
+            <!-- Loại sản phẩm với phần "Xem thêm" -->
+            <p>
+              <strong>Loại sản phẩm:</strong>
+              <span id="productDetailsType"></span>
+              <a href="#" id="productTypeMoreLink" class="text-primary"
+                >Xem thêm</a
+              >
+              <span
+                id="productDetailsTypeDescription"
+                style="display: none"
+              ></span>
+            </p>
+
+            <p>
+              <strong>Cửa hàng:</strong> <span id="productDetailsShop"></span>
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Đóng
             </button>
           </div>
         </div>
@@ -539,10 +619,15 @@
             }" style="cursor: pointer; width: 50px; height: 50px;">
         </td>
         <td>${product.name}</td>
-        <td>${product.description}</td>
+       
         <td>${(product.price * 1000).toLocaleString()} VND</td>
         <td>${product.quantity}</td>
         <td>
+           <button class="btn btn-primary btn-sm btn-details" title="Chi tiết" data-bs-toggle="modal" data-bs-target="#productDetailsModal" data-id="${
+             product.id
+           }">
+    <i class="fas fa-info-circle"></i>
+  </button>
           <button class="btn btn-success btn-sm btn-update" title="Cập nhật" data-bs-toggle="modal" data-bs-target="#editProductModal" data-id="${
             product.id
           }">
@@ -565,6 +650,55 @@
               deleteProduct(productId);
             }
           });
+          //Gắn sự kiện click cho nút chi tiết
+          $(".btn-details").on("click", function () {
+            const productId = $(this).data("id");
+
+            $.ajax({
+              url: `https://localhost:7060/api/Products/${productId}`,
+              method: "GET",
+              success: function (product) {
+                // Định dạng giá với dấu chấm phân cách hàng nghìn và thêm " VND"
+                const formattedPrice = `${product.price.toLocaleString(
+                  "vi-VN"
+                )} VND`;
+                $("#productDetailsPrice").text(formattedPrice);
+
+                // Các thiết lập khác cho modal chi tiết
+                $("#productDetailsName").text(product.name);
+                $("#productDetailsDescription").text(product.description);
+                $("#productDetailsDiscount").text(product.discountPercent);
+                $("#productDetailsQuantity").text(product.quantity);
+                $("#productDetailsSoldQuantity").text(product.soldQuantity);
+                $("#productDetailsLikeQuantity").text(product.likeQuantity);
+                $("#productDetailsRating").text(product.rating);
+                $("#productDetailsType").text(product.productType.name);
+                $("#productDetailsTypeDescription").text(
+                  product.productType.description
+                );
+                $("#productDetailsShop").text(product.shop.name);
+
+                // Sự kiện "Xem thêm" cho mô tả loại sản phẩm
+                $("#productTypeMoreLink")
+                  .off("click")
+                  .on("click", function (e) {
+                    e.preventDefault();
+                    $("#productDetailsTypeDescription").toggle();
+                    $(this).text(
+                      $("#productDetailsTypeDescription").is(":visible")
+                        ? "Ẩn bớt"
+                        : "Xem thêm"
+                    );
+                  });
+
+                // Mở modal chi tiết sản phẩm
+                $("#productDetailsModal").modal("show");
+              },
+              error: function () {
+                alert("Không thể tải dữ liệu chi tiết sản phẩm!");
+              },
+            });
+          });
 
           // Gắn sự kiện click cho nút cập nhật
           $(".btn-update").on("click", function () {
@@ -582,12 +716,6 @@
                   $("#editProductQuantity").val(product.quantity);
                   $("#editProductId").val(product.id);
                   $("#editProductTypeId").val(product.productType.id);
-                  console.log("id product", product.productType.id);
-                  // Kiểm tra lần cuối nội dung của #editProductTypeId
-                  console.log(
-                    "Nội dung cuối cùng của #editProductTypeId:",
-                    $("#editProductTypeId").html()
-                  );
 
                   // Mở modal
                   $("#editProductModal").modal("show");
@@ -610,7 +738,7 @@
           const prevButton = document.createElement("li");
           prevButton.className =
             "page-item" + (currentPage === 1 ? " disabled" : "");
-          prevButton.innerHTML = `<a class="page-link" href="#" tabindex="-1">Previous</a>`;
+          prevButton.innerHTML = `<a class="page-link" href="#" tabindex="-1">Trước</a>`;
           prevButton.onclick = () => {
             if (currentPage > 1)
               fetchProducts(shopId, accessToken, currentPage - 1);
@@ -631,7 +759,7 @@
           const nextButton = document.createElement("li");
           nextButton.className =
             "page-item" + (currentPage === totalPage ? " disabled" : "");
-          nextButton.innerHTML = `<a class="page-link" href="#">Next</a>`;
+          nextButton.innerHTML = `<a class="page-link" href="#">Sau</a>`;
           nextButton.onclick = () => {
             if (currentPage < totalPage)
               fetchProducts(shopId, accessToken, currentPage + 1);
