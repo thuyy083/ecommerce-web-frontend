@@ -221,5 +221,59 @@
                 alert('Đã thêm sản phẩm vào giỏ hàng!');
             }
     </script>
+    <script>
+      $(document).ready(function () {
+        $("#navbar-container").load(
+          "./fragments/navbar.html",
+          function (response, status, xhr) {
+            if (status === "success") {
+              // Đảm bảo rằng tất cả các phần tử đã được nạp trước khi thực hiện kiểm tra trạng thái
+              const token = localStorage.getItem("token");
+              const avatar = localStorage.getItem("avatar");
+
+              const userAvatar = document.getElementById("user-avatar");
+              const loginRegister = document.getElementById("login-register");
+              const logoutBtn = document.getElementById("logout-btn");
+              const orders = document.getElementById("order");
+
+
+              if (token && avatar) {
+                userAvatar.style.display = "block";
+                loginRegister.style.display = "none";
+                userAvatar.src = `./Images/avatar/${avatar}`;
+                logoutBtn.style.display = "block";
+                orders.style.display = "block";
+
+
+                logoutBtn.addEventListener("click", function () {
+                  localStorage.removeItem("token");
+                  localStorage.removeItem("avatar");
+                  window.location.href = "/login.html";
+                });
+              } else {
+                userAvatar.style.display = "none";
+                logoutBtn.style.display = "none";
+                orders.style.display = "none";
+                loginRegister.style.display = "block";
+              }
+            } else {
+              console.error(
+                "Error loading navbar:",
+                xhr.status,
+                xhr.statusText
+              );
+            }
+          }
+        );
+      });
+    </script>
+   <!-- KHA AI -->
+   <script>
+      $(document).ready(function() { 
+          //$('#navbar-container').load('./fragments/navbar.html', function(response, status, xhr) {});
+          $('#footer-container').load('./fragments/footer_2.html', function(response, status, xhr) {});
+      });
+
+  </script>
   </body>
 </html>
