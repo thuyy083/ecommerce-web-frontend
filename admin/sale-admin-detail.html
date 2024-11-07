@@ -4,35 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chi Tiết Chương Trình Giảm Giá</title>
-    <!-- Bootstrap CSS -->
-    <!-- Bootstrap CSS -->
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    
-   <!-- Font Awesome -->
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0-beta3/css/all.min.css">
-   <!-- Bootstrap JS -->
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- giao diện -->
     <link href="../css/style_shop_dashboard.css" rel="stylesheet" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
     <link rel="icon" href="../Logo/icon.png" type="image/x-icon" />
-    <script
-      src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
-      crossorigin="anonymous"
-    ></script>
-    <!-- giao diện -->
-  
-    <!-- Bootstrap JS CDN -->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous" ></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.2/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../css/style_index.css" />
     <style>
-        
         #layoutSidenav {
             display: flex;
         }
@@ -56,51 +36,10 @@
         }
        
     </style>
-
-
 </head>
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand ">
-        <ul class="navbar-nav ms-auto me-3 me-lg-4">
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle d-flex align-items-center gap-2"
-              id="navbarDropdown"
-              href="#"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <div class="profile-info d-flex align-items-center" id="avatar">
-               
-              </div>
-            </a>
-            <ul
-              class="dropdown-menu dropdown-menu-end shadow-sm"
-              aria-labelledby="navbarDropdown"
-              style="min-width: 200px"
-            >
-              <!-- <li class="d-flex align-items-center p-2">
-                
-                <div class="ms-2">
-                  <div class="name" id="name"></div>
-                  <div class="email text-muted small" id="email"></div>
-                </div>
-              </li> -->
-  
-              <li><hr class="dropdown-divider" /></li>
-              <li>
-                <button id="logoutBtn" class="btn">
-                  Đăng xuất
-                  <i
-                    class="fa-solid fa-arrow-right-from-bracket"
-                    style="margin-left: 5px"
-                  ></i>
-                </button>
-              </li>
-            </ul>
-          </li>
-        </ul>
+        
       </nav>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
@@ -164,17 +103,18 @@
                             <button id="addProductsBtn" class="btn btn-auth">Thêm sản phẩm</button>
                         </div>
                         <div id="availableProductList" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg " role="document">
-                                <div class="modal-content ">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Sản phẩm có sẵn</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
+                            <div class="modal-dialog modal-lg " role="document" >
+                                <div class="modal-header" style="background-color: #3a6d8c; color: white;">
+                                    <h5 class="modal-title" style="color: white;">Sản phẩm có sẵn</h5>
+                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" style="background-color: #3a6d8c;color: white; border: 0px;">
+                                        <span aria-hidden="true" data-bs-dismiss="modal" >&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-content " style="border-bottom: 0px; border-radius: 0px ;">
+                                    
                                     <div class="modal-body">
                                         <table class="table table-bordered" id="productTable">
-                                            <thead class="thead-light text-center">
+                                            <thead class="thead-light text-center" style="background-color: #ead8b1;">
                                                 <tr>
                                                     <th>STT</th>
                                                     <th>Hình</th>
@@ -186,15 +126,10 @@
                                             <tbody id="productTableBody" class="mt-2" style="background-color: #f7f5f2;"></tbody>
                                         </table>
                                          <!-- Phân trang -->
-                                        <nav aria-label="Page navigation">
-                                            <ul class="pagination justify-content-center" id="pagination">
-                                                <li class="page-item"><a class="page-link" href="#" id="prevPage">«</a></li>
-                                                <li class="page-item"><a class="page-link" href="#" id="nextPage">»</a></li>
-                                            </ul>
-                                        </nav>
+                                         <div id="availableProductPagination" class="d-flex justify-content-center"></div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                                         <button id="submitSelectedProducts" type="button" class="btn btn-auth">Thêm sản phẩm đã chọn</button>
                                     </div>
                                 </div>
@@ -229,16 +164,17 @@
                             
                             <div id="availableCustomerTypeList" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="customerTypeModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Loại khách hàng có sẵn</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
+                                    <div class="modal-header" style="background-color: #3a6d8c; color: white;">
+                                        <h5 class="modal-title" style="color: white;">Loại khách hàng có sẵn</h5>
+                                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" style="background-color: #3a6d8c; color: white; border: 0px;">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-content" style="border-bottom: 0px; border-radius: 0px ;" >
+                                        
                                         <div class="modal-body">
                                             <table class="table table-bordered" id="customerTypeTable">
-                                                <thead class="thead-light text-center">
+                                                <thead class="text-center" style="background-color: #EAD8B1;">
                                                     <tr>
                                                         <th>STT</th>
                                                         <th>Tên loại khách hàng</th>
@@ -250,7 +186,7 @@
                                             </table>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                                             <button id="submitSelectedCustomerTypes" type="button" class="btn btn-auth">Thêm loại khách hàng đã chọn</button>
                                         </div>
                                     </div>
@@ -268,26 +204,18 @@
    
 
 <!-- JavaScript -->
+
 <script>
+    
     const saleEventId = new URLSearchParams(window.location.search).get('id'); 
     $(document).ready(function () {
+        
         const accessToken = localStorage.getItem("token");
-        const avatar = $("#avatar");
-        avatar.append(`<img src="../Images/avatar/${localStorage.getItem("avatar")}" class="rounded-circle" width="32px" height="32px" />`);
-       
         if (!accessToken) {
             alert("Không tìm thấy token, vui lòng đăng nhập lại.");
             return window.location.href = "../login.html";
         }
         
-        const logoutBtn = $("#logoutBtn");
-
-        // Đăng xuất
-        logoutBtn.on("click", function () {
-          localStorage.removeItem("token");
-          localStorage.removeItem("avatar");
-          window.location.href = "../login.html";
-        });
         let discount = 1;
         let products = []; 
         let customerTypes = []; 
@@ -322,6 +250,7 @@
         const productsPerPage = 5; 
         let currentProductPage = 1;
         let currentCustomerPage = 1;
+        let currentAvailableProductPage = 1;
 
         function updateProductList() {
             $('#productItems').empty();
@@ -367,20 +296,24 @@
         }
 
         function renderPagination(type, totalPages) {
-            const paginationContainer = (type === 'product') ? $('#productPagination') : $('#customerTypePagination');
-            paginationContainer.empty();
+            const paginationContainer = (type === 'product') ? $('#productPagination')
+                : (type === 'customerType') ? $('#customerTypePagination') : $('#availableProductPagination');
 
+            paginationContainer.empty();
             for (let i = 1; i <= totalPages; i++) {
                 const pageButton = $('<button>')
                     .addClass('btn btn-auth mx-1')
-                    .text("Trang "+i)
+                    .text("Trang " + i)
                     .click(() => {
                         if (type === 'product') {
                             currentProductPage = i;
                             updateProductList();
-                        } else {
+                        } else if (type === 'customerType') {
                             currentCustomerPage = i;
-                            displayCustomerTypes();
+                            updateCustomerTypeList();
+                        } else {
+                            currentAvailableProductPage = i;
+                            updateAvailableProductList();
                         }
                     });
                 paginationContainer.append(pageButton);
@@ -411,7 +344,7 @@
         });
 
         $('#addProductsBtn').on('click', function() {
-            fetchData('https://localhost:7060/api/Products', function(response) {
+            fetchData('https://localhost:7060/api/Products?Pagination=false', function(response) {
                 const availableProducts = response.data.filter(p => !products.some(prod => prod.id === p.id));
                 displayAvailableProducts(availableProducts);
             });
@@ -419,6 +352,8 @@
 
         function displayAvailableProducts(products) {
             const productTableBody = $('#productTableBody').empty();
+            const totalPages = Math.ceil(productTableBody.length / 4);
+
             products.length > 0 
                 ? products.forEach((product, i) => {
                     const firstImage = product.images?.[0]?.path || 'default-image.jpg';
@@ -503,8 +438,8 @@
                 alert('Vui lòng chọn ít nhất một loại khách hàng để thêm.');
             }
         });
-
         fetchSaleEventDetails();
+        
     });
 </script>
 

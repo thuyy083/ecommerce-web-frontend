@@ -6,23 +6,25 @@
     <title>Quản lý chương trình giảm giá</title>
 
    <!-- Bootstrap CSS -->
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    <!-- Font Awesome -->
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0-beta3/css/all.min.css">
    <!-- Bootstrap JS -->
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- giao diện -->
     <link href="../css/style_shop_dashboard.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
     <link rel="icon" href="../Logo/icon.png" type="image/x-icon" />
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous" ></script>
-    <!-- giao diện -->
-    <!-- Bootstrap JS CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.2/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="../css/style_index.css" />
 
-   
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/> -->
+
+    <link rel="stylesheet" href="../css/style_index.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+   <!-- Bootstrap CSS & JS -->
+
+
 
     
 </head>
@@ -47,14 +49,11 @@
                 aria-labelledby="navbarDropdown"
                 style="min-width: 200px"
               >
-                <!-- <li class="d-flex align-items-center p-2">
-                  
+                <li >
                   <div class="ms-2">
-                    <div class="name" id="name"></div>
-                    <div class="email text-muted small" id="email"></div>
+                    <div  id="email"></div>
                   </div>
-                </li> -->
-    
+                </li>
                 <li><hr class="dropdown-divider" /></li>
                 <li>
                   <button id="logoutBtn" class="btn">
@@ -125,7 +124,7 @@
                         
                         <div class="d-flex justify-content-center mb-4 mt-4">
                             <div id="pagination" class="d-flex justify-content-center"></div>
-                            <button class="btn btn-auth " data-toggle="modal" data-target="#addSaleEventModal">Thêm chương trình giảm giá</button>
+                            <button class="btn btn-auth " data-bs-toggle="modal" data-bs-target="#addSaleEventModal">Thêm chương trình giảm giá</button>
                         </div>
                     </div>
                 </div>
@@ -139,63 +138,64 @@
 <!-- Modal Thêm Chương Trình Giảm Giá -->
 <div class="modal fade" id="addSaleEventModal" tabindex="-1" role="dialog" aria-labelledby="addSaleEventModalLabel" aria-hidden="true" >
     <div class="modal-dialog modal-lg" >
-        <div class="modal-content" style="background-color: #edeef1;">
-            <div class="modal-header" style="background-color: #ead8b1;">
-                <h5 class="modal-title" >Thêm chương trình giảm giá</h5>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
+        <div class="modal-header " style="background-color: #ead8b1;">
+            <h5 class="modal-title" >Thêm chương trình giảm giá</h5>
+            <button type="button" class="close" data-bs-dismiss="modal" style="background-color: #ead8b1; border: 0px;">&times;</button>
+        </div>
+        <div class="modal-content" style="background-color: #edeef1; border-bottom: 0px; border-radius: 0px ;" >
+            
             <div class="modal-body">
                 <form id="addSaleEventForm" enctype="multipart/form-data">
                     <div class="form-group d-flex align-items-center justify-content-center">
-                    <label for="currentIllustration1" class="font-weight-bold pe-3"><h5>Hình minh họa</h5></label></div>
-                    <div class="form-group d-flex align-items-center justify-content-center">
-                        <div class="d-flex align-items-center">
-                            <label for="editIllustration1" class="btn" style="display: inline-flex; align-items: center;">
-                                <img id="currentIllustration1" src="../Images/default-image.jpg" alt="Current Illustration" height="150px" width="650px" style="margin-right: 10px;">
-                            </label>
-                            <input type="file" class="d-none" id="editIllustration1" accept="image/*">
-                        </div>
+                        <b><label for="currentIllustration1" class="font-weight-bold pe-3"><h5>Hình minh họa</h5></label></b>
                     </div>
+                    
                     <div style="flex: 1; margin-right: 30px; margin-left: 30px;">
+                        <div class="form-group d-flex align-items-center justify-content-center" style="flex: 1; margin-right: 50px; margin-left: 50px;">
+                            <div class="d-flex align-items-center" >
+                                <b><label for="editIllustration1" class="btn" style="display: inline-flex; align-items: center;">
+                                    <img id="currentIllustration1" src="../Images/default-image.jpg" alt="Current Illustration" height="150px" width="600px" style="margin-right: 10px;">
+                                </label></b>
+                                <input type="file" class="d-none" id="editIllustration1" accept="image/*">
+                            </div>
+                        </div>
                         <div class="mb-3 d-flex justify-content-between">
                             <div style="flex: 1; margin-right: 50px; margin-left: 30px;">
-                                <label for="name" class="form-label font-weight-bold">Tên</label>
+                                <b><label for="name" class="form-label font-weight-bold">Tên</label></b>
                                 <input type="text" class="form-control" id="name" required>
                             </div>
                             <div style="flex: 1; margin-right: 30px;">
-                                <label for="discount" class="form-label font-weight-bold">Giảm giá (%)</label>
+                                <b><label for="discount" class="form-label font-weight-bold">Giảm giá (%)</label></b>
                                 <input type="number" class="form-control" id="discount" required min="0" max="100">
                             </div>
                         </div>
                         <div class="mb-3 d-flex">
                             <div style="flex: 1; margin-right: 50px; margin-left: 30px;">
-                                <label for="startDate" class="form-label font-weight-bold">Ngày bắt đầu</label>
+                                <b><label for="startDate" class="form-label font-weight-bold">Ngày bắt đầu</label></b>
                                 <input type="datetime-local" class="form-control" id="startDate" required>
                             </div>
                             <div style="flex: 1; margin-right: 30px;">
-                                <label for="endDate" class="form-label font-weight-bold">Ngày kết thúc</label>
+                                <b><label for="endDate" class="form-label font-weight-bold">Ngày kết thúc</label></b>
                                 <input type="datetime-local" class="form-control" id="endDate" required>
                             </div>
                         </div>
                        
                         <div class="mb-3 d-flex justify-content-between">
                             <div style="flex: 1; margin-right: 60px; margin-left: 30px;">
-                                <label class="form-label font-weight-bold">Loại khách hàng</label>
-                                <select id="customerTypeSelect" class="form-control" multiple required>
+                                <b><label class="form-label font-weight-bold">Loại khách hàng</label></b>
+                                <select id="customerTypeSelect" class="form-control" multiple required style="height: 80px;">
                                     <option value="" disabled>Chọn loại khách hàng</option>
-                                    <!-- Các loại khách hàng sẽ được thêm vào đây bằng JavaScript -->
                                 </select>
                             </div>
                             <div style="flex: 1; margin-right: 30px;">
-                                <label class="form-label font-weight-bold">Sản phẩm</label>
-                                <select id="productIds" class="form-control" multiple required>
+                                <b><label class="form-label font-weight-bold">Sản phẩm</label></b>
+                                <select id="productIds" class="form-control" multiple required style="height: 80px;">
                                     <option value="" disabled>Chọn sản phẩm</option>
-                                    <!-- Các sản phẩm sẽ được thêm vào đây bằng JavaScript -->
                                 </select>
                             </div>
                         </div>
                         <div class="mb-3" style="flex: 1; margin-right: 35px; margin-left: 30px;">
-                            <label for="description" class="form-label font-weight-bold">Mô tả</label>
+                            <b><label for="description" class="form-label font-weight-bold">Mô tả</label></b>
                             <textarea class="form-control" id="description" rows="3"></textarea>
                         </div>
                     </div>
@@ -204,7 +204,7 @@
             </div>
             
             <div class="modal-footer" style="flex: 1; margin-right: 35px; ">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                 <button type="button" class="btn btn-auth" id="saveSaleEvent">Lưu</button>
             </div>
         </div>
@@ -217,13 +217,13 @@
 <!-- Modal Sửa Chương Trình -->
 <div class="modal fade" id="editSaleEventModal" tabindex="-1" role="dialog" aria-hidden="true" aria-labelledby="editSaleEventModal">
     <div class="modal-dialog">
-        <div class="modal-content" style="background-color: #edeef1;">
-            <div class="modal-header" style="background-color: #ead8b1;">
-                <h5 class="modal-title">Sửa thông tin chương trình giảm giá</h5>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
+        <div class="modal-header" style="background-color: #ead8b1;">
+            <h5 class="modal-title">Sửa thông tin chương trình giảm giá</h5>
+            <button type="button" class="close" data-bs-dismiss="modal" style="background-color: #ead8b1; border: 0px;">&times;</button>
+        </div>
+        <div class="modal-content" style="background-color: #edeef1; border-bottom: 0px; border-radius: 0px ;">
             <div class="modal-body">
-                <form id="editSaleEventForm">
+                <form id="editSaleEventForm" style=" margin-top: -15px;">
                     <input type="hidden" id="editSaleEventId">
                     <div class="form-group d-flex align-items-center justify-content-center">
                         <div class="d-flex align-items-center">
@@ -259,7 +259,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                 <button type="button" class="btn btn-auth" id="updateSaleEvent">Cập nhật</button>
             </div>
         </div>
@@ -270,14 +270,29 @@
         
     $(document).ready(function () {
         const accessToken = localStorage.getItem("token");
-        const avatar = $("#avatar");
-        avatar.append(`<img src="../Images/avatar/${localStorage.getItem("avatar")}" class="rounded-circle" width="32px" height="32px" />`);
-       
+        
         if (!accessToken) {
             alert("Không tìm thấy token, vui lòng đăng nhập lại.");
             return window.location.href = "../login.html";
         }
-        
+
+
+        function loaduser() {
+            $.ajax({
+                url: 'https://localhost:7060/api/Accounts',
+                method: 'GET',
+                headers: { Authorization: `Bearer ${accessToken}` },
+                success: showuser,
+                error: handleError("Có lỗi xảy ra khi tai thông tin admin.")
+            });
+        }
+        function showuser(data) {
+            const avatar = $("#avatar");
+            avatar.append(`<img src="../Images/avatar/${data.avatar}" class="rounded-circle" width="32px" height="32px" />`);
+            const email = $("#email");
+            email.append(`<p>Hi ${data.email}</p>`)
+        }
+        loaduser();
         const logoutBtn = $("#logoutBtn");
 
         // Đăng xuất
@@ -310,7 +325,7 @@
     
         function loadProductOptions() {
             $.ajax({
-                url: 'https://localhost:7060/api/Products',
+                url: 'https://localhost:7060/api/Products?Pagination=false',
                 method: 'GET',
                 headers: { Authorization: `Bearer ${accessToken}` },
                 success: populateProductOptions,
@@ -379,10 +394,11 @@
                         <td>
                             <div class="d-flex align-items-center mt-3">
                                 <button class="btn btn-warning btn-sm edit-button" data-id="${item.id}"><i class="fas fa-edit"></i></button>
-                                <button class="btn btn-danger btn-sm delete-button ml-2" data-id="${item.id}"><i class="fas fa-trash-alt"></i></button>
-                                <button class="btn btn-info btn-sm view-button ml-2" data-id="${item.id}" onclick="window.location.href='sale-admin-detail.html?id=${item.id}'">
+                                <button style="margin-left: 5px;"  class="btn btn-danger btn-sm delete-button ml-2" data-id="${item.id}"><i class="fas fa-trash-alt"></i></button>
+                                <button style="margin-left: 5px;" class="btn btn-info btn-sm view-button ml-2" data-id="${item.id}" onclick="window.location.href='sale-admin-detail.html?id=${item.id}'">
                                     <i class="fas fa-eye"></i>
                                 </button>
+                                <button style="margin-left: 5px;" class="btn btn-success btn-sm mail-button" data-id="${item.id}"><i class="fas fa-envelope"></i></button>
                             </div>
                         </td>
                     </tr>`;
@@ -400,18 +416,24 @@
                 alert("Vui lòng chọn một hình minh họa.");
                 return;
             }
-    
+
+            const fileName = illustrationFile.name;
+
+            const selectedCustomerTypeIds = $('#customerTypeSelect').val(); 
+            const selectedProductIds = $('#productIds').val(); 
+
+
             const saleEvent = {
                 name: $('#name').val().trim(),
                 description: $('#description').val().trim(),
-                illustration: illustrationFile.name,
+                illustration: fileName,
                 discount: parseFloat($('#discount').val()) / 100,
                 startDate: $('#startDate').val(),
                 endDate: $('#endDate').val(),
-                customerTypeIds: $('#customerTypeSelect').val(),
-                productIds: $('#productIds').val()
+                customerTypeIds: selectedCustomerTypeIds,
+                productIds: selectedProductIds
             };
-    
+
             if (!saleEvent.customerTypeIds.length) {
                 alert("Vui lòng chọn loại khách hàng.");
                 return;
@@ -420,7 +442,36 @@
                 alert("Vui lòng chọn ít nhất một sản phẩm.");
                 return;
             }
-    
+            const name = document.getElementById('name').value.trim(); // Loại bỏ khoảng trắng đầu và cuối
+
+            if (name.length === 0) {
+                alert("Vui lòng nhập tên chương trình giảm giá.");
+                return;
+            }
+
+            const description = document.getElementById('description').value.trim(); // Loại bỏ khoảng trắng đầu và cuối
+
+            if (description.length === 0) {
+                alert("Vui lòng nhập mô tả chương trình giảm giá.");
+                return;
+            }
+            const startDate = new Date(document.getElementById('startDate').value);
+            const endDate = new Date(document.getElementById('endDate').value);
+            if(endDate<=startDate){
+                alert("Vui lòng chọn thời gian khuyến mãi hợp lệ: ngày bắt đầu nhỏ hơn ngày kết thúc");
+                return;
+            }
+
+            const discountInput = $('#discount').val().trim(); // Lấy giá trị của trường discount và loại bỏ khoảng trắng đầu cuối
+            const discount = parseFloat(discountInput);
+
+            if (!discountInput) {
+                alert("Vui lòng nhập mức giảm giá.");
+                return;
+            } else if (isNaN(discount) || discount < 0 || discount > 100) {
+                alert("Vui lòng nhập mức giảm giá hợp lệ trong khoảng từ 0 đến 100.");
+                return;
+            }
             $.ajax({
                 url: 'https://localhost:7060/api/Sales',
                 method: 'POST',
@@ -429,15 +480,50 @@
                 data: JSON.stringify(saleEvent),
                 success: function () {
                     alert("Chương trình giảm giá đã được thêm thành công!");
+                    $('#addSaleEventForm')[0].reset(); // Reset tất cả các input, textarea
+                    $('#customerTypeSelect').val(null).trigger('change'); // Reset multiple select
+                    $('#productIds').val(null).trigger('change'); // Reset multiple select khác
+                    $('#currentIllustration1').attr('src', '../Images/default-image.jpg'); // Reset hình ảnh minh họa nếu có
                     $('#addSaleEventModal').modal('hide');
-                    $('#addSaleEventForm')[0].reset(); 
-                    $('#currentIllustration1').attr('src', '../Images/default-image.jpg'); 
                     loadSaleEvents();
+                    
                 },
-                error: handleError("Có lỗi xảy ra khi thêm chương trình giảm giá.")
+                error: function (xhr) {
+                    console.error("Có lỗi xảy ra:", xhr.responseText);
+                    alert("Có lỗi xảy ra: " + xhr.responseText);
+                }
             });
         });
-    
+    //gửi mail
+    $(document).on('click', '.mail-button', function () {
+        const id = $(this).data('id');
+        
+        Swal.fire({
+            title: 'Xác nhận',
+            text: 'Bạn muốn gửi mail thông báo chương trình giảm giá đến khách hàng?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Gửi',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: `https://localhost:7060/api/Sales/${id}/notify-mail`,
+                    method: 'POST',
+                    headers: { Authorization: `Bearer ${accessToken}` },
+                    success: function(response) {
+                        Swal.fire('Thành công!', 'Mail đã được gửi thành công!', 'success');
+                    },
+                    error: function(error) {
+                        Swal.fire('Lỗi!', 'Có lỗi xảy ra khi gửi mail!', 'error');
+                    }
+                });
+            }
+        });
+    });
+
+
+        // Chỉnh sửa chương trình giảm giá
         $(document).on('click', '.edit-button', function () {
             const id = $(this).data('id');
             $.ajax({
