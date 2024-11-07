@@ -512,11 +512,9 @@
                     method: 'POST',
                     headers: { Authorization: `Bearer ${accessToken}` },
                     success: function(response) {
-                        // Thực hiện gì đó sau khi gửi mail thành công (nếu cần)
                         Swal.fire('Thành công!', 'Mail đã được gửi thành công!', 'success');
                     },
                     error: function(error) {
-                        // Xử lý lỗi nếu có
                         Swal.fire('Lỗi!', 'Có lỗi xảy ra khi gửi mail!', 'error');
                     }
                 });
