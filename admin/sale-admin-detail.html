@@ -4,31 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chi Tiết Chương Trình Giảm Giá</title>
-    <!-- Bootstrap CSS -->
-    <!-- Bootstrap CSS -->
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     
    <!-- Font Awesome -->
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0-beta3/css/all.min.css">
+   <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0-beta3/css/all.min.css"> -->
    <!-- Bootstrap JS -->
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- giao diện -->
-   <link href="../css/style-shop-dashboard.css" rel="stylesheet" />
+    <link href="../css/style_shop_dashboard.css" rel="stylesheet" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
     <link rel="icon" href="../Logo/icon.png" type="image/x-icon" />
-    <script
-      src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous" ></script>
     <!-- giao diện -->
   
     <!-- Bootstrap JS CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.2/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../css/style_index.css" />
     <style>
@@ -61,52 +55,7 @@
 </head>
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand ">
-        <ul class="navbar-nav ms-auto me-3 me-lg-4">
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle d-flex align-items-center gap-2"
-              id="navbarDropdown"
-              href="#"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <div class="profile-info d-flex align-items-center" id="avatar">
-               
-              </div>
-            </a>
-            <ul
-              class="dropdown-menu dropdown-menu-end shadow-sm"
-              aria-labelledby="navbarDropdown"
-              style="min-width: 200px"
-            >
-              <li class="d-flex align-items-center p-2">
-                <img
-                  src="../Images/avatar/no-avatar.jpg"
-                  class="rounded-circle me-2"
-                  width="32"
-                  height="32"
-                  alt="Profile picture"
-                />
-                <div class="ms-2">
-                  <div class="name">Hizrian</div>
-                  <div class="email text-muted small">hello@example.com</div>
-                </div>
-              </li>
-  
-              <li><hr class="dropdown-divider" /></li>
-              <li>
-                <a class="dropdown-item" href="#!" style="display: inline-block">
-                  Đăng xuất
-                  <i
-                    class="fa-solid fa-arrow-right-from-bracket"
-                    style="margin-left: 5px"
-                  ></i>
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
+        
       </nav>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
@@ -137,7 +86,7 @@
 
                         <h1 class="text-center p-3" style="background-color: #001f3f; color: #ffffff;">Thông tin chi tiết chương trình giảm giá</h1>
                        
-                        <div class="row">
+                        <div class="row mt-4">
                                 <div class="col-md-5 ms-1" id="viewImage"> </div>
                                 <div class="col-md-6">
                                     <h3 id="viewName" class="mb-3"></h3>
@@ -145,9 +94,9 @@
                                 </div>
                         </div>
                         
-                    </section>
+                    </section >
                     
-                    <section>
+                    <section style="margin-top: 60px;">
                     <div class="container">
                         <div class="d-flex justify-content-center p-2" style="background-color: #3a6d8c; color: #ffffff;"><h3>Danh sách các sản phẩm áp dụng trong chương trình</h3></div>
                         <table class="table table-bordered text-center" id="productList">
@@ -170,17 +119,18 @@
                             <button id="addProductsBtn" class="btn btn-auth">Thêm sản phẩm</button>
                         </div>
                         <div id="availableProductList" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg " role="document">
-                                <div class="modal-content ">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Sản phẩm có sẵn</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
+                            <div class="modal-dialog modal-lg " role="document" >
+                                <div class="modal-header" style="background-color: #3a6d8c; color: white;">
+                                    <h5 class="modal-title" style="color: white;">Sản phẩm có sẵn</h5>
+                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" style="background-color: #3a6d8c;color: white; border: 0px;">
+                                        <span aria-hidden="true" data-bs-dismiss="modal" >&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-content " style="border-bottom: 0px; border-radius: 0px ;">
+                                    
                                     <div class="modal-body">
                                         <table class="table table-bordered" id="productTable">
-                                            <thead class="thead-light text-center">
+                                            <thead class="thead-light text-center" style="background-color: #ead8b1;">
                                                 <tr>
                                                     <th>STT</th>
                                                     <th>Hình</th>
@@ -192,15 +142,10 @@
                                             <tbody id="productTableBody" class="mt-2" style="background-color: #f7f5f2;"></tbody>
                                         </table>
                                          <!-- Phân trang -->
-                                        <nav aria-label="Page navigation">
-                                            <ul class="pagination justify-content-center" id="pagination">
-                                                <li class="page-item"><a class="page-link" href="#" id="prevPage">«</a></li>
-                                                <li class="page-item"><a class="page-link" href="#" id="nextPage">»</a></li>
-                                            </ul>
-                                        </nav>
+                                         <div id="availableProductPagination" class="d-flex justify-content-center"></div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                                         <button id="submitSelectedProducts" type="button" class="btn btn-auth">Thêm sản phẩm đã chọn</button>
                                     </div>
                                 </div>
@@ -209,7 +154,7 @@
                     </div>
                     
                     </section>
-                    <section>
+                    <section style="margin-top: 60px;">
                         <div class="container mt-2">
                             <div class="d-flex justify-content-center p-2" style="background-color: #3a6d8c; color: #ffffff;">
                                 <h3>Danh sách loại khách hàng áp dụng trong chương trình</h3>
@@ -235,16 +180,17 @@
                             
                             <div id="availableCustomerTypeList" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="customerTypeModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Loại khách hàng có sẵn</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
+                                    <div class="modal-header" style="background-color: #3a6d8c; color: white;">
+                                        <h5 class="modal-title" style="color: white;">Loại khách hàng có sẵn</h5>
+                                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" style="background-color: #3a6d8c; color: white; border: 0px;">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-content" style="border-bottom: 0px; border-radius: 0px ;" >
+                                        
                                         <div class="modal-body">
                                             <table class="table table-bordered" id="customerTypeTable">
-                                                <thead class="thead-light text-center">
+                                                <thead class="text-center" style="background-color: #EAD8B1;">
                                                     <tr>
                                                         <th>STT</th>
                                                         <th>Tên loại khách hàng</th>
@@ -256,7 +202,7 @@
                                             </table>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                                             <button id="submitSelectedCustomerTypes" type="button" class="btn btn-auth">Thêm loại khách hàng đã chọn</button>
                                         </div>
                                     </div>
@@ -274,198 +220,173 @@
    
 
 <!-- JavaScript -->
+
 <script>
+    
     const saleEventId = new URLSearchParams(window.location.search).get('id'); 
     $(document).ready(function () {
+        
         const accessToken = localStorage.getItem("token");
-        const avatar = $("#avatar");
-        avatar.append(`<img src="../Images/avatar/${localStorage.getItem("avatar")}" class="rounded-circle" width="32" height="32" />`);
+        if (!accessToken) {
+            alert("Không tìm thấy token, vui lòng đăng nhập lại.");
+            return window.location.href = "../login.html";
+        }
+        
         let discount = 1;
-        let products = []; // Khai báo biến sản phẩm
-        let customerTypes = []; // Khai báo biến loại khách hàng
+        let products = []; 
+        let customerTypes = []; 
 
-        // Xem chi tiết chương trình giảm giá
-        $.ajax({
-            url: `https://localhost:7060/api/Sales/${saleEventId}`,
-            method: 'GET',
-            headers: {
-                Authorization: `Bearer ${accessToken}`
-            },
-            success: function(response) {
+        function fetchData(url, successCallback) {
+            $.ajax({
+                url,
+                method: 'GET',
+                headers: { Authorization: `Bearer ${accessToken}` },
+                success: successCallback,
+                error: function() { alert('Lỗi khi lấy dữ liệu.'); }
+            });
+        }
+
+        function fetchSaleEventDetails() {
+            fetchData(`https://localhost:7060/api/Sales/${saleEventId}`, function(response) {
                 $('#viewName').text("Chương trình giảm giá " + response.name);
-                const viewImage = $("#viewImage");
-                viewImage.append(`<img src="../Images/${response.illustration}" height="350px" width="350px">`);
-                const viewSaleDetail = $("#viewSaleDetail");
-                viewSaleDetail.append(`
-                    <p><b>Chương trình: </b>giảm ${response.discount * 100} % cho tất cả sản phẩm có trong chương trình</p>
+                $('#viewImage').html(`<img src="../Images/${response.illustration}" height="350px" width="350px">`);
+                $('#viewSaleDetail').html(`
+                    <p><b>Chương trình: </b>giảm ${response.discount * 100}% cho tất cả sản phẩm</p>
                     <p><b>Thời gian: </b>từ ${new Date(response.startDate).toLocaleString("vi-VN")} <b>đến</b> ${new Date(response.endDate).toLocaleString("vi-VN")}</p>
                     <p><b>Mô tả: </b>${response.description}</p>
                 `);
-                discount = response.discount * discount;
-                products = response.products; // Lưu trữ sản phẩm
-                customerTypes = response.customerTypes; // Lưu trữ loại khách hàng
-                // Cập nhật danh sách sản phẩm và loại khách hàng
-                updateProductList(products);
-                displayCustomerTypes(customerTypes); 
-            },
-            error: function () {
-                alert('Lỗi khi lấy thông tin chương trình giảm giá.');
-            }
-        });
-
-        const productsPerPage = 5; // Số sản phẩm mỗi trang
+                discount = response.discount;
+                products = response.products; 
+                customerTypes = response.customerTypes; 
+                updateProductList();
+                displayCustomerTypes();
+            });
+        }
+        
+        const productsPerPage = 5; 
         let currentProductPage = 1;
         let currentCustomerPage = 1;
+        let currentAvailableProductPage = 1;
 
-        function updateProductList(products) {
+        function updateProductList() {
             $('#productItems').empty();
             const totalPages = Math.ceil(products.length / productsPerPage);
             const paginatedProducts = products.slice((currentProductPage - 1) * productsPerPage, currentProductPage * productsPerPage);
             
-            if (Array.isArray(products) && products.length > 0) {
-                let a = (currentProductPage - 1) * productsPerPage + 1; // Đánh số lại từ đầu trang
-                paginatedProducts.forEach(function(product) {
+            if (paginatedProducts.length > 0) {
+                paginatedProducts.forEach((product, index) => {
                     $('#productItems').append(`
                         <tr>
-                            <td>${a++}</td>
+                            <td>${(currentProductPage - 1) * productsPerPage + index + 1}</td>
                             <td><img src="../Images/${product.images[0]?.path || 'default-image.jpg'}" width="50px" height="50px" /></td>
                             <td>${product.name}</td>
                             <td>${product.quantity}</td>
                             <td>${(product.price * 1000).toLocaleString('vi-VN')} VND</td>
                             <td>${(Math.round(product.price - product.price * discount) * 1000).toLocaleString('vi-VN')} VND</td>
-                            <td>
-                                <button class="btn btn-danger delete-product" data-id="${product.id}">Xóa</button>
-                            </td>
+                            <td><button class="btn btn-danger delete-product" data-id="${product.id}">Xóa</button></td>
                         </tr>
                     `);
                 });
             } else {
                 $('#productItems').append('<tr><td colspan="7">Không có sản phẩm nào.</td></tr>');
             }
-            
             renderPagination('product', totalPages);
         }
 
-        function displayCustomerTypes(customerTypes) {
-            const customerTypesTableBody = $('#customerTypes');
-            customerTypesTableBody.empty();
+        function displayCustomerTypes() {
+            $('#customerTypes').empty();
             const totalPages = Math.ceil(customerTypes.length / productsPerPage);
             const paginatedCustomerTypes = customerTypes.slice((currentCustomerPage - 1) * productsPerPage, currentCustomerPage * productsPerPage);
             
             paginatedCustomerTypes.forEach((type, index) => {
-                customerTypesTableBody.append(`
+                $('#customerTypes').append(`
                     <tr>
-                        <td>${(currentCustomerPage - 1) * productsPerPage + (index + 1)}</td>
+                        <td>${(currentCustomerPage - 1) * productsPerPage + index + 1}</td>
                         <td>${type.name}</td>
                         <td>${type.description}</td>
-                        <td>
-                            <button class="btn btn-danger remove-customer-type" data-id="${type.id}">Xóa</button>
-                        </td>
+                        <td><button class="btn btn-danger remove-customer-type" data-id="${type.id}">Xóa</button></td>
                     </tr>
                 `);
             });
-            
             renderPagination('customerType', totalPages);
         }
 
         function renderPagination(type, totalPages) {
-            const paginationContainer = (type === 'product') ? $('#productPagination') : $('#customerTypePagination');
-            paginationContainer.empty();
+            const paginationContainer = (type === 'product') ? $('#productPagination')
+                : (type === 'customerType') ? $('#customerTypePagination') : $('#availableProductPagination');
 
+            paginationContainer.empty();
             for (let i = 1; i <= totalPages; i++) {
                 const pageButton = $('<button>')
                     .addClass('btn btn-auth mx-1')
-                    .text("Trang "+i)
+                    .text("Trang " + i)
                     .click(() => {
                         if (type === 'product') {
                             currentProductPage = i;
-                            updateProductList(products); // Sử dụng biến products đã lưu
-                        } else {
+                            updateProductList();
+                        } else if (type === 'customerType') {
                             currentCustomerPage = i;
-                            displayCustomerTypes(customerTypes); // Sử dụng biến customerTypes đã lưu
+                            updateCustomerTypeList();
+                        } else {
+                            currentAvailableProductPage = i;
+                            updateAvailableProductList();
                         }
                     });
                 paginationContainer.append(pageButton);
             }
         }
 
-        // Hàm xóa sản phẩm
-        $(document).on('click', '.delete-product', function () {
-            const productId = $(this).data('id'); 
-            if (confirm('Bạn có chắc muốn xóa sản phẩm này không?')) {
+        function handleDelete(url, successMessage) {
+            if (confirm('Bạn có chắc chắn?')) {
                 $.ajax({
-                    url: `https://localhost:7060/api/Sales/${saleEventId}/products/${productId}`,
+                    url,
                     method: 'DELETE',
-                    headers: {
-                        Authorization: `Bearer ${accessToken}`
-                    },
+                    headers: { Authorization: `Bearer ${accessToken}` },
                     success: function () {
-                        alert('Sản phẩm đã được xóa thành công.');
-                        // Cập nhật lại danh sách sản phẩm sau khi xóa
-                        updateProductList(products.filter(product => product.id !== productId));
+                        alert(successMessage);
+                        fetchSaleEventDetails();
                     },
-                    error: function (jqXHR) {
-                        if (jqXHR.status === 404) {
-                            alert('Sản phẩm không tồn tại trong chương trình giảm giá này.');
-                        } else {
-                            alert('Lỗi khi xóa sản phẩm.');
-                        }
-                    }
+                    error: function () { alert('Lỗi khi xóa.'); }
                 });
             }
+        }
+
+        $(document).on('click', '.delete-product', function () {
+            handleDelete(`https://localhost:7060/api/Sales/${saleEventId}/products/${$(this).data('id')}`, 'Sản phẩm đã được xóa thành công.');
         });
 
-        // Thêm sản phẩm
-        $('#addProductsBtn').on('click', function() {
-            $.ajax({
-                url: `https://localhost:7060/api/Products`,
-                method: 'GET',
-                headers: {
-                    Authorization: `Bearer ${accessToken}`
-                },
-                success: function(response) {
-                    const products = Array.isArray(response.data) ? response.data : []; // Đảm bảo response.data là một mảng
-                    const existingProductIds = $('#productItems').find('.delete-product').map(function() {
-                        return $(this).data('id');
-                    }).get();
+        $(document).on('click', '.remove-customer-type', function () {
+            handleDelete(`https://localhost:7060/api/Sales/${saleEventId}/customer-types/${$(this).data('id')}`, 'Loại khách hàng đã được xóa thành công.');
+        });
 
-                    // Lọc sản phẩm chưa có trong chương trình giảm giá
-                    const availableProducts = products.filter(product => !existingProductIds.includes(product.id));
-                    displayAvailableProducts(availableProducts);
-                },
-                error: function() {
-                    alert('Lỗi khi lấy danh sách sản phẩm.');
-                }
+        $('#addProductsBtn').on('click', function() {
+            fetchData('https://localhost:7060/api/Products?Pagination=false', function(response) {
+                const availableProducts = response.data.filter(p => !products.some(prod => prod.id === p.id));
+                displayAvailableProducts(availableProducts);
             });
         });
 
-        // Hàm để hiển thị danh sách sản phẩm có sẵn để thêm
         function displayAvailableProducts(products) {
-            const productTableBody = $('#productTableBody');
-            productTableBody.empty(); // Xóa nội dung trước đó
+            const productTableBody = $('#productTableBody').empty();
+            const totalPages = Math.ceil(productTableBody.length / 4);
 
-            if (products.length > 0) {
-                let i = 1;
-                products.forEach(product => {
+            products.length > 0 
+                ? products.forEach((product, i) => {
                     const firstImage = product.images?.[0]?.path || 'default-image.jpg';
                     productTableBody.append(`
                         <tr>
-                            <td>${i++}</td>
+                            <td>${i + 1}</td>
                             <td><img src="../Images/${firstImage}" alt="${product.name}" height="50px" width="70px"/></td>
                             <td>${product.name}</td>
                             <td>${(product.price * 1000).toLocaleString('vi-VN')} VND</td>
                             <td><input type="checkbox" class="select-product" data-id="${product.id}"></td>
                         </tr>
                     `);
-                });
-            } else {
-                productTableBody.append('<tr><td colspan="5">Không có sản phẩm nào có sẵn.</td></tr>');
-            }
-
-            $('#availableProductList').modal('show'); // Hiện modal chứa danh sách sản phẩm có sẵn
+                })
+                : productTableBody.append('<tr><td colspan="5">Không có sản phẩm nào có sẵn.</td></tr>');
+            $('#availableProductList').modal('show');
         }
 
-        // Xử lý khi nhấn nút thêm sản phẩm đã chọn
         $('#submitSelectedProducts').on('click', function() {
             const selectedProductIds = $('.select-product:checked').map(function() {
                 return $(this).data('id');
@@ -475,97 +396,42 @@
                 $.ajax({
                     url: `https://localhost:7060/api/Sales/${saleEventId}/products`,
                     method: 'POST',
-                    headers: {
-                        Authorization: `Bearer ${accessToken}`,
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
                     data: JSON.stringify(selectedProductIds),
                     success: function() {
                         alert('Thêm sản phẩm thành công.');
                         $('#availableProductList').modal('hide');
-                        // Cập nhật lại danh sách sản phẩm
-                        updateProductList(products);
+                        fetchSaleEventDetails();
                     },
-                    error: function() {
-                        alert('Lỗi khi thêm sản phẩm vào chương trình giảm giá.');
-                    }
+                    error: function() { alert('Lỗi khi thêm sản phẩm vào chương trình giảm giá.'); }
                 });
             } else {
                 alert('Vui lòng chọn ít nhất một sản phẩm để thêm.');
             }
         });
 
-        // Xóa loại khách hàng
-        $(document).on('click', '.remove-customer-type', function () {
-            const customerTypeId = $(this).data('id');
-            if (confirm('Bạn có chắc muốn xóa loại khách hàng này không?')) {
-                $.ajax({
-                    url: `https://localhost:7060/api/Sales/${saleEventId}/customer-types/${customerTypeId}`,
-                    method: 'DELETE',
-                    headers: {
-                        Authorization: `Bearer ${accessToken}`
-                    },
-                    success: function () {
-                        alert('Loại khách hàng đã được xóa thành công.');
-                        // Cập nhật lại danh sách loại khách hàng sau khi xóa
-                        displayCustomerTypes(customerTypes.filter(type => type.id !== customerTypeId));
-                    },
-                    error: function () {
-                        alert('Lỗi khi xóa loại khách hàng.');
-                    }
-                });
-            }
-        });
-
-        // Thêm loại khách hàng
         $('#addCustomerTypesBtn').on('click', function() {
-            $.ajax({
-                url: `https://localhost:7060/api/CustomerTypes`,
-                method: 'GET',
-                headers: {
-                    Authorization: `Bearer ${accessToken}`
-                },
-                success: function(response) {
-                    const customerTypes = Array.isArray(response.data) ? response.data : []; // Đảm bảo response.data là một mảng
-                    const existingCustomerTypeIds = $('#customerTypes').find('.remove-customer-type').map(function() {
-                        return $(this).data('id');
-                    }).get();
-
-                    // Lọc loại khách hàng chưa có trong chương trình giảm giá
-                    const availableCustomerTypes = response.filter(type => !existingCustomerTypeIds.includes(type.id));
-                    displayAvailableCustomerTypes(availableCustomerTypes);
-                },
-                error: function() {
-                    alert('Lỗi khi lấy danh sách loại khách hàng.');
-                }
+            fetchData('https://localhost:7060/api/CustomerTypes', function(response) {
+                const availableCustomerTypes = response.filter(type => !customerTypes.some(t => t.id === type.id));
+                displayAvailableCustomerTypes(availableCustomerTypes);
             });
         });
 
-        // Hàm để hiển thị danh sách loại khách hàng có sẵn để thêm
-        function displayAvailableCustomerTypes(customerTypes) {
-            const customerTypeTableBody = $('#customerTypeTableBody');
-            customerTypeTableBody.empty(); // Xóa nội dung trước đó
-
-            if (customerTypes.length > 0) {
-                let i = 1;
-                customerTypes.forEach(type => {
-                    customerTypeTableBody.append(`
-                        <tr>
-                            <td>${i++}</td>
-                            <td>${type.name}</td>
-                            <td>${type.description}</td>
-                            <td><input type="checkbox" class="select-customer-type" data-id="${type.id}"></td>
-                        </tr>
-                    `);
-                });
-            } else {
-                customerTypeTableBody.append('<tr><td colspan="4">Không có loại khách hàng nào có sẵn.</td></tr>');
-            }
-
-            $('#availableCustomerTypeList').modal('show'); // Hiện modal chứa danh sách loại khách hàng có sẵn
+        function displayAvailableCustomerTypes(types) {
+            const customerTypeTableBody = $('#customerTypeTableBody').empty();
+            types.length > 0
+                ? types.forEach((type, i) => customerTypeTableBody.append(`
+                    <tr>
+                        <td>${i + 1}</td>
+                        <td>${type.name}</td>
+                        <td>${type.description}</td>
+                        <td><input type="checkbox" class="select-customer-type" data-id="${type.id}"></td>
+                    </tr>
+                `))
+                : customerTypeTableBody.append('<tr><td colspan="4">Không có loại khách hàng nào có sẵn.</td></tr>');
+            $('#availableCustomerTypeList').modal('show');
         }
 
-        // Xử lý khi nhấn nút thêm loại khách hàng đã chọn
         $('#submitSelectedCustomerTypes').on('click', function() {
             const selectedCustomerTypeIds = $('.select-customer-type:checked').map(function() {
                 return $(this).data('id');
@@ -575,33 +441,77 @@
                 $.ajax({
                     url: `https://localhost:7060/api/Sales/${saleEventId}/customer-types`,
                     method: 'POST',
-                    headers: {
-                        Authorization: `Bearer ${accessToken}`,
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
                     data: JSON.stringify(selectedCustomerTypeIds),
                     success: function() {
                         alert('Thêm loại khách hàng thành công.');
                         $('#availableCustomerTypeList').modal('hide');
-                        // Cập nhật lại danh sách loại khách hàng
-                        displayCustomerTypes(customerTypes);
-
+                        fetchSaleEventDetails();
                     },
-                    error: function() {
-                        alert('Lỗi khi thêm loại khách hàng vào chương trình giảm giá.');
-                    }
+                    error: function() { alert('Lỗi khi thêm loại khách hàng vào chương trình giảm giá.'); }
                 });
             } else {
                 alert('Vui lòng chọn ít nhất một loại khách hàng để thêm.');
             }
         });
+        fetchSaleEventDetails();
+        
     });
 </script>
 
 
 
+
 <script>
+    $(document).ready(function () {
+      $("#navbar-container").load(
+        "./fragments/navbar.html",
+        function (response, status, xhr) {
+          if (status === "success") {
+            // Đảm bảo rằng tất cả các phần tử đã được nạp trước khi thực hiện kiểm tra trạng thái
+            const token = localStorage.getItem("token");
+            const avatar = localStorage.getItem("avatar");
+
+            const userAvatar = document.getElementById("user-avatar");
+            const loginRegister = document.getElementById("login-register");
+            const logoutBtn = document.getElementById("logout-btn");
+            const orders = document.getElementById("order");
+
+
+            if (token && avatar) {
+              userAvatar.style.display = "block";
+              loginRegister.style.display = "none";
+              userAvatar.src = `./Images/avatar/${avatar}`;
+              logoutBtn.style.display = "block";
+              orders.style.display = "block";
+
+
+              logoutBtn.addEventListener("click", function () {
+                localStorage.removeItem("token");
+                localStorage.removeItem("avatar");
+                window.location.href = "/login.html";
+              });
+            } else {
+              userAvatar.style.display = "none";
+              logoutBtn.style.display = "none";
+              orders.style.display = "none";
+              loginRegister.style.display = "block";
+            }
+          } else {
+            console.error(
+              "Error loading navbar:",
+              xhr.status,
+              xhr.statusText
+            );
+          }
+        }
+      );
+    });
+  </script>
+ <!-- KHA AI -->
+ <script>
     $(document).ready(function() { 
+        //$('#navbar-container').load('./fragments/navbar.html', function(response, status, xhr) {});
         $('#footer-container').load('../fragments/footer_2.html', function(response, status, xhr) {});
     });
 
