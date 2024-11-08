@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm Địa Chỉ Mới</title>
+    <link  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"rel="stylesheet"/>
+    <link rel="icon" href="Logo/icon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./css/style_index.css" />
+    <script src="https://code.jquery.com/jquery-3.7.1.js" 
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="crossorigin="anonymous"></script>
+     <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container1 {
+            max-width: 600px;
+            margin-top: 50px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .h21 {
+            color: #0d6efd;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .form-group label {
+            font-weight: bold;
+            color: #333;
+        }
+        .btn-primary {
+            width: 100%;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js"
+    integrity="sha512-6sSYJqDreZRZGkJ3b+YfdhB3MzmuP9R7X1QZ6g5aIXhRvR1Y/N/P47jmnkENm7YL3oqsmI6AK+V6AD99uWDnIw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <div id="navbar-container"></div>
+
+    <div class="container container1">
+        <h2 class="h21"><i class="fas fa-map-marker-alt"></i> Thêm Địa Chỉ Mới</h2>
+        <form id="addAddressForm">
+            <div class="form-group mb-3">
+                <label for="houseNumber"><i class="fas fa-home"></i> Số nhà:</label>
+                <input type="text" id="houseNumber" class="form-control" placeholder="Nhập số nhà" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="street"><i class="fas fa-road"></i> Đường:</label>
+                <input type="text" id="street" class="form-control" placeholder="Nhập tên đường" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="ward"><i class="fas fa-map-pin"></i> Phường:</label>
+                <input type="text" id="ward" class="form-control" placeholder="Nhập phường" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="district"><i class="fas fa-city"></i> Quận:</label>
+                <input type="text" id="district" class="form-control" placeholder="Nhập quận" required>
+            </div>
+            <div class="form-group mb-4">
+                <label for="city"><i class="fas fa-globe"></i> Thành phố:</label>
+                <input type="text" id="city" class="form-control" placeholder="Nhập thành phố" required>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="addAddress()">
+                <i class="fas fa-save"></i> Lưu địa chỉ
+            </button>
+        </form>
+    </div>
+    <div id="footer-container"></div>
+
+    <script>
+        async function addAddress() {
+            const token = localStorage.getItem("token");
+            if (!token) {
+                alert("Bạn cần đăng nhập để thêm địa chỉ.");
+                return;
+            }
+
+            const houseNumber = document.getElementById("houseNumber").value;
+            const street = document.getElementById("street").value;
+            const ward = document.getElementById("ward").value;
+            const district = document.getElementById("district").value;
+            const city = document.getElementById("city").value;
+
+            try {
+                const response = await fetch("https://localhost:7060/api/Addresses", {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        houseNumber,
+                        street,
+                        ward,
+                        district,
+                        city
+                    })
+                });
+
+                if (response.ok) {
+                    alert("Thêm địa chỉ thành công.");
+                    window.location.href = "shopping_cart.html"; // Quay lại trang giỏ hàng sau khi thêm địa chỉ thành công
+                } else {
+                    alert("Có lỗi xảy ra khi thêm địa chỉ.");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Có lỗi xảy ra khi kết nối tới server.");
+            }
+        }
+    </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    $("#navbar-container").load(
+      "./fragments/navbar.html",
+      function (response, status, xhr) {
+        if (status === "success") {
+          // Đảm bảo rằng tất cả các phần tử đã được nạp trước khi thực hiện kiểm tra trạng thái
+          const token = localStorage.getItem("token");
+          const avatar = localStorage.getItem("avatar");
+
+          const userAvatar = document.getElementById("user-avatar");
+          const loginRegister = document.getElementById("login-register");
+          const logoutBtn = document.getElementById("logout-btn");
+          const orders = document.getElementById("order");
+
+          if (token && avatar) {
+            userAvatar.style.display = "block";
+            loginRegister.style.display = "none";
+            userAvatar.src = `./Images/avatar/${avatar}`;
+            logoutBtn.style.display = "block";
+            orders.style.display = "block";
+
+            logoutBtn.addEventListener("click", function () {
+              localStorage.removeItem("token");
+              localStorage.removeItem("avatar");
+              window.location.href = "/login.html";
+            });
+          } else {
+            userAvatar.style.display = "none";
+            logoutBtn.style.display = "none";
+            orders.style.display = "none";
+            loginRegister.style.display = "block";
+          }
+        } else {
+          console.error(
+            "Error loading navbar:",
+            xhr.status,
+            xhr.statusText
+          );
+        }
+      }
+    );
+  });
+</script>
+
+<!-- KHA AI -->
+<script>
+  $(document).ready(function () {
+    //$('#navbar-container').load('./fragments/navbar.html', function (response, status, xhr) { });
+    $("#footer-container").load(
+      "./fragments/footer.html",
+      function (response, status, xhr) {}
+    );
+  });
+</script>
+</body>
+</html>
