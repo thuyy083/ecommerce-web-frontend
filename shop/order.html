@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Quản lý đơn hàng</title>
+
+    <link href="../css/style_shop_dashboard.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="icon" href="../Logo/icon.png" type="image/x-icon" />
+    <script
+      src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Thêm jQuery từ CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- jQuery CDN -->
+
+    <!-- Bootstrap JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+      <ul class="navbar-nav ms-auto me-3 me-lg-4">
+        <li class="nav-item">
+          <div class="profile-info d-flex align-items-center">
+            <img
+              src="../Images/avatar/no-avatar.jpg"
+              class="rounded-circle me-2"
+              width="32"
+              height="32"
+              alt="Avatar"
+            />
+            <span class="text-white">Xin chào, [Tên người dùng]</span>
+          </div>
+        </li>
+
+        <li class="nav-item ms-3">
+          <button id="logoutBtn" class="btn custom-logout-btn">
+            Đăng xuất
+          </button>
+        </li>
+      </ul>
+    </nav>
+
+    <div id="layoutSidenav">
+      <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+          <div class="sb-sidenav-menu">
+            <div class="nav">
+              <div class="sb-sidenav-menu-heading text-center">
+                <img
+                  src="../Logo/Logo.png"
+                  alt="Logo"
+                  class="logo-img"
+                  style="width: 200px; height: 50px"
+                />
+              </div>
+              <hr />
+              <h5 class="text-center">SHOP CỦA TÔI</h5>
+              <a class="nav-link" href="dashboard.html">
+                <div class="sb-nav-link-icon">
+                  <i class="fas fa-tachometer-alt"></i>
+                </div>
+                Sản phẩm
+              </a>
+              <a class="nav-link" href="order.html">
+                <div class="sb-nav-link-icon">
+                  <i class="fas fa-tachometer-alt"></i>
+                </div>
+                Đơn hàng
+              </a>
+            </div>
+          </div>
+        </nav>
+      </div>
+
+      <div id="layoutSidenav_content">
+        <main>
+          <div class="container-fluid px-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h2 class="mt-4">QUẢN LÝ ĐƠN HÀNG</h2>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 mb-4">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label for="Status">Trạng thái đơn hàng</label>
+                        <select id="Status" class="form-select">
+                          <option value="">--</option>
+                          <option value="Processing">Đang xử lý</option>
+                          <option value="Shipping">Đang vận chuyển</option>
+                          <option value="Delivered">Đã giao</option>
+                          <option value="Cancelled">Đã hủy</option>
+                        </select>
+                      </div>
+                      <div class="col-md-3">
+                        <label for="PaymentStatus">Trạng thái thanh toán</label>
+                        <select id="PaymentStatus" class="form-select">
+                          <option value="">--</option>
+                          <option value="Pending">Chưa thanh toán</option>
+                          <option value="Completed">Đã thanh toán</option>
+                        </select>
+                      </div>
+                      <div class="col-md-2">
+                        <label for="Page">Trang</label>
+                        <input
+                          type="number"
+                          id="Page"
+                          class="form-control"
+                          placeholder="Page"
+                        />
+                      </div>
+                      <div class="col-md-2">
+                        <label for="SortBy">Sắp xếp theo</label>
+                        <select id="SortBy" class="form-control">
+                          <option value="id">ID</option>
+                          <option value="date">Ngày đặt</option>
+                          <!-- Bạn có thể thêm các trường khác ở đây nếu cần -->
+                        </select>
+                      </div>
+
+                      <div class="col-md-2">
+                        <label for="SortType">Kiểu sắp xếp</label>
+                        <select id="SortType" class="form-control">
+                          <option value="asc">Tăng dần</option>
+                          <option value="desc">Giảm dần</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Cột Danh sách đơn hàng -->
+              <div class="col-md-12">
+                <!-- Đổi từ col-md-9 thành col-md-12 để chiếm toàn bộ chiều rộng -->
+                <div class="card mb-4">
+                  <div
+                    class="card-header d-flex justify-content-between align-items-center"
+                  >
+                    <div class="d-flex align-items-center">
+                      <i class="fas fa-table me-1"></i>
+                      <span>Danh sách đơn hàng</span>
+                      <span class="ms-2 text-muted"
+                        >(Tổng cộng: <span id="totalOrdersCount">0</span> đơn
+                        hàng)</span
+                      >
+                    </div>
+                  </div>
+
+                  <div class="card-body">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th>Tổng tiền</th>
+                          <th>Trạng thái đơn hàng</th>
+                          <th>Trạng thái thanh toán</th>
+                          <th>Thời gian tạo</th>
+                          <th>Thao tác</th>
+                        </tr>
+                      </thead>
+                      <tbody id="productTableBody">
+                        <!-- Dữ liệu sẽ được chèn tại đây -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <ul class="pagination" id="paginationControls">
+                  <!-- Các trang sẽ được chèn tại đây bằng JavaScript -->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </main>
+        <footer id="footer-container"></footer>
+      </div>
+    </div>
+    <!-- Modal Chi Tiết Đơn Hàng -->
+    <div
+      class="modal fade"
+      id="orderDetailModal"
+      tabindex="-1"
+      aria-labelledby="orderDetailModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="orderDetailModalLabel">
+              Chi Tiết Đơn Hàng
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body" id="orderDetailContent">
+            <!-- Nội dung chi tiết đơn hàng sẽ được chèn vào đây -->
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Đóng
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Cập nhật Đơn hàng -->
+    <div
+      class="modal fade"
+      id="updateOrderModal"
+      tabindex="-1"
+      aria-labelledby="updateOrderModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="updateOrderModalLabel">
+              Cập nhật đơn hàng
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- Form cập nhật trạng thái đơn hàng và thanh toán -->
+            <form id="updateOrderForm">
+              <div class="mb-3">
+                <label for="updateOrderStatus" class="form-label"
+                  >Trạng thái đơn hàng</label
+                >
+                <select id="updateOrderStatus" class="form-select">
+                  <option value="Processing">Đang xử lý</option>
+                  <option value="Shipping">Đang vận chuyển</option>
+                  <option value="Delivered">Đã giao</option>
+                  <option value="Cancelled">Đã hủy</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="updatePaymentStatus" class="form-label"
+                  >Trạng thái thanh toán</label
+                >
+                <select id="updatePaymentStatus" class="form-select">
+                  <option value="Pending">Chưa thanh toán</option>
+                  <option value="Completed">Đã thanh toán</option>
+                </select>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Đóng
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="saveOrderUpdateBtn"
+            >
+              Lưu
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const accessToken = localStorage.getItem("token");
+      const shopId = sessionStorage.getItem("shopId");
+
+      $(document).ready(function () {
+        const logoutBtn = $("#logoutBtn");
+
+        // Đăng xuất
+        logoutBtn.on("click", function () {
+          localStorage.removeItem("token");
+          localStorage.removeItem("avatar");
+          window.location.href = "../login.html";
+        });
+
+        // Gọi API để lấy thông tin tài khoản
+        $.ajax({
+          url: "https://localhost:7060/api/Accounts",
+          type: "GET",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+          success: function (response) {
+            if (response && response.shop && response.shop.id) {
+              const shopId = response.shop.id;
+              const shopName = response.shop.name;
+              const avatar = response.avatar;
+              sessionStorage.setItem("shopId", shopId);
+
+              $(".text-white").text(`Xin chào, ${shopName}`);
+              $("img.rounded-circle").attr(
+                "src",
+                avatar
+                  ? `../Images/avatar/${avatar}`
+                  : "../Images/avatar/no-avatar.jpg"
+              );
+            } else {
+              console.error(
+                "Không tìm thấy thông tin shop trong dữ liệu tài khoản."
+              );
+            }
+          },
+          error: function (xhr) {
+            console.error("Lỗi khi gọi API:", xhr.responseText);
+          },
+        });
+        // Hàm gọi API và hiển thị dữ liệu đơn hàng với các bộ lọc
+        function fetchAndDisplayOrders(page = 1) {
+          const status = $("#Status").val();
+          const paymentStatus = $("#PaymentStatus").val();
+          const sortBy = $("#SortBy").val() || "id";
+          const sortType = $("#SortType").val() || "asc";
+
+          $.ajax({
+            url: `https://localhost:7060/api/Orders/shop`,
+            type: "GET",
+            data: {
+              status: status,
+              paymentStatus: paymentStatus,
+              page: page,
+              sortBy: sortBy,
+              sortType: sortType,
+            },
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+            success: function (response) {
+              const orders = response.data;
+              const totalPage = response.totalPage;
+              const tableBody = $("#productTableBody");
+              tableBody.empty();
+
+              // Hiển thị dữ liệu đơn hàng trong bảng
+              orders.forEach((order, index) => {
+                const orderStatusButton = getStatusButton(order.status);
+                const paymentStatusButton = getPaymentStatusButton(
+                  order.paymentStatus
+                );
+
+                const row = `<tr>
+       
+          <td class="text-custom-highlight"><strong style="color: #FF5733;">${(
+            order.total * 1000
+          ).toLocaleString()} VND</strong></td>
+          <td class="text-center">${orderStatusButton}</td>
+          <td class="text-center">${paymentStatusButton}</td>
+          <td>${new Date(order.createdAt).toLocaleString()}</td>
+          <td>
+            <button class="btn btn-primary btn-sm" onclick="viewOrderDetails(${
+              order.id
+            })">
+              <i class="fa-solid fa-eye"></i> Chi tiết
+            </button>
+            <button class="btn btn-info btn-sm" onclick="updateOrder(${
+              order.id
+            })">
+              <i class="fa-solid fa-pen"></i> Cập nhật
+            </button>
+          </td>
+        </tr>`;
+                tableBody.append(row);
+              });
+
+              // Thiết lập phân trang
+              setupPagination(totalPage, page);
+            },
+            error: function (error) {
+              console.error("Lỗi khi lấy đơn hàng:", error);
+            },
+          });
+        }
+
+        // Hàm thiết lập phân trang
+        function setupPagination(totalPage, currentPage) {
+          const paginationControls =
+            document.getElementById("paginationControls");
+          paginationControls.innerHTML = "";
+
+          // Nút Previous
+          const prevButton = document.createElement("li");
+          prevButton.className =
+            "page-item" + (currentPage === 1 ? " disabled" : "");
+          prevButton.innerHTML = `<a class="page-link" href="#" tabindex="-1">Trước</a>`;
+          prevButton.onclick = () => {
+            if (currentPage > 1) fetchAndDisplayOrders(currentPage - 1);
+          };
+          paginationControls.appendChild(prevButton);
+
+          // Tạo nút cho từng trang
+          for (let i = 1; i <= totalPage; i++) {
+            const pageItem = document.createElement("li");
+            pageItem.className =
+              "page-item" + (i === currentPage ? " active" : "");
+            pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+            pageItem.onclick = () => fetchAndDisplayOrders(i);
+            paginationControls.appendChild(pageItem);
+          }
+
+          // Nút Next
+          const nextButton = document.createElement("li");
+          nextButton.className =
+            "page-item" + (currentPage === totalPage ? " disabled" : "");
+          nextButton.innerHTML = `<a class="page-link" href="#">Sau</a>`;
+          nextButton.onclick = () => {
+            if (currentPage < totalPage) fetchAndDisplayOrders(currentPage + 1);
+          };
+          paginationControls.appendChild(nextButton);
+        }
+
+        // Lắng nghe sự kiện thay đổi trên tất cả các bộ lọc
+        $("#Page, #Status, #PaymentStatus, #SortBy, #SortType").on(
+          "change",
+          function () {
+            const page = parseInt($("#Page").val(), 10) || 1; // Lấy giá trị trang hoặc mặc định là 1 nếu không hợp lệ
+            fetchAndDisplayOrders(page); // Gọi hàm hiển thị dữ liệu đơn hàng với trang và các bộ lọc mới
+          }
+        );
+
+        // Các hàm hỗ trợ lấy trạng thái và thanh toán
+        function getStatusButton(status) {
+          let btnClass;
+          let statusText;
+
+          switch (status) {
+            case "Shipping":
+              statusText = "Đang vận chuyển";
+              btnClass = "btn-warning";
+              break;
+            case "Delivered":
+              statusText = "Đã giao";
+              btnClass = "btn-success";
+              break;
+            case "Processing":
+              statusText = "Đang xử lý";
+              btnClass = "btn-info";
+              break;
+            case "Cancelled":
+              statusText = "Đã hủy";
+              btnClass = "btn-danger";
+              break;
+            default:
+              statusText = "Chưa xác định";
+              btnClass = "btn-secondary";
+              break;
+          }
+
+          return `<span class="btn ${btnClass} btn-sm">${statusText}</span>`;
+        }
+
+        function getPaymentStatusButton(paymentStatus) {
+          let btnClass;
+          let paymentStatusText;
+
+          switch (paymentStatus) {
+            case "Pending":
+              paymentStatusText = "Chưa thanh toán";
+              btnClass = "btn-warning";
+              break;
+            case "Completed":
+              paymentStatusText = "Đã thanh toán";
+              btnClass = "btn-success";
+              break;
+            default:
+              paymentStatusText = "Chưa xác định";
+              btnClass = "btn-secondary";
+              break;
+          }
+
+          return `<span class="btn ${btnClass} btn-sm">${paymentStatusText}</span>`;
+        }
+
+        // Gọi hàm lấy dữ liệu khi trang được tải
+        fetchAndDisplayOrders();
+
+        // Hàm hiển thị chi tiết đơn hàng
+        window.viewOrderDetails = function (orderId) {
+          $.ajax({
+            url: `https://localhost:7060/api/Orders/${orderId}/shop`,
+            type: "GET",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+            success: function (orderDetails) {
+              const orderStatusText = getOrderStatusText(orderDetails.status);
+              const paymentStatusText = getPaymentStatusText(
+                orderDetails.paymentStatus
+              );
+
+              const orderContent = `
+                  <p><strong>Mã đơn hàng:</strong> ${orderDetails.id}</p>
+                  <p><strong>Trạng thái:</strong> ${orderStatusText}</p>
+                  <p><strong>Trạng thái thanh toán:</strong> ${paymentStatusText}</p>
+                  <p><strong>Tổng tiền:</strong> ${(
+                    orderDetails.total * 1000
+                  ).toLocaleString()} VND</p>
+                  <p><strong>Thời gian tạo:</strong> ${new Date(
+                    orderDetails.createdAt
+                  ).toLocaleString()}</p>
+                  <p><strong>Địa chỉ giao hàng:</strong> ${
+                    orderDetails.address.addressDetail
+                  }</p>
+                  <h6>Chi tiết sản phẩm:</h6>
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Ảnh sản phẩm</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Số lượng</th>
+                        <th>Giá đơn vị (VND)</th>
+                        <th>Thành tiền (VND)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      ${orderDetails.detailOrders
+                        .map(
+                          (detail, index) => ` 
+                        <tr>
+                          <td>${index + 1}</td>
+                          <td style="text-align: center;">
+                            <img src="../Images/${
+                              detail.product.images[0]?.path || "no-image.jpg"
+                            }" alt="Ảnh sản phẩm" style="width: 50px; height: 50px;">
+                          </td>
+                          <td>${detail.product.name}</td>
+                          <td>${detail.quantity}</td>
+                          <td>${(detail.unitPrice * 1000).toLocaleString()}</td>
+                          <td>${(
+                            detail.unitPrice *
+                            detail.quantity *
+                            1000
+                          ).toLocaleString()}</td>
+                        </tr>
+                      `
+                        )
+                        .join("")}
+                    </tbody>
+                  </table>
+                  <p style="text-align: right;"><strong>Tổng cộng:</strong> ${(
+                    orderDetails.total * 1000
+                  ).toLocaleString()} VND</p>
+                `;
+
+              $("#orderDetailContent").html(orderContent);
+              $("#orderDetailModal").modal("show");
+            },
+            error: function (error) {
+              console.error("Lỗi khi lấy chi tiết đơn hàng:", error);
+            },
+          });
+        };
+
+        // Chuyển trạng thái đơn hàng và thanh toán sang tiếng Việt
+        function getOrderStatusText(status) {
+          switch (status) {
+            case "Shipping":
+              return "Đang vận chuyển";
+            case "Delivered":
+              return "Đã giao";
+            case "Processing":
+              return "Đang xử lý";
+            case "Cancelled":
+              return "Đã hủy";
+            default:
+              return "Chưa xác định";
+          }
+        }
+
+        function getPaymentStatusText(paymentStatus) {
+          switch (paymentStatus) {
+            case "Pending":
+              return "Chưa thanh toán";
+            case "Completed":
+              return "Đã thanh toán";
+            default:
+              return "Chưa xác định";
+          }
+        }
+
+        // Hàm cập nhật trạng thái đơn hàng
+        window.updateOrder = function (orderId) {
+          // Lấy thông tin đơn hàng từ API
+          $.ajax({
+            url: `https://localhost:7060/api/Orders/${orderId}/shop`,
+            type: "GET",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+            success: function (orderDetails) {
+              // Điền thông tin vào modal
+              $("#updateOrderStatus").val(orderDetails.status);
+              $("#updatePaymentStatus").val(orderDetails.paymentStatus);
+
+              // Hiển thị modal
+              $("#updateOrderModal").modal("show");
+
+              // Xử lý khi nhấn "Lưu"
+              $("#saveOrderUpdateBtn")
+                .off("click")
+                .on("click", function () {
+                  const updatedStatus = $("#updateOrderStatus").val();
+                  const updatedPaymentStatus = $("#updatePaymentStatus").val();
+
+                  // Dữ liệu gửi lên API
+                  const dataToUpdate = {};
+                  if (updatedStatus) dataToUpdate.status = updatedStatus;
+                  if (updatedPaymentStatus)
+                    dataToUpdate.paymentStatus = updatedPaymentStatus;
+
+                  // Gửi yêu cầu cập nhật dữ liệu lên API
+                  $.ajax({
+                    url: `https://localhost:7060/api/Orders/${orderId}/shop`,
+                    type: "PUT",
+                    headers: {
+                      Authorization: `Bearer ${accessToken}`,
+                    },
+                    contentType: "application/json",
+                    data: JSON.stringify(dataToUpdate),
+                    success: function (response) {
+                      alert("Cập nhật đơn hàng thành công");
+                      $("#updateOrderModal").modal("hide");
+                      fetchAndDisplayOrders(); // Cập nhật lại danh sách đơn hàng sau khi thay đổi
+                    },
+                    error: function (error) {
+                      console.error("Lỗi khi cập nhật đơn hàng:", error);
+                      alert("Cập nhật đơn hàng thất bại");
+                    },
+                  });
+                });
+            },
+            error: function (error) {
+              console.error("Lỗi khi lấy thông tin đơn hàng:", error);
+            },
+          });
+        };
+      });
+    </script>
+
+    <script>
+      $(document).ready(function () {
+        $("#footer-container").load("../fragments/footer_2.html");
+      });
+    </script>
+  </body>
+</html>
