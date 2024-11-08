@@ -67,11 +67,17 @@
               </div>
               <hr />
               <h5 class="text-center">SHOP CỦA TÔI</h5>
-              <a class="nav-link" href="dashboard1.html">
+              <a class="nav-link" href="dashboard.html">
                 <div class="sb-nav-link-icon">
                   <i class="fas fa-tachometer-alt"></i>
                 </div>
                 Sản phẩm
+              </a>
+              <a class="nav-link" href="order.html">
+                <div class="sb-nav-link-icon">
+                  <i class="fas fa-tachometer-alt"></i>
+                </div>
+                Đơn hàng
               </a>
             </div>
           </div>
@@ -139,7 +145,6 @@
                         <tr>
                           <th>Ảnh</th>
                           <th>Tên</th>
-
                           <th>Giá</th>
                           <th>Số lượng</th>
                           <th>Thao tác</th>
@@ -361,7 +366,7 @@
               <span id="productDetailsSoldQuantity"></span>
             </p>
             <p>
-              <strong>Số lượng thích:</strong>
+              <strong>Số lượt thích:</strong>
               <span id="productDetailsLikeQuantity"></span>
             </p>
             <p>
@@ -564,7 +569,7 @@
           const sortBy = $("#SortBy").val();
           const sortType = $("#SortType").val();
 
-          let apiUrl = `https://localhost:7060/api/Products/shop/${shopId}?Page=${page}&`;
+          let apiUrl = `https://localhost:7060/api/Products/shop/${shopId}?Page=${page}&Pagination=true&`;
           console.log(apiUrl);
           if (productType) apiUrl += `FByType=${productType}&`;
           if (minPrice && maxPrice)
@@ -650,7 +655,7 @@
               deleteProduct(productId);
             }
           });
-          //Gắn sự kiện click cho nút chi tiết
+          // Gắn sự kiện click cho nút chi tiết
           $(".btn-details").on("click", function () {
             const productId = $(this).data("id");
 
@@ -658,10 +663,10 @@
               url: `https://localhost:7060/api/Products/${productId}`,
               method: "GET",
               success: function (product) {
-                // Định dạng giá với dấu chấm phân cách hàng nghìn và thêm " VND"
-                const formattedPrice = `${product.price.toLocaleString(
-                  "vi-VN"
-                )} VND`;
+                // Định dạng giá với dấu chấm phân cách hàng nghìn và thêm " VND", nhân giá với 1000
+                const formattedPrice = `${(
+                  product.price * 1000
+                ).toLocaleString()} VND`;
                 $("#productDetailsPrice").text(formattedPrice);
 
                 // Các thiết lập khác cho modal chi tiết
@@ -671,7 +676,14 @@
                 $("#productDetailsQuantity").text(product.quantity);
                 $("#productDetailsSoldQuantity").text(product.soldQuantity);
                 $("#productDetailsLikeQuantity").text(product.likeQuantity);
-                $("#productDetailsRating").text(product.rating);
+
+                // Kiểm tra rating và hiển thị
+                if (product.rating > 0) {
+                  $("#productDetailsRating").html(`${product.rating} ⭐`);
+                } else {
+                  $("#productDetailsRating").text("Chưa có đánh giá");
+                }
+
                 $("#productDetailsType").text(product.productType.name);
                 $("#productDetailsTypeDescription").text(
                   product.productType.description
@@ -853,7 +865,13 @@
             },
             error: function (xhr) {
               console.error("Lỗi khi xóa sản phẩm:", xhr.responseText);
-              alert("Xóa sản phẩm thất bại!");
+
+              if (xhr.status === 500) {
+                // Giả sử 409 là mã lỗi xung đột khi có ràng buộc
+                alert("Sản phẩm không thể xóa vì đang liên kết với đơn hàng.");
+              } else {
+                alert("Xóa sản phẩm thất bại!");
+              }
             },
           });
         }
@@ -1048,6 +1066,14 @@
               },
               success: function () {
                 $(this).parent().remove(); // Xóa ảnh khỏi giao diện
+
+                // Reload lại trang sau khi đóng modal
+                $("#productImagesModal").on("hidden.bs.modal", function () {
+                  location.reload();
+                });
+
+                // Đóng modal khi xóa ảnh thành công
+                $("#productImagesModal").modal("hide");
               }.bind(this),
               error: function (jqXHR, textStatus, errorThrown) {
                 console.error(
@@ -1101,7 +1127,7 @@
 
                   // Hiển thị thông báo lỗi cho người dùng
                   if (xhr.status === 500) {
-                    alert("Có lỗi xảy ra khi tải ảnh. Vui lòng chọn ảnh khác.");
+                    alert("Ảnh đã có rồi. Vui lòng chọn ảnh khác.");
                     // Xóa nội dung của trường nhập ảnh
                     imageInput.value = ""; // hoặc imageInput.files = null; để xóa ảnh đã chọn
                   } else {

@@ -11478,3 +11478,27 @@ body {
   background-color: #5a6268;
   border-color: #545b62;
 }
+.text-custom-highlight {
+  color: #ff6347; /* Màu đỏ cam tươi */
+  font-weight: bold;
+}
+/* Kiểu mặc định của nav-link */
+.nav-link {
+  color: #333; /* Màu chữ mặc định */
+  text-decoration: none; /* Bỏ gạch chân */
+  padding: 10px; /* Thêm khoảng cách */
+}
+
+/* Thay đổi kiểu khi hover */
+.nav-link:hover {
+  color: #007bff; /* Màu chữ khi hover */
+  background-color: #3a6d8c; /* Màu nền khi hover */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Hiệu ứng chuyển */
+}
+
+/* Thay đổi kiểu khi liên kết đang active */
+.nav-link.active {
+  color: #fff; /* Màu chữ khi active */
+  background-color: #007bff; /* Màu nền khi active */
+  font-weight: bold; /* Tô đậm chữ */
+}
